@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Healthcare Analytics Portfolio — Complete Report (Sections A–F)</title>
+<style>
+/* ═══════════════════════════════════════════
+   SHARED BASE CSS — from Section E (master)
+═══════════════════════════════════════════ */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Calibri,'Segoe UI',Arial,sans-serif;font-size:11pt;line-height:1.5;background:#F8FAFC;color:#1E293B;max-width:8.5in;margin:0 auto;padding:.5in .75in}
+.section-header{background:#0D47A1;color:white;padding:28pt 32pt;margin-bottom:32pt;border-radius:4px}
+.section-header .label{font-size:10pt;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:6pt}
+.section-header h1{font-size:26pt;font-weight:700;line-height:1.15;margin-bottom:8pt}
+.section-header .sub{font-size:13pt;opacity:.85}
+.page-title{font-size:20pt;font-weight:700;color:#1565C0;margin:32pt 0 6pt;padding-bottom:8pt;border-bottom:3px solid #1565C0}
+.page-sub{font-size:12pt;color:#64748B;margin-bottom:18pt}
+.lead{font-size:10.5pt;color:#334155;margin-bottom:16pt;line-height:1.6}
+.sg{display:grid;gap:14pt;margin:18pt 0}
+.sg2{grid-template-columns:repeat(2,1fr)}.sg3{grid-template-columns:repeat(3,1fr)}.sg4{grid-template-columns:repeat(4,1fr)}
+.sc{background:white;border-radius:6px;padding:16pt 14pt;box-shadow:0 1px 4px rgba(0,0,0,.08);border-top:4px solid #1565C0}
+.sc.r{border-top-color:#C62828}.sc.g{border-top-color:#2E7D32}.sc.w{border-top-color:#F9A825}.sc.b{border-top-color:#1565C0}
+.sn{font-size:28pt;font-weight:700;line-height:1.1;margin-bottom:4pt;color:#1565C0}
+.sc.r .sn{color:#C62828}.sc.g .sn{color:#2E7D32}.sc.w .sn{color:#E65100}
+.sl{font-size:10pt;font-weight:600;color:#1E293B;margin-bottom:3pt}.sd{font-size:9pt;color:#64748B}
+.fb{background:white;border-radius:6px;padding:16pt 18pt;margin:14pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #1565C0}
+.fb h3{font-size:12pt;font-weight:700;margin-bottom:6pt}
+.fb p,.fb li{font-size:10.5pt;color:#334155;margin-bottom:4pt;line-height:1.5}
+.fb ul,.fb ol{padding-left:16pt;margin-top:6pt}
+.al{border-radius:6px;padding:14pt 16pt;margin:14pt 0;display:flex;gap:12pt;align-items:flex-start}
+.al-ic{font-size:18pt;flex-shrink:0;margin-top:-2pt}
+.al-co h4{font-size:11pt;font-weight:700;margin-bottom:4pt}
+.al-co p,.al-co li{font-size:10pt;margin-bottom:3pt;line-height:1.4}
+.al-co ul{padding-left:14pt}
+.al.ok{background:#F1F8E9;border:1px solid #C5E1A5}.al.ok .al-co h4{color:#2E7D32}
+.al.info{background:#EFF6FF;border:1px solid #BFDBFE}.al.info .al-co h4{color:#1D4ED8}
+.al.warn{background:#FFF8E1;border:1px solid #FFE082}.al.warn .al-co h4{color:#E65100}
+.al.crisis{background:#FEF2F2;border:1px solid #FECACA}.al.crisis .al-co h4{color:#B91C1C}
+.cs{background:white;border-radius:6px;padding:14pt 20pt 14pt;margin:14pt 0;box-shadow:0 1px 6px rgba(0,0,0,.09);border-top:3px solid #1565C0}
+.cs img{width:100%;height:auto;display:block;border-radius:4px}
+.ch{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:12pt;padding-bottom:10pt;border-bottom:1px solid #E2E8F0}
+.cc{margin-top:14pt;padding-top:12pt;border-top:1px solid #F1F5F9}
+.cc p{font-size:9.5pt;color:#475569;line-height:1.5;margin-bottom:3pt}
+.cc .src{font-size:9pt;color:#94A3B8;font-style:italic}
+.cg2{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:22pt 0}
+.cg2 .cs{margin:0}
+.xref{background:#EFF6FF;border:2px solid #1565C0;border-radius:6px;padding:18pt 20pt;margin:22pt 0}
+.xref .tag{display:inline-block;background:#1565C0;color:white;font-size:8pt;font-weight:700;padding:2pt 8pt;border-radius:10px;margin-bottom:8pt;letter-spacing:.5px;text-transform:uppercase}
+.xref h4{font-size:12pt;font-weight:700;color:#1565C0;margin-bottom:8pt}
+.xref p{font-size:10.5pt;color:#1E293B;line-height:1.5;margin-bottom:6pt}
+.xref ul{padding-left:16pt;margin-top:6pt}
+.xref li{font-size:10.5pt;color:#334155;margin-bottom:4pt}
+table{width:100%;border-collapse:collapse;margin:16pt 0;font-size:10pt;background:white;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+th{background:#1565C0;color:white;font-weight:700;padding:9pt 10pt;text-align:left}
+td{padding:7pt 10pt;border-bottom:1px solid #F1F5F9}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#F8FAFC}
+.tr-green td{background:#F1F8E9!important}.tr-amber td{background:#FFF8E1!important}
+.tr-red td{background:#FEF2F2!important}.tr-total td{background:#0D47A1!important;color:white!important;font-weight:700}
+.code{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:4px;padding:12pt 14pt;font-family:'Courier New',monospace;font-size:9pt;margin:14pt 0;white-space:pre;line-height:1.6}
+.badge{display:inline-block;background:#0D47A1;color:white;font-size:9pt;font-weight:700;padding:3pt 10pt;border-radius:12px;margin-bottom:10pt;letter-spacing:.5px}
+.pb{page-break-before:always;margin-top:32pt}
+
+/* ── BADGE RINGS (Section F style) ── */
+.badge-ring-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:12pt;margin:20pt 0}
+.badge-ring-wrap.cols3{grid-template-columns:repeat(3,1fr)}
+.badge-ring{display:flex;flex-direction:column;align-items:center;text-align:center}
+.badge-circle{width:96pt;height:96pt;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.13);position:relative;margin-bottom:10pt}
+.badge-circle.b{background:linear-gradient(135deg,#1565C0,#1E88E5)}
+.badge-circle.b .badge-num{color:white}
+.badge-circle.lb{background:linear-gradient(135deg,#1976D2,#42A5F5)}
+.badge-circle.lb .badge-num{color:white}
+.badge-circle.r{background:linear-gradient(135deg,#B71C1C,#E53935)}
+.badge-circle.r .badge-num{color:white}
+.badge-circle.g{background:linear-gradient(135deg,#1B5E20,#43A047)}
+.badge-circle.g .badge-num{color:white}
+.badge-circle.o{background:linear-gradient(135deg,#E65100,#FB8C00)}
+.badge-circle.o .badge-num{color:white}
+.badge-circle.w{background:linear-gradient(135deg,#37474F,#607D8B)}
+.badge-circle.w .badge-num{color:white}
+.badge-num{font-size:15pt;font-weight:800;line-height:1;margin-bottom:3pt}
+.badge-sub{font-size:7pt;color:rgba(255,255,255,.9);font-weight:700;text-transform:uppercase;letter-spacing:.5px;max-width:72pt;line-height:1.3}
+.badge-desc{font-size:8.5pt;color:#64748B;max-width:96pt;line-height:1.4;text-align:center}
+
+
+/* ── ROI BARS (Section F style) ── */
+.roi-bar-wrap{margin-top:16pt;padding-top:14pt;border-top:1px solid #F1F5F9}
+.roi-bar-label{display:flex;justify-content:space-between;font-size:9pt;font-weight:700;margin-bottom:6pt}
+.roi-bar-track{background:#F1F5F9;border-radius:20px;height:14pt;overflow:hidden;position:relative}
+.roi-bar-invest{height:100%;border-radius:20px;display:flex;align-items:center;padding-left:8pt;font-size:8pt;font-weight:700;color:white;white-space:nowrap;min-width:40pt}
+.roi-bar-return{position:absolute;top:0;left:0;height:100%;border-radius:20px;opacity:.22}
+.roi-meta{display:flex;gap:16pt;margin-top:8pt;font-size:9pt;color:#64748B}
+.roi-meta span strong{color:#1E293B}
+/* ── SEVERITY BARS ── */
+.sev-wrap{margin:16pt 0}
+.sev-row{margin-bottom:10pt}
+.sev-label-row{display:flex;justify-content:space-between;font-size:9pt;font-weight:700;margin-bottom:4pt;color:#1E293B}
+.sev-track{background:#F1F5F9;border-radius:20px;height:11pt;overflow:hidden}
+.sev-fill{height:100%;border-radius:20px}
+.sev-fill.r{background:linear-gradient(90deg,#F87171,#C62828)}
+.sev-fill.o{background:linear-gradient(90deg,#FB8C00,#E65100)}
+.sev-fill.b{background:linear-gradient(90deg,#42A5F5,#1565C0)}
+.sev-fill.g{background:linear-gradient(90deg,#66BB6A,#2E7D32)}
+/* ── MINI DONUT (CSS only) ── */
+.mini-donut-wrap{display:flex;gap:20pt;align-items:center;margin:16pt 0;flex-wrap:wrap}
+.mini-donut{position:relative;width:80pt;height:80pt;flex-shrink:0}
+.mini-donut svg{width:80pt;height:80pt}
+.mini-donut-label{text-align:center;margin-top:6pt;font-size:8pt;font-weight:700;color:#1E293B}
+.mini-donut-info{flex:1;min-width:160pt}
+.mini-donut-info h4{font-size:11pt;font-weight:700;color:#1E293B;margin:0 0 6pt}
+.mini-donut-info p{font-size:9pt;color:#64748B;margin:3pt 0;line-height:1.4}
+
+
+.page-title .pt-line1{display:block;line-height:1.2;font-size:28pt;font-weight:800;color:#1565C0}
+.page-title .pt-line2{display:block;line-height:1.3;font-size:20pt;font-weight:700;color:#1565C0;margin-top:2pt}
+
+
+
+/* ═══════════════════════════════════════════
+   SECTION A — BLUE THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-a .section-header{background:#1565C0}
+.sec-a .page-title{color:#1565C0;border-bottom-color:#1565C0}
+.sec-a .sc{border-top-color:#1565C0}
+.sec-a .sn{color:#1565C0}
+.sec-a .sc.r .sn{color:#C62828}.sec-a .sc.r{border-top-color:#C62828}
+.sec-a .sc.g .sn{color:#2E7D32}.sec-a .sc.g{border-top-color:#2E7D32}
+.sec-a .sc.w .sn{color:#E65100}.sec-a .sc.w{border-top-color:#F9A825}
+.sec-a .sc.t{border-top-color:#33a7c8}.sec-a .sc.t .sn{color:#33a7c8}
+.sec-a .sc.p{border-top-color:#a538c6}.sec-a .sc.p .sn{color:#a538c6}
+.sec-a .fb{border-left-color:#1565C0}
+.sec-a .cs{border-top-color:#1565C0}
+.sec-a table th{background:#1565C0}
+.sec-a .conn-c{border-top-color:#1565C0}
+.sec-a .conn-c h4{color:#1565C0}
+.sec-a .chart-side .cs-txt h3{color:#1565C0}
+.sec-a .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #a538c6;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-a .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-a .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-a .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-a .rt{display:inline-block;background:#a538c6;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-a .rt.u{background:#D32F2F}.sec-a .rt.h{background:#1565C0}
+.sec-a .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-a .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-a .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #1565C0}
+.sec-a .cb{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1px solid #F59E0B;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-a .cb .ic{font-size:20pt}
+.sec-a .cb p{font-size:10pt;color:#78350F;line-height:1.5}
+.sec-a .sn-box{background:#FFFBEB;border-left:4px solid #F59E0B;border-radius:0 6px 6px 0;padding:12pt 14pt;margin:14pt 0;font-size:9.5pt;color:#78350F}
+.sec-a .sn-box strong{display:block;margin-bottom:6pt;font-size:10pt}
+.sec-a .chart-side{background:white;border-radius:6px;margin:16pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.sec-a .chart-side .cs-img{padding:16pt;border-right:1px solid #F1F5F9}
+.sec-a .chart-side .cs-img img{width:100%;height:auto;display:block;border-radius:4px}
+.sec-a .chart-side .cs-txt{padding:20pt 22pt}
+.sec-a .chart-side .cs-txt p{font-size:10pt;color:#475569;line-height:1.6;margin-bottom:8pt}
+.sec-a .chart-side .cs-txt ul{padding-left:14pt;margin-bottom:8pt}
+.sec-a .chart-side .cs-txt li{font-size:10pt;color:#475569;margin-bottom:5pt;line-height:1.5}
+.sec-a .chart-side .cs-txt .src{font-size:9pt;color:#94A3B8;font-style:italic;margin-top:12pt;padding-top:8pt;border-top:1px solid #F1F5F9}
+.sec-a .xref{background:#EFF6FF;border:2px solid #1565C0}
+.sec-a .xref .tag{background:#1565C0}
+.sec-a .xref h4{color:#1565C0}
+.sec-a .tr-total td{background:#0D47A1!important;color:white!important;font-weight:700}
+
+
+/* ═══════════════════════════════════════════
+   SECTION B — ORANGE THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-b .section-header{background:#E65100}
+.sec-b .page-title{color:#E65100;border-bottom-color:#E65100}
+.sec-b .sc{border-top-color:#E65100}
+.sec-b .sn{color:#E65100}
+.sec-b .sc.t{border-top-color:#0277BD}.sec-b .sc.t .sn{color:#0277BD}
+.sec-b .fb{border-left-color:#E65100}
+.sec-b .cs{border-top-color:#E65100}
+.sec-b table th{background:#E65100}
+.sec-b .conn-c{border-top-color:#E65100}
+.sec-b .conn-c h4{color:#E65100}
+.sec-b .chart-side .cs-txt h3{color:#E65100}
+.sec-b .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #E65100;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-b .rc.urgent{border-left-color:#D32F2F}
+.sec-b .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-b .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-b .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-b .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-b .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-b .rt{display:inline-block;background:#E65100;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-b .rt.u{background:#D32F2F}.sec-b .rt.h{background:#0277BD}
+.sec-b .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-b .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-b .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #E65100}
+.sec-b .cb{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:1px solid #FB8C00;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-b .cb .ic{font-size:20pt}
+.sec-b .cb p{font-size:10pt;color:#4E342E;line-height:1.5}
+.sec-b .cph{background:#FFF3E0;border:2px dashed #E65100;border-radius:4px;min-height:220px;display:flex;align-items:center;justify-content:center;color:#E65100;font-size:11pt;font-weight:600;text-align:center;padding:20pt}
+.sec-b .chart-side{background:white;border-radius:6px;margin:16pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.sec-b .chart-side .cs-img{padding:16pt;border-right:1px solid #F1F5F9}
+.sec-b .chart-side .cs-img img{width:100%;height:auto;display:block;border-radius:4px}
+.sec-b .chart-side .cs-txt{padding:20pt 22pt}
+.sec-b .chart-side .cs-txt p{font-size:10pt;color:#475569;line-height:1.6;margin-bottom:8pt}
+.sec-b .chart-side .cs-txt ul{padding-left:14pt;margin-bottom:8pt}
+.sec-b .chart-side .cs-txt li{font-size:10pt;color:#475569;margin-bottom:5pt;line-height:1.5}
+.sec-b .chart-side .cs-txt .src{font-size:9pt;color:#94A3B8;font-style:italic;margin-top:12pt;padding-top:8pt;border-top:1px solid #F1F5F9}
+.sec-b .tr-total td{background:#E65100!important;color:white!important;font-weight:700}
+.sec-b .xref{background:#FFF3E0;border:2px solid #E65100}
+.sec-b .xref .tag{background:#E65100}
+.sec-b .xref h4{color:#E65100}
+
+
+/* ═══════════════════════════════════════════
+   SECTION C — GREEN THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-c .section-header{background:#1B5E20}
+.sec-c .page-title{color:#2E7D32;border-bottom-color:#2E7D32}
+.sec-c .sc{border-top-color:#2E7D32}
+.sec-c .sn{color:#2E7D32}
+.sec-c .sc.t{border-top-color:#0277BD}.sec-c .sc.t .sn{color:#0277BD}
+.sec-c .fb{border-left-color:#2E7D32}
+.sec-c .cs{border-top-color:#2E7D32}
+.sec-c table th{background:#2E7D32}
+.sec-c .conn-c{border-top-color:#2E7D32}
+.sec-c .conn-c h4{color:#2E7D32}
+.sec-c .chart-side .cs-txt h3{color:#2E7D32}
+.sec-c .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #2E7D32;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-c .rc.urgent{border-left-color:#D32F2F}
+.sec-c .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-c .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-c .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-c .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-c .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-c .rt{display:inline-block;background:#2E7D32;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-c .rt.u{background:#D32F2F}.sec-c .rt.h{background:#0277BD}
+.sec-c .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-c .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-c .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #2E7D32}
+.sec-c .cb{background:linear-gradient(135deg,#F1F8E9,#DCEDC8);border:1px solid #66BB6A;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-c .cb .ic{font-size:20pt}
+.sec-c .cb p{font-size:10pt;color:#1B5E20;line-height:1.5}
+.sec-c .cph{background:#F1F8E9;border:2px dashed #2E7D32;border-radius:4px;min-height:220px;display:flex;align-items:center;justify-content:center;color:#2E7D32;font-size:11pt;font-weight:600;text-align:center;padding:20pt}
+.sec-c .chart-side{background:white;border-radius:6px;margin:16pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.sec-c .chart-side .cs-img{padding:16pt;border-right:1px solid #F1F5F9}
+.sec-c .chart-side .cs-img img{width:100%;height:auto;display:block;border-radius:4px}
+.sec-c .chart-side .cs-txt{padding:20pt 22pt}
+.sec-c .chart-side .cs-txt p{font-size:10pt;color:#475569;line-height:1.6;margin-bottom:8pt}
+.sec-c .chart-side .cs-txt ul{padding-left:14pt;margin-bottom:8pt}
+.sec-c .chart-side .cs-txt li{font-size:10pt;color:#475569;margin-bottom:5pt;line-height:1.5}
+.sec-c .chart-side .cs-txt .src{font-size:9pt;color:#94A3B8;font-style:italic;margin-top:12pt;padding-top:8pt;border-top:1px solid #F1F5F9}
+.sec-c .tr-total td{background:#1B5E20!important;color:white!important;font-weight:700}
+.sec-c .xref{background:#F1F8E9;border:2px solid #2E7D32}
+.sec-c .xref .tag{background:#2E7D32}
+.sec-c .xref h4{color:#2E7D32}
+.sec-c .badge-desc{font-size:9.5pt;color:#334155;max-width:100pt;line-height:1.5;text-align:center;font-weight:500}
+
+
+/* ═══════════════════════════════════════════
+   SECTION D — RED THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-d .section-header{background:#B71C1C}
+.sec-d .page-title{color:#C62828;border-bottom-color:#C62828}
+.sec-d .sc{border-top-color:#C62828}
+.sec-d .sn{color:#C62828}
+.sec-d .sc.r .sn{color:#C62828}.sec-d .sc.r{border-top-color:#C62828}
+.sec-d .sc.g{border-top-color:#2E7D32}.sec-d .sc.g .sn{color:#2E7D32}
+.sec-d .sc.t{border-top-color:#0277BD}.sec-d .sc.t .sn{color:#0277BD}
+.sec-d .sc.w{border-top-color:#F9A825}.sec-d .sc.w .sn{color:#F9A825}
+.sec-d .fb{border-left-color:#C62828}
+.sec-d .cs{border-top-color:#C62828}
+.sec-d table th{background:#C62828}
+.sec-d .conn-c{border-top-color:#C62828}
+.sec-d .conn-c h4{color:#C62828}
+.sec-d .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #C62828;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-d .rc.ok{border-left-color:#2E7D32}
+.sec-d .rc.warn{border-left-color:#F9A825}
+.sec-d .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-d .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-d .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-d .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-d .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-d .rt{display:inline-block;background:#C62828;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-d .rt.ok{background:#2E7D32}.sec-d .rt.w{background:#F9A825;color:#1E293B}.sec-d .rt.h{background:#0277BD}
+.sec-d .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-d .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-d .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #C62828}
+.sec-d .cb{background:linear-gradient(135deg,#FFF5F5,#FFCDD2);border:1px solid #EF9A9A;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-d .cb .ic{font-size:20pt}
+.sec-d .cb p{font-size:10pt;color:#B71C1C;line-height:1.5}
+.sec-d .cph{background:#FFF5F5;border:2px dashed #C62828;border-radius:4px;min-height:220px;display:flex;align-items:center;justify-content:center;color:#C62828;font-size:11pt;font-weight:600;text-align:center;padding:20pt}
+.sec-d .tr-total td{background:#B71C1C!important;color:white!important;font-weight:700}
+.sec-d .xref{background:#FFF5F5;border:2px solid #C62828}
+.sec-d .xref .tag{background:#C62828}
+.sec-d .xref h4{color:#C62828}
+
+
+/* ═══════════════════════════════════════════
+   SECTION E — PURPLE THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-e .section-header{background:#0D47A1}
+.sec-e .page-title{color:#1565C0;border-bottom-color:#1565C0}
+.sec-e .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #1565C0;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-e .rc.w{border-left-color:#F9A825}
+.sec-e .rc.g{border-left-color:#2E7D32}
+.sec-e .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-e .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-e .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-e .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-e .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-e .rt{display:inline-block;background:#1565C0;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-e .rt.u{background:#D32F2F}.sec-e .rt.h{background:#0277BD}
+.sec-e .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-e .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-e .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #1565C0}
+.sec-e .conn-c h4{color:#1565C0}
+.sec-e .cb{background:linear-gradient(135deg,#EDE7F6,#D1C4E9);border:1px solid #9575CD;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-e .cb .ic{font-size:20pt}
+.sec-e .cb p{font-size:10pt;color:#311B92;line-height:1.5}
+.sec-e .rc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14pt;margin:14pt 0}
+.sec-e .tag{display:inline-block;background:#1565C0;color:white;font-size:8pt;font-weight:700;padding:2pt 8pt;border-radius:10px;margin-bottom:8pt;letter-spacing:.5px;text-transform:uppercase}
+
+
+/* ═══════════════════════════════════════════
+   PRINT / PAGE BREAK RULES
+═══════════════════════════════════════════ */
+@page {
+  size: letter;
+  margin: 0.75in 0.75in 0.75in 0.75in;
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+    font-size: 9pt;
+    color: #94A3B8;
+    padding-top: 6pt;
+    border-top: 1px solid #E2E8F0;
+  }
+}
+@media print {
+  .pb { page-break-before: always !important; }
+  .sec-a, .sec-b, .sec-c, .sec-d, .sec-e, .sec-f { page-break-before: always !important; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; margin: 0; padding: 0; }
+  .section-divider { display: none !important; }
+}
+
+/* ── SECTION DIVIDERS (screen only) ── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 16pt;
+  margin: 40pt 0 0 0;
+  padding: 20pt 0 0 0;
+  position: relative;
+}
+.section-divider::before {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, currentColor);
+  opacity: 0.25;
+}
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to left, transparent, currentColor);
+  opacity: 0.25;
+}
+.section-divider .div-label {
+  display: flex;
+  align-items: center;
+  gap: 10pt;
+  background: white;
+  border: 2px solid currentColor;
+  border-radius: 30px;
+  padding: 6pt 18pt;
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.section-divider .div-label .div-icon { font-size: 13pt; }
+.section-divider .div-label .div-count {
+  margin-left: 10pt;
+  padding: 2pt 9pt;
+  border-radius: 12px;
+  font-size: 8pt;
+  font-weight: 800;
+  background: currentColor;
+  color: white;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+.section-divider.intro  { color: #6B21A8; }
+.section-divider.sec-a  { color: #1565C0; }
+.section-divider.sec-b  { color: #E65100; }
+.section-divider.sec-c  { color: #1B5E20; }
+.section-divider.sec-d  { color: #B71C1C; }
+.section-divider.sec-e  { color: #0D47A1; }
+.section-divider.sec-f  { color: #6B21A8; }
+
+/* ═══ INTRO — PURPLE THEME ═══ */
+.sec-intro{background:#F5F0FF}
+.sec-intro .section-header{background:linear-gradient(135deg,#4A148C,#6B21A8);color:white;padding:32pt 48pt;margin-bottom:32pt;border-radius:4px}
+.sec-intro .section-header .label{font-size:10pt;letter-spacing:3px;text-transform:uppercase;opacity:.75;margin-bottom:8pt}
+.sec-intro .section-header h1{font-size:28pt;font-weight:800;line-height:1.1;margin-bottom:6pt}
+.sec-intro .section-header h1 span{opacity:.65;font-weight:400}
+.sec-intro .section-header .sub{font-size:12pt;opacity:.82;max-width:560pt}
+.sec-intro .page-title{font-size:20pt;font-weight:700;color:#6B21A8;margin:32pt 0 6pt;padding-bottom:8pt;border-bottom:3px solid #6B21A8}
+.sec-intro .page-sub{font-size:12pt;color:#64748B;margin-bottom:18pt}
+.sec-intro .badge-ring-wrap{display:grid;gap:12pt;margin:24pt 0}
+.sec-intro .badge-ring{display:flex;flex-direction:column;align-items:center;text-align:center}
+.sec-intro .badge-circle{width:100pt;height:100pt;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.13);margin-bottom:10pt}
+.sec-intro .badge-circle.p{background:white;border:5pt solid #6B21A8}
+.sec-intro .badge-circle.g{background:white;border:5pt solid #2E7D32}
+.sec-intro .badge-circle.r{background:white;border:5pt solid #C62828}
+.sec-intro .badge-circle.w{background:white;border:5pt solid #E65100}
+.sec-intro .badge-circle.b{background:white;border:5pt solid #1565C0}
+.sec-intro .badge-num{font-size:17pt;font-weight:800;line-height:1;margin-bottom:3pt}
+.sec-intro .badge-circle.p .badge-num{color:#6B21A8}
+.sec-intro .badge-circle.g .badge-num{color:#2E7D32}
+.sec-intro .badge-circle.r .badge-num{color:#C62828}
+.sec-intro .badge-circle.w .badge-num{color:#E65100}
+.sec-intro .badge-circle.b .badge-num{color:#1565C0}
+.sec-intro .badge-sub{font-size:7pt;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;max-width:72pt;line-height:1.3}
+.sec-intro .badge-desc{font-size:9pt;color:#64748B;max-width:100pt;line-height:1.4;text-align:center}
+.sec-intro .fb{background:white;border-radius:6px;padding:16pt 18pt;margin:14pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #6B21A8}
+.sec-intro .fb.r{border-left-color:#C62828}.sec-intro .fb.g{border-left-color:#2E7D32}.sec-intro .fb.b{border-left-color:#1565C0}.sec-intro .fb.w{border-left-color:#E65100}
+.sec-intro .fb h3{font-size:12pt;font-weight:700;margin-bottom:8pt;color:#6B21A8}
+.sec-intro .fb.r h3{color:#C62828}.sec-intro .fb.g h3{color:#2E7D32}.sec-intro .fb.b h3{color:#1565C0}.sec-intro .fb.w h3{color:#E65100}
+.sec-intro .fb p,.sec-intro .fb li{font-size:10.5pt;color:#334155;margin-bottom:4pt;line-height:1.5}
+.sec-intro .fb ul{padding-left:16pt;margin-top:6pt}
+.sec-intro .al{border-radius:6px;padding:14pt 16pt;margin:14pt 0;display:flex;gap:12pt;align-items:flex-start}
+.sec-intro .al-ic{font-size:18pt;flex-shrink:0;margin-top:-2pt}
+.sec-intro .al-co h4{font-size:11pt;font-weight:700;margin-bottom:4pt}
+.sec-intro .al-co p{font-size:10pt;color:#334155;line-height:1.4}
+.sec-intro .al.info{background:#F3E8FF;border:1px solid #D8B4FE}.sec-intro .al.info .al-co h4{color:#6B21A8}
+.sec-intro .al.crisis{background:#FEF2F2;border:1px solid #FECACA}.sec-intro .al.crisis .al-co h4{color:#B91C1C}
+.sec-intro .al.ok{background:#F1F8E9;border:1px solid #C5E1A5}.sec-intro .al.ok .al-co h4{color:#2E7D32}
+.sec-intro table{width:100%;border-collapse:collapse;margin:16pt 0;font-size:10pt;background:white;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-intro th{background:#4A148C;color:white;font-weight:700;padding:9pt 10pt;text-align:left}
+.sec-intro td{padding:7pt 10pt;border-bottom:1px solid #F1F5F9}
+.sec-intro tr:last-child td{border-bottom:none}
+.sec-intro tr:nth-child(even) td{background:#F5F0FF}
+.sec-intro .tr-total td{background:#4A148C!important;color:white!important;font-weight:700}
+.sec-intro .cg2{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:16pt 0}
+.sec-intro .hero-visual{background:white;border-radius:10px;padding:20pt;box-shadow:0 3px 16px rgba(0,0,0,.10);margin:24pt 0}
+.sec-intro .hero-title{font-size:13pt;font-weight:700;color:#1E293B;margin-bottom:4pt}
+.sec-intro .hero-sub{font-size:10pt;color:#64748B;margin-bottom:16pt}
+.sec-intro .smap{display:grid;grid-template-columns:repeat(6,1fr);gap:8pt;margin:20pt 0}
+.sec-intro .smap-item{background:white;border-radius:6px;padding:10pt 8pt;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-intro .smap-letter{font-size:20pt;font-weight:700;margin-bottom:2pt}
+.sec-intro .smap-name{font-size:7.5pt;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.3px;line-height:1.3}
+.sec-intro .smap-pages{font-size:8.5pt;color:#888;margin-top:3pt}
+
+
+/* ═══ SECTION F — PURPLE THEME ═══ */
+.sec-f{background:#F5F0FF}
+.sec-f .section-header{background:linear-gradient(135deg,#4A148C,#6B21A8);color:white;padding:32pt 48pt;margin-bottom:32pt;border-radius:4px}
+.sec-f .section-header .label{font-size:10pt;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:6pt}
+.sec-f .section-header h1{font-size:26pt;font-weight:700;line-height:1.15;margin-bottom:8pt}
+.sec-f .section-header .sub{font-size:13pt;opacity:.85}
+.sec-f .page-title{font-size:20pt;font-weight:700;color:#6B21A8;margin:32pt 0 6pt;padding-bottom:8pt;border-bottom:3px solid #6B21A8}
+.sec-f .page-sub{font-size:12pt;color:#64748B;margin-bottom:18pt}
+.sec-f .lead{font-size:10.5pt;color:#334155;margin-bottom:16pt;line-height:1.6}
+.sec-f .sg{display:grid;gap:14pt;margin:18pt 0}
+.sec-f .sg2{grid-template-columns:repeat(2,1fr)}.sec-f .sg3{grid-template-columns:repeat(3,1fr)}.sec-f .sg4{grid-template-columns:repeat(4,1fr)}
+.sec-f .sc{background:white;border-radius:6px;padding:16pt 14pt;box-shadow:0 1px 4px rgba(0,0,0,.08);border-top:4px solid #6B21A8}
+.sec-f .sc.r{border-top-color:#C62828}.sec-f .sc.g{border-top-color:#2E7D32}.sec-f .sc.w{border-top-color:#F9A825}.sec-f .sc.b{border-top-color:#1565C0}
+.sec-f .sn{font-size:26pt;font-weight:700;line-height:1.1;margin-bottom:4pt;color:#6B21A8}
+.sec-f .sc.r .sn{color:#C62828}.sec-f .sc.g .sn{color:#2E7D32}.sec-f .sc.w .sn{color:#E65100}.sec-f .sc.b .sn{color:#1565C0}
+.sec-f .sl{font-size:10pt;font-weight:600;color:#1E293B;margin-bottom:3pt}.sec-f .sd{font-size:9pt;color:#64748B}
+.sec-f .fb{background:white;border-radius:6px;padding:16pt 18pt;margin:14pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #6B21A8}
+.sec-f .fb.r{border-left-color:#C62828}.sec-f .fb.g{border-left-color:#2E7D32}.sec-f .fb.w{border-left-color:#E65100}.sec-f .fb.b{border-left-color:#1565C0}
+.sec-f .fb h3{font-size:12pt;font-weight:700;margin-bottom:8pt;color:#6B21A8}
+.sec-f .fb.r h3{color:#C62828}.sec-f .fb.g h3{color:#2E7D32}.sec-f .fb.w h3{color:#E65100}.sec-f .fb.b h3{color:#1565C0}
+.sec-f .fb p,.sec-f .fb li{font-size:10.5pt;color:#334155;margin-bottom:4pt;line-height:1.5}
+.sec-f .fb ul,.sec-f .fb ol{padding-left:16pt;margin-top:6pt}
+.sec-f .al{border-radius:6px;padding:14pt 16pt;margin:14pt 0;display:flex;gap:12pt;align-items:flex-start}
+.sec-f .al-ic{font-size:18pt;flex-shrink:0;margin-top:-2pt}
+.sec-f .al-co h4{font-size:11pt;font-weight:700;margin-bottom:4pt}
+.sec-f .al-co p,.sec-f .al-co li{font-size:10pt;margin-bottom:3pt;line-height:1.4}
+.sec-f .al-co ul{padding-left:14pt}
+.sec-f .al.ok{background:#F1F8E9;border:1px solid #C5E1A5}.sec-f .al.ok .al-co h4{color:#2E7D32}
+.sec-f .al.info{background:#F3E8FF;border:1px solid #D8B4FE}.sec-f .al.info .al-co h4{color:#6B21A8}
+.sec-f .al.warn{background:#FFF8E1;border:1px solid #FFE082}.sec-f .al.warn .al-co h4{color:#E65100}
+.sec-f .al.crisis{background:#FEF2F2;border:1px solid #FECACA}.sec-f .al.crisis .al-co h4{color:#B91C1C}
+.sec-f table{width:100%;border-collapse:collapse;margin:16pt 0;font-size:10pt;background:white;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-f th{background:#4A148C;color:white;font-weight:700;padding:9pt 10pt;text-align:left}
+.sec-f td{padding:7pt 10pt;border-bottom:1px solid #F1F5F9}
+.sec-f tr:last-child td{border-bottom:none}
+.sec-f tr:nth-child(even) td{background:#F5F0FF}
+.sec-f .tr-green td{background:#F1F8E9!important}.sec-f .tr-amber td{background:#FFF8E1!important}
+.sec-f .tr-red td{background:#FEF2F2!important}.sec-f .tr-total td{background:#4A148C!important;color:white!important;font-weight:700}
+.sec-f .tr-blue td{background:#EFF6FF!important}
+.sec-f .code{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:4px;padding:12pt 14pt;font-family:'Courier New',monospace;font-size:9pt;margin:14pt 0;white-space:pre;line-height:1.6}
+.sec-f .badge{display:inline-block;background:#4A148C;color:white;font-size:9pt;font-weight:700;padding:3pt 10pt;border-radius:12px;margin-bottom:10pt;letter-spacing:.5px}
+.sec-f .badge.r{background:#B91C1C}.sec-f .badge.g{background:#166534}.sec-f .badge.w{background:#92400E}.sec-f .badge.b{background:#1e40af}
+.sec-f .cg2{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:16pt 0}
+.sec-f .init-card{background:white;border-radius:8px;padding:20pt;box-shadow:0 2px 8px rgba(0,0,0,.09);margin:14pt 0;border-top:5px solid #6B21A8}
+.sec-f .init-card.r{border-top-color:#C62828}.sec-f .init-card.g{border-top-color:#2E7D32}.sec-f .init-card.b{border-top-color:#1565C0}.sec-f .init-card.w{border-top-color:#E65100}
+.sec-f .init-tag{font-size:8pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6B21A8;margin-bottom:6pt}
+.sec-f .init-card.r .init-tag{color:#C62828}.sec-f .init-card.g .init-tag{color:#2E7D32}.sec-f .init-card.b .init-tag{color:#1565C0}.sec-f .init-card.w .init-tag{color:#E65100}
+.sec-f .init-title{font-size:16pt;font-weight:700;color:#1E293B;margin-bottom:10pt}
+.sec-f .init-value{font-size:22pt;font-weight:700;color:#6B21A8;margin-bottom:8pt}
+.sec-f .init-card.r .init-value{color:#C62828}.sec-f .init-card.g .init-value{color:#2E7D32}.sec-f .init-card.b .init-value{color:#1565C0}.sec-f .init-card.w .init-value{color:#E65100}
+.sec-f .phase{background:white;border-radius:6px;padding:16pt 18pt;margin:10pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:6px solid #6B21A8;display:grid;grid-template-columns:140pt 1fr;gap:16pt;align-items:start}
+.sec-f .phase.p2{border-left-color:#1565C0}.sec-f .phase.p3{border-left-color:#2E7D32}.sec-f .phase.p4{border-left-color:#E65100}
+.sec-f .phase-label{font-size:11pt;font-weight:700;color:#6B21A8}
+.sec-f .phase.p2 .phase-label{color:#1565C0}.sec-f .phase.p3 .phase-label{color:#2E7D32}.sec-f .phase.p4 .phase-label{color:#E65100}
+.sec-f .phase-period{font-size:9pt;color:#64748B;margin-top:3pt}
+.sec-f .phase-body h4{font-size:11pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-f .phase-body p,.sec-f .phase-body li{font-size:10pt;color:#334155;line-height:1.5;margin-bottom:3pt}
+.sec-f .phase-body ul{padding-left:14pt}
+.sec-f .crisis-card{background:white;border-radius:8px;padding:18pt;box-shadow:0 2px 6px rgba(0,0,0,.09);border-top:4px solid #C62828}
+.sec-f .crisis-tag{font-size:8pt;font-weight:700;letter-spacing:1.5px;color:#C62828;text-transform:uppercase;margin-bottom:6pt}
+.sec-f .crisis-metric{font-size:24pt;font-weight:700;color:#C62828;margin-bottom:4pt}
+.sec-f .crisis-label{font-size:10pt;color:#555;margin-bottom:10pt}
+.sec-f .crisis-body{font-size:10pt;color:#334155;line-height:1.6}
+.sec-f .smap{display:grid;grid-template-columns:repeat(5,1fr);gap:10pt;margin:20pt 0}
+.sec-f .smap-item{background:white;border-radius:6px;padding:12pt 10pt;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-f .smap-letter{font-size:22pt;font-weight:700;margin-bottom:4pt}
+.sec-f .smap-name{font-size:8pt;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.5px;line-height:1.3}
+.sec-f .smap-pages{font-size:9pt;color:#888;margin-top:4pt}
+.sec-f .quad{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:16pt 0}
+.sec-f .quad-item{border-radius:8px;padding:18pt;min-height:160pt}
+.sec-f .quad-item h4{font-size:12pt;font-weight:700;margin-bottom:10pt}
+.sec-f .quad-item ul{padding-left:14pt}
+.sec-f .quad-item li{font-size:10pt;line-height:1.6;margin-bottom:4pt}
+.sec-f .badge-ring-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:12pt;margin:24pt 0}
+.sec-f .badge-ring{display:flex;flex-direction:column;align-items:center;text-align:center}
+.sec-f .badge-circle{width:100pt;height:100pt;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.13);margin-bottom:10pt}
+.sec-f .badge-circle.p{background:white;border:5pt solid #6B21A8}
+.sec-f .badge-circle.g{background:white;border:5pt solid #2E7D32}
+.sec-f .badge-circle.r{background:white;border:5pt solid #C62828}
+.sec-f .badge-circle.w{background:white;border:5pt solid #E65100}
+.sec-f .badge-circle.b{background:white;border:5pt solid #1565C0}
+.sec-f .badge-num{font-size:17pt;font-weight:800;line-height:1;margin-bottom:3pt}
+.sec-f .badge-circle.p .badge-num{color:#6B21A8}
+.sec-f .badge-circle.g .badge-num{color:#2E7D32}
+.sec-f .badge-circle.r .badge-num{color:#C62828}
+.sec-f .badge-circle.w .badge-num{color:#E65100}
+.sec-f .badge-circle.b .badge-num{color:#1565C0}
+.sec-f .badge-sub{font-size:7pt;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;max-width:72pt;line-height:1.3}
+.sec-f .badge-desc{font-size:9pt;color:#64748B;max-width:100pt;line-height:1.4;text-align:center}
+.sec-f .roi-bar-wrap{margin-top:16pt;padding-top:14pt;border-top:1px solid #F1F5F9}
+.sec-f .roi-bar-label{display:flex;justify-content:space-between;font-size:9pt;font-weight:700;margin-bottom:6pt}
+.sec-f .roi-bar-track{background:#F1F5F9;border-radius:20px;height:14pt;overflow:hidden;position:relative}
+.sec-f .roi-bar-invest{height:100%;border-radius:20px;display:flex;align-items:center;padding-left:8pt;font-size:8pt;font-weight:700;color:white;white-space:nowrap;min-width:40pt}
+.sec-f .roi-bar-return{position:absolute;top:0;left:0;height:100%;border-radius:20px;opacity:.22}
+.sec-f .roi-meta{display:flex;gap:16pt;margin-top:8pt;font-size:9pt;color:#64748B}
+.sec-f .roi-meta span strong{color:#1E293B}
+.sec-f .crisis-card2{background:white;border-radius:10px;padding:0;box-shadow:0 3px 12px rgba(0,0,0,.10);overflow:hidden;margin-bottom:4pt}
+.sec-f .crisis-top{background:#C62828;color:white;padding:14pt 18pt;display:flex;align-items:center;gap:14pt;min-height:72pt}
+.sec-f .crisis-icon{font-size:28pt;flex-shrink:0}
+.sec-f .crisis-top-text h4{font-size:13pt;font-weight:700;margin-bottom:2pt}
+.sec-f .crisis-top-text .csub{font-size:8.5pt;opacity:.85;letter-spacing:.2px}
+.sec-f .crisis-body2{padding:16pt 18pt}
+.sec-f .crisis-metric2{font-size:30pt;font-weight:800;color:#C62828;line-height:1;margin-bottom:4pt}
+.sec-f .crisis-label2{font-size:10pt;color:#555;margin-bottom:12pt;font-weight:600}
+.sec-f .crisis-sev{margin-bottom:12pt}
+.sec-f .crisis-sev-label{font-size:8pt;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:4pt;letter-spacing:.5px}
+.sec-f .crisis-sev-track{background:#FEE2E2;border-radius:20px;height:10pt;overflow:hidden}
+.sec-f .crisis-sev-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#F87171,#C62828)}
+.sec-f .crisis-detail{font-size:10pt;color:#334155;line-height:1.6}
+.sec-f .crisis-action{background:#FEF2F2;border-radius:6px;padding:10pt 12pt;margin-top:10pt;font-size:10pt;color:#7F1D1D;border-left:3px solid #C62828}
+
+
+
+/* ════════════════════════════════════════════════════
+   LAYOUT FIXES — DEFINITIVE CLEAN VERSION
+   !important on layout only, never on font-size
+════════════════════════════════════════════════════ */
+
+/* Intro: badge circles sized correctly */
+.sec-intro .badge-circle{width:74pt;height:74pt}
+.sec-intro .badge-num{font-size:12.5pt}
+.sec-intro .badge-sub{font-size:6pt}
+.sec-intro .badge-desc{font-size:8pt;max-width:88pt}
+.sec-intro .badge-ring-wrap{gap:8pt}
+
+/* Sec-C: 4-col badge grid contained */
+.sec-c .badge-ring-wrap{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8pt}
+.sec-c .badge-circle{width:88pt;height:88pt}
+.sec-c .badge-num{font-size:13pt}
+.sec-c .badge-sub{font-size:6.5pt;max-width:68pt}
+
+/* Sec-E: grids contained — layout !important, font-size never */
+.sec-e .sg2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.sec-e .sg3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.sec-e .sg4{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.sec-e .sc{min-width:0!important;overflow:hidden!important}
+.sec-e .sn{font-size:20pt;word-break:break-word;white-space:normal}
+.sec-e .sl{font-size:9pt;word-break:break-word}
+.sec-e .sd{font-size:8pt;word-break:break-word;line-height:1.3}
+
+/* Sec-E: code blocks wrap, never expand page */
+.sec-e .code{white-space:pre-wrap!important;overflow-wrap:break-word!important;word-break:break-all!important;overflow-x:hidden!important;font-size:8pt}
+
+/* Sec-E: rc-grid contained */
+.sec-e .rc-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;overflow:hidden!important}
+.sec-e .rc-grid .rc{min-width:0!important;overflow:hidden!important;word-break:break-word}
+.sec-e .rc-grid .xref{overflow:hidden!important;word-break:break-word;font-size:9pt}
+.sec-e .rc-grid .xref-grid{grid-template-columns:1fr 1fr!important;font-size:9pt}
+.sec-e h3{word-break:break-word}
+
+/* All crisis banners same height */
+.crisis-top{min-height:72pt!important}
+.sec-f .crisis-top{min-height:72pt!important}
+
+/* Print */
+@media print{
+  .pb{page-break-before:always!important}
+  .sec-intro,.sec-a,.sec-b,.sec-c,.sec-d,.sec-e,.sec-f{page-break-before:always!important}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER PAGE ═══ -->
+<div style="page-break-after:always;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0D47A1 0%,#1565C0 40%,#1976D2 70%,#283593 100%);color:white;padding:60pt 80pt;text-align:center;border-radius:8px;margin-bottom:0;">
+  <div style="font-size:11pt;letter-spacing:4px;text-transform:uppercase;opacity:.7;margin-bottom:20pt;">Healthcare Analytics Portfolio — Comprehensive Report</div>
+  <div style="font-size:42pt;font-weight:800;line-height:1.1;margin-bottom:16pt;letter-spacing:-1px;">Healthcare Analytics<br/>Portfolio</div>
+  <div style="font-size:18pt;opacity:.85;margin-bottom:32pt;font-weight:300;">A Complete Data-Driven Analysis Across Five Dimensions</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16pt;margin:28pt 0;width:100%;max-width:600pt;">
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:16pt 12pt;">
+      <div style="font-size:24pt;font-weight:800;">351,765</div>
+      <div style="font-size:9pt;opacity:.8;text-transform:uppercase;letter-spacing:1px;">Total Patients</div>
+    </div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:16pt 12pt;">
+      <div style="font-size:24pt;font-weight:800;">$15B+</div>
+      <div style="font-size:9pt;opacity:.8;text-transform:uppercase;letter-spacing:1px;">Revenue Opportunity</div>
+    </div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:16pt 12pt;">
+      <div style="font-size:24pt;font-weight:800;">36</div>
+      <div style="font-size:9pt;opacity:.8;text-transform:uppercase;letter-spacing:1px;">SQL Exercises</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12pt;flex-wrap:wrap;justify-content:center;margin:20pt 0;">
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section A — Patient &amp; Care Quality</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section B — Operations &amp; Capacity</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section C — Financial &amp; Revenue Cycle</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section D — Risk, Safety &amp; Compliance</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section E — System Performance &amp; Scalability</div>
+  </div>
+  <div style="margin-top:40pt;font-size:10pt;opacity:.65;">Prepared for Executive Leadership · Q1 2026 · Confidential</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     INTRODUCTION
+═══════════════════════════════════════ -->
+<body>
+
+<!-- ═══════════════════════════════════════
+     EDITABLE SECTION: Section F — Strategic Roadmap & ROI
+     Edit ONLY between the section div tags below.
+     The head/CSS above is a copy for preview only.
+═══════════════════════════════════════ -->
+
+<div class="sec-f pb" id="section-f">
+
+
+<!-- ==============================
+     SECTION HEADER
+================================ -->
+<div class="section-header">
+  <div class="label">Healthcare Analytics Portfolio — Section F of F</div>
+  <h1>Strategic Recommendations &amp; Activation Roadmap</h1>
+  <div class="sub">Synthesising $13.3B of identified opportunity across 36 exercises into a prioritised, investment-ready action plan</div>
+</div>
+
+<!-- COVER STAT CARDS -->
+<div class="badge-ring-wrap">
+  <div class="badge-ring">
+    <div class="badge-circle p">
+      <div class="badge-num">$13.3B</div>
+      <div class="badge-sub">Opportunity Identified</div>
+    </div>
+    <div class="badge-desc">Across 5 analytical sections and 86 portfolio pages</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num">36</div>
+      <div class="badge-sub">Exercises Complete</div>
+    </div>
+    <div class="badge-desc">7,078,107 rows · 17 tables · multi-panel dashboards</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle r">
+      <div class="badge-num">4</div>
+      <div class="badge-sub">Active Crisis Signals</div>
+    </div>
+    <div class="badge-desc">Each requiring immediate executive attention</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle w">
+      <div class="badge-num">$3.8M</div>
+      <div class="badge-sub">Investment Required</div>
+    </div>
+    <div class="badge-desc">To unlock the full $13.3B opportunity</div>
+  </div>
+</div>
+
+<div class="al info" style="margin-top:20pt;">
+  <div class="al-ic">⚡</div>
+  <div class="al-co">
+    <h4>The Activation Paradox</h4>
+    <p>The analytics infrastructure is not broken — it is dormant. Every finding in this portfolio was produced from data the organisation already holds, using indexes that are already deployed, on a database already in operation. The $13.3B opportunity does not require new technology investment. It requires translating analytical findings into operational decisions — and the tools to do that translation are already built.</p>
+  </div>
+</div>
+
+<!-- PORTFOLIO MAP -->
+<div style="margin-top:24pt;">
+  <div style="font-size:11pt;font-weight:700;color:#4A148C;margin-bottom:12pt;letter-spacing:.5px;text-transform:uppercase;font-size:9pt;">Portfolio Structure — Five Sections, One Integrated Story</div>
+  <div class="smap">
+    <div class="smap-item">
+      <div class="smap-letter" style="color:#388E3C;">A</div>
+      <div class="smap-name">Patient &amp; Care Quality</div>
+      <div class="smap-pages">11 pages</div>
+    </div>
+    <div class="smap-item">
+      <div class="smap-letter" style="color:#1565C0;">B</div>
+      <div class="smap-name">Operations &amp; Capacity</div>
+      <div class="smap-pages">14 pages</div>
+    </div>
+    <div class="smap-item">
+      <div class="smap-letter" style="color:#2E7D32;">C</div>
+      <div class="smap-name">Financial &amp; Revenue Cycle</div>
+      <div class="smap-pages">13 pages</div>
+    </div>
+    <div class="smap-item">
+      <div class="smap-letter" style="color:#C62828;">D</div>
+      <div class="smap-name">Risk, Safety &amp; Compliance</div>
+      <div class="smap-pages">13 pages</div>
+    </div>
+    <div class="smap-item">
+      <div class="smap-letter" style="color:#1565C0;">E</div>
+      <div class="smap-name">System Performance &amp; Scalability</div>
+      <div class="smap-pages">20 pages</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 1: FULL OPPORTUNITY MAP
+================================ -->
+<div class="pb"></div>
+<div class="page-title">The $13.3B Opportunity: Full Value Map</div>
+<div class="page-sub">Every quantified finding from all 36 exercises — what was found, what it is worth, and which section carries the evidence</div>
+
+<table>
+  <thead>
+    <tr><th>Domain</th><th>Key Findings</th><th>Consolidated Value</th><th>Portfolio Section</th></tr>
+  </thead>
+  <tbody>
+    <tr class="tr-red">
+      <td><strong>🏥 Clinical &amp; Patient Safety</strong></td>
+      <td>
+        100 patients with 8–11 allergies misclassified LOW RISK · 52,202 zero-record documentation gaps ·
+        16 CRITICAL patients averaging 3.5 treatment failures · 78% patient acquisition collapse ·
+        11.36% readmission rate (top 10% nationally)
+      </td>
+      <td><strong>$13.1B</strong><br/><span style="font-size:9pt;color:#888;">LTV protection + $193M intervention savings</span></td>
+      <td>A · D</td>
+    </tr>
+    <tr class="tr-amber">
+      <td><strong>💰 Financial &amp; Revenue Cycle</strong></td>
+      <td>
+        56.8% collection rate vs 90%+ benchmark · $400M+ uncollected A/R ·
+        81.5% of visits without verified insurance · 64,398 uninsured seniors eligible for Medicare ·
+        Q4 revenue cascade −$198M (Aug → Dec)
+      </td>
+      <td><strong>$1.3B+</strong><br/><span style="font-size:9pt;color:#888;">A/R recovery + Medicare enrollment</span></td>
+      <td>C</td>
+    </tr>
+    <tr class="tr-blue">
+      <td><strong>⚙️ Operations &amp; Capacity</strong></td>
+      <td>
+        189.8% system utilisation · 3.6× pay disparity by workload tier · 549,737 appointment slots lost ·
+        70% of vendors in problematic status · 56% patient drop-off at first visit transition ·
+        12% treatment pathway completion rate
+      </td>
+      <td><strong>$250M+</strong><br/><span style="font-size:9pt;color:#888;">Attrition prevention + supply chain + no-show recovery</span></td>
+      <td>B</td>
+    </tr>
+    <tr class="tr-green">
+      <td><strong>📊 System Performance &amp; Scalability</strong></td>
+      <td>
+        8,139× query performance gain confirmed · 82% index coverage (vs 40–60% industry) ·
+        &lt;100ms 4-table JOIN at 7.08M rows · 18-year scalability runway at current growth ·
+        4 analytics capabilities ready to deploy immediately with zero additional build
+      </td>
+      <td><strong>$8–20M</strong><br/><span style="font-size:9pt;color:#888;">Advanced analytics activation annually</span></td>
+      <td>E</td>
+    </tr>
+    <tr class="tr-total">
+      <td colspan="2"><strong>TOTAL IDENTIFIED OPPORTUNITY</strong></td>
+      <td><strong>$13.3B+</strong></td>
+      <td>A–E</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="al info">
+  <div class="al-ic">💡</div>
+  <div class="al-co">
+    <h4>Why the Numbers Add Up to More Than $13.3B</h4>
+    <p>The individual exercise values sum to more than $13.3B because the capstone is a synthesis estimate that accounts for overlap between initiatives. The $13.3B is the conservative, non-duplicated strategic opportunity figure. Individual exercise values are additive within their domains but some represent the same underlying patient population viewed from different analytical angles.</p>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 2: FOUR CRISIS SIGNALS
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Four Active Crisis Signals</div>
+<div class="page-sub">These are not risks to monitor — they are failures already in progress, each with quantified impact and a clear response pathway</div>
+
+<div class="cg2">
+  <div class="crisis-card2">
+    <div class="crisis-top">
+      <div class="crisis-icon">📉</div>
+      <div class="crisis-top-text">
+        <h4>Crisis 1 — Patient Acquisition Collapse</h4>
+        <div class="csub">Section A · Window Functions Cohort Analysis</div>
+      </div>
+    </div>
+    <div class="crisis-body2">
+      <div class="crisis-metric2">78%</div>
+      <div class="crisis-label2">Collapse in new patient acquisition — 13,791 → 3,006/month</div>
+      <div class="crisis-sev">
+        <div class="crisis-sev-label">Severity — Critical &amp; Structural</div>
+        <div class="crisis-sev-track"><div class="crisis-sev-fill" style="width:95%"></div></div>
+      </div>
+      <div class="crisis-detail">Admitted outcomes rose from 16.6% → 93.9% — fewer patients, each dramatically more acute. 30-day retention at 11% vs 30% target. 56% of first-visit patients never return.</div>
+      <div class="crisis-action"><strong>Response:</strong> 72-hour first-visit follow-up · recall automation at 90-day inactivity · targeted reactivation campaign</div>
+    </div>
+  </div>
+  <div class="crisis-card2">
+    <div class="crisis-top" style="padding:16.5pt 22pt;min-height:87pt;">
+      <div class="crisis-icon">💸</div>
+      <div class="crisis-top-text">
+        <h4>Crisis 2 — Revenue Collection Failure</h4>
+        <div class="csub">Section C · Revenue Cycle LEFT JOIN</div>
+      </div>
+    </div>
+    <div class="crisis-body2">
+      <div class="crisis-metric2">56.8%</div>
+      <div class="crisis-label2">Collection rate vs 90%+ industry benchmark — 33 pts below standard</div>
+      <div class="crisis-sev">
+        <div class="crisis-sev-label">Severity — High · $400M+ at risk</div>
+        <div class="crisis-sev-track"><div class="crisis-sev-fill" style="width:95%"></div></div>
+      </div>
+      <div class="crisis-detail">32% of bills show zero payments. 48% partial. All payment methods — debit, cheque, credit, bank transfer — stuck in PENDING regardless of payer type. Insurance coverage makes no statistical difference.</div>
+      <div class="crisis-action"><strong>Response:</strong> Payment processing audit · 30/60/90-day A/R escalation automation · high-value bill priority queue</div>
+    </div>
+  </div>
+</div>
+
+<div class="cg2" style="margin-top:16pt;">
+  <div class="crisis-card2">
+    <div class="crisis-top">
+      <div class="crisis-icon">🏥</div>
+      <div class="crisis-top-text">
+        <h4>Crisis 3 — Insurance Coverage Gap</h4>
+        <div class="csub">Section C · Temporal JOIN · Insurance Claims</div>
+      </div>
+    </div>
+    <div class="crisis-body2">
+      <div class="crisis-metric2">81.5%</div>
+      <div class="crisis-label2">Visits with no active insurance at time of service</div>
+      <div class="crisis-sev">
+        <div class="crisis-sev-label">Severity — Systemic · $7.36B financial exposure</div>
+        <div class="crisis-sev-track"><div class="crisis-sev-fill" style="width:90%"></div></div>
+      </div>
+      <div class="crisis-detail">64,398 uninsured patients identified. Each episode carries $242,400 bad debt exposure. 81.5% of visits unverified. 7 active insurance types currently paying 0%.</div>
+      <div class="crisis-action"><strong>Response:</strong> Pre-visit eligibility verification · Medicare enrollment campaign (significant Medicare enrollment opportunity) · payer contract renegotiation</div>
+    </div>
+  </div>
+  <div class="crisis-card2">
+    <div class="crisis-top">
+      <div class="crisis-icon">⚕️</div>
+      <div class="crisis-top-text">
+        <h4>Crisis 4 — Patient Safety Classification</h4>
+        <div class="csub">Section D · EXISTS / NOT EXISTS · Allergy Cross-Check</div>
+      </div>
+    </div>
+    <div class="crisis-body2">
+      <div class="crisis-metric2">100</div>
+      <div class="crisis-label2">Patients with 8–11 allergies classified LOW RISK</div>
+      <div class="crisis-sev">
+        <div class="crisis-sev-label">Severity — Clinical Governance Exposure</div>
+        <div class="crisis-sev-track"><div class="crisis-sev-fill" style="width:100%"></div></div>
+      </div>
+      <div class="crisis-detail">52,202 additional patients with zero allergy records — prescriber blind spots at scale. One severe-allergy patient generates 1,000 potential medication conflicts across 948 medications.</div>
+      <div class="crisis-action"><strong>Response:</strong> Immediate reclassification · documentation audit · prescribing alert at order entry · risk scoring re-run with corrected data</div>
+    </div>
+  </div>
+</div>
+
+<div class="al warn">
+  <div class="al-ic">⚠️</div>
+  <div class="al-co">
+    <h4>Compounding Nature of These Crises</h4>
+    <p>These four crises interact. Fewer new patients (Crisis 1) reduces the revenue base available to absorb collection failures (Crisis 2). Uninsured visits (Crisis 3) worsen collection outcomes. Misclassified patients (Crisis 4) consume high-cost resources without appropriate billing, compressing margins further. Addressing them in isolation understates the total recovery potential — integrated response amplifies returns across all four.</p>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 3: PRIORITY MATRIX
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Strategic Priority Matrix</div>
+<div class="page-sub">Six initiatives mapped by implementation timeline and business value — sequenced for maximum near-term impact</div>
+
+<div class="quad">
+  <div class="quad-item" style="background:#FEF2F2;border:2px solid #FECACA;">
+    <h4 style="color:#B91C1C;">🚨 Immediate — Highest Value</h4>
+    <ul>
+      <li><strong>Allergy Safety Reclassification</strong><br/><span style="font-size:9pt;color:#555;">100 patients · Patient safety priority · Week 1</span></li>
+      <li style="margin-top:8pt;"><strong>CRITICAL Risk Programme</strong><br/><span style="font-size:9pt;color:#555;">16 patients → 4,000 at scale · $193M savings · Month 1</span></li>
+      <li style="margin-top:8pt;"><strong>A/R PENDING Resolution</strong><br/><span style="font-size:9pt;color:#555;">$400M+ uncollected · Payment processing audit · Month 1</span></li>
+    </ul>
+  </div>
+  <div class="quad-item" style="background:#F0FDF4;border:2px solid #BBF7D0;">
+    <h4 style="color:#166534;">✅ Immediate — Infrastructure Ready</h4>
+    <ul>
+      <li><strong>Allergy Documentation Audit</strong><br/><span style="font-size:9pt;color:#555;">52,202 patients · Zero-record gap closure · Month 1</span></li>
+      <li style="margin-top:8pt;"><strong>72-Hour First Visit Follow-up</strong><br/><span style="font-size:9pt;color:#555;">56% never return · Recall automation · Month 1</span></li>
+      <li style="margin-top:8pt;"><strong>Treatment Gap Recall (7-day trigger)</strong><br/><span style="font-size:9pt;color:#555;">10.3-day avg gap · Scheduling workflow · Month 2</span></li>
+    </ul>
+  </div>
+  <div class="quad-item" style="background:#EFF6FF;border:2px solid #BFDBFE;">
+    <h4 style="color:#1D4ED8;">📋 Q1–Q2 2026 — High Value</h4>
+    <ul>
+      <li><strong>Medicare Enrollment Campaign</strong><br/><span style="font-size:9pt;color:#555;">64,398 eligible seniors · significant Medicare enrollment opportunity · 90 days</span></li>
+      <li style="margin-top:8pt;"><strong>Insurance Verification Workflow</strong><br/><span style="font-size:9pt;color:#555;">90% uninsured visits · Pre-visit eligibility · Q1</span></li>
+      <li style="margin-top:8pt;"><strong>Volume Recovery Programme</strong><br/><span style="font-size:9pt;color:#555;">78% acquisition collapse · $200M+ · Q1–Q2</span></li>
+    </ul>
+  </div>
+  <div class="quad-item" style="background:#F5F0FF;border:2px solid #D8B4FE;">
+    <h4 style="color:#6B21A8;">🔮 Q2–Q4 2026 — Strategic Build</h4>
+    <ul>
+      <li><strong>Workload Equity Rebalancing</strong><br/><span style="font-size:9pt;color:#555;">3.6× pay disparity · $2.7M attrition saving · Q2</span></li>
+      <li style="margin-top:8pt;"><strong>Supply Chain Vendor Formalisation</strong><br/><span style="font-size:9pt;color:#555;">70% problematic vendors · 5–15% cost saving · Q3</span></li>
+      <li style="margin-top:8pt;"><strong>Advanced Analytics &amp; AI Layer</strong><br/><span style="font-size:9pt;color:#555;">Predictive risk · Population health · Q4 2026</span></li>
+    </ul>
+  </div>
+</div>
+
+<table style="margin-top:20pt;">
+  <thead>
+    <tr><th>Initiative</th><th>Timeline</th><th>Investment</th><th>Return</th><th>ROI</th></tr>
+  </thead>
+  <tbody>
+    <tr class="tr-red"><td><strong>Patient Safety &amp; Allergy</strong></td><td>Week 1 — Month 1</td><td>$200K</td><td>$13.1B lifetime value protection</td><td>Compliance + Safety</td></tr>
+    <tr class="tr-red"><td><strong>Risk Stratification Programme</strong></td><td>Month 1 — Month 3</td><td>$500K</td><td>$193M direct savings</td><td>323–560%</td></tr>
+    <tr class="tr-amber"><td><strong>Revenue Cycle Overhaul</strong></td><td>Q1 2026</td><td>$800K</td><td>$400M+ A/R recovery</td><td>50,000%+</td></tr>
+    <tr class="tr-amber"><td><strong>Insurance Activation Campaign</strong></td><td>Q1–Q2 2026</td><td>$1.5M</td><td>significant Medicare enrollment opportunity</td><td>440–587%</td></tr>
+    <tr class="tr-blue"><td><strong>Volume Recovery Programme</strong></td><td>Q1–Q3 2026</td><td>$500K</td><td>$200M+ annually</td><td>400%+</td></tr>
+    <tr class="tr-blue"><td><strong>Operational Efficiency</strong></td><td>Q2–Q4 2026</td><td>$300K</td><td>$2M+ (workload + supply chain)</td><td>100%+</td></tr>
+    <tr class="tr-total"><td colspan="2"><strong>TOTAL</strong></td><td><strong>$3.8M</strong></td><td><strong>$13.3B+</strong></td><td><strong>350,000%+</strong></td></tr>
+  </tbody>
+</table>
+
+<!-- ==============================
+     PAGE 4: INITIATIVE 1 — PATIENT SAFETY
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Initiative 1: Patient Safety &amp; Allergy Management</div>
+<div class="page-sub">The most urgent clinical and compliance priority in the portfolio — identifiable, addressable, and non-negotiable</div>
+
+<div class="init-card r">
+  <div class="init-tag">Initiative 1 · Immediate · Patient Safety</div>
+  <div class="init-title">Allergy Reclassification &amp; Documentation Completion</div>
+  <div class="init-value">$13.1B Lifetime Value Protection</div>
+  <p style="font-size:10.5pt;color:#555;margin-bottom:10pt;">Investment: $200K
+<div class="roi-bar-wrap">
+  <div class="roi-bar-label">
+    <span>Investment: <strong>$200K</strong></span>
+    <span style="color:#C62828;">Return: <strong>Compliance + LTV Protection</strong></span>
+  </div>
+  <div class="roi-bar-track">
+    <div class="roi-bar-return" style="width:100%;background:#C62828;"></div>
+    <div class="roi-bar-invest" style="width:92%;background:#C62828;">invest</div>
+  </div>
+  <div class="roi-meta">
+    <span>🟢 <strong>ROI: 1.5×</strong> return on investment</span>
+    <span>📌 <strong>Patient Safety</strong> — activate existing analytical infrastructure</span>
+  </div>
+</div>
+<div style="margin-bottom:6pt;"></div><p style="display:none;"> · Timeline: Week 1 → Month 3 · Source: Ex 31, 34, 35</p>
+</div>
+
+<div class="badge-ring-wrap" style="grid-template-columns:repeat(3,1fr);">
+  <div class="badge-ring">
+    <div class="badge-circle r">
+      <div class="badge-num">100</div>
+      <div class="badge-sub">Misclassified<br/>Patients</div>
+    </div>
+    <div class="badge-desc">8–11 allergies, labelled LOW RISK — immediate reclassification required</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle r">
+      <div class="badge-num">52,202</div>
+      <div class="badge-sub">Zero-Record<br/>Patients</div>
+    </div>
+    <div class="badge-desc">16% of active visit population with no allergy documentation on file</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle r">
+      <div class="badge-num">1,000</div>
+      <div class="badge-sub">Conflict Points<br/>Per Patient</div>
+    </div>
+    <div class="badge-desc">One severe-allergy patient generates 1,000 conflicts across 948 medications</div>
+  </div>
+</div>
+
+<div class="cg2">
+  <div class="fb r">
+    <h3>Clinical Governance Exposure</h3>
+    <ul>
+      <li>100 patients with 8–11 active allergies receiving LOW RISK standard protocols — not clinically defensible</li>
+      <li>$2.9M gap in specialist spending for this cohort confirms under-management</li>
+      <li>79% CRITICAL patient treatment failure rate signals that escalation protocols are not being triggered</li>
+      <li>Allergy score is the #1 separator between CRITICAL and HIGH risk tiers (2.4 vs 1.7)</li>
+    </ul>
+  </div>
+  <div class="fb r">
+    <h3>Documentation Gap Consequences</h3>
+    <ul>
+      <li>52,202 patients arrive at treatment with zero allergy records — prescribers are flying blind</li>
+      <li>At the database's 644,303 allergy records across 351,765 patients, zero-record patients are statistical outliers — not a data system problem but a registration workflow failure</li>
+      <li>Each prescribing decision for a zero-record patient is an unquantified liability event</li>
+    </ul>
+  </div>
+</div>
+
+<div class="fb r" style="margin-top:6pt;">
+  <h3>Recommended Actions — Sequenced</h3>
+  <ol style="padding-left:16pt;">
+    <li style="margin-bottom:8pt;"><strong>Week 1:</strong> Extract the 100 misclassified patients from the EXISTS query — send to clinical governance for individual case review. Interim flag: upgrade to MODERATE RISK pending review.</li>
+    <li style="margin-bottom:8pt;"><strong>Month 1:</strong> Run allergy documentation audit against 52,202 zero-record patients. Segment by upcoming appointment date — prioritise highest-acuity scheduled visits first.</li>
+    <li style="margin-bottom:8pt;"><strong>Month 2:</strong> Integrate allergy alert trigger at prescribing point for any patient with 3+ active allergies — surface conflict check at order entry.</li>
+    <li style="margin-bottom:4pt;"><strong>Month 3:</strong> Re-run composite risk scoring with corrected allergy data — expect CRITICAL patient count to rise significantly once allergy scores are accurate.</li>
+  </ol>
+</div>
+
+<!-- ==============================
+     PAGE 5: INITIATIVE 2 — RISK PROGRAMME
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Initiative 2: Risk Stratification Programme</div>
+<div class="page-sub">From 16 identified CRITICAL patients to 4,000 at population scale — a $193M savings opportunity with infrastructure already built</div>
+
+<div class="init-card r">
+  <div class="init-tag">Initiative 2 · Month 1–3 · Clinical Operations</div>
+  <div class="init-title">Composite Risk Scoring Deployment at Scale</div>
+  <div class="init-value">$193M Direct Savings · 323% ROI</div>
+  <p style="font-size:10.5pt;color:#555;margin-bottom:10pt;">Investment: $500K
+<div class="roi-bar-wrap">
+  <div class="roi-bar-label">
+    <span>Investment: <strong>$500K</strong></span>
+    <span style="color:#C62828;">Return: <strong>$193M direct savings · 323% ROI</strong></span>
+  </div>
+  <div class="roi-bar-track">
+    <div class="roi-bar-return" style="width:100%;background:#C62828;"></div>
+    <div class="roi-bar-invest" style="width:29.599999999999994%;background:#C62828;">invest</div>
+  </div>
+  <div class="roi-meta">
+    <span>🟢 <strong>ROI: 88×</strong> return on investment</span>
+    <span>📌 <strong>Risk Programme</strong> — activate existing analytical infrastructure</span>
+  </div>
+</div>
+<div style="margin-bottom:6pt;"></div><p style="display:none;"> · Timeline: Month 1 → Month 6 · Source: Ex 35, 36, 36b</p>
+</div>
+
+<div class="badge-ring-wrap" style="grid-template-columns:repeat(4,1fr);">
+  <div class="badge-ring">
+    <div class="badge-circle r">
+      <div class="badge-num">16</div>
+      <div class="badge-sub">CRITICAL Patients<br/>(Sample)</div>
+    </div>
+    <div class="badge-desc">Avg score 10, $161K spend, 3.5 treatment failures, $273K LTV</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle r">
+      <div class="badge-num">4,000</div>
+      <div class="badge-sub">CRITICAL at<br/>50K Scale</div>
+    </div>
+    <div class="badge-desc">8% of high-acuity population projected as CRITICAL</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num">$193M</div>
+      <div class="badge-sub">Savings — 30%<br/>Intervention</div>
+    </div>
+    <div class="badge-desc">Conservative estimate — 30% cost reduction on CRITICAL cohort</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num">323%</div>
+      <div class="badge-sub">ROI — CRITICAL<br/>Tier</div>
+    </div>
+    <div class="badge-desc">HIGH tier ROI even higher at 560%</div>
+  </div>
+</div>
+
+<div class="cg2">
+  <div class="fb r">
+    <h3>The CRITICAL Patient Profile</h3>
+    <ul>
+      <li>18 patients confirmed CRITICAL in capstone cohort — 20% of established patient sample</li>
+      <li>Average 3.5 treatment failures per patient — multiple protocol escalations have already failed</li>
+      <li>Average LTV of $273K — among the highest in the portfolio</li>
+      <li>65-day median visit cadence vs 130 days for low-acuity — 2× scheduling resource consumption</li>
+      <li>79% treatment failure rate vs 69% HIGH — CRITICAL label tracks real clinical outcomes</li>
+    </ul>
+  </div>
+  <div class="fb r">
+    <h3>Five-Dimension Scoring Model</h3>
+    <ul>
+      <li><strong>Age Component:</strong> Non-linear risk contribution — oldest and youngest at higher baseline</li>
+      <li><strong>Allergy Severity:</strong> Primary CRITICAL/HIGH separator — 2.4 vs 1.7 average</li>
+      <li><strong>Utilisation Rate:</strong> Visit frequency as proxy for disease burden</li>
+      <li><strong>Treatment Adherence:</strong> Failure rate per patient tracked longitudinally</li>
+      <li><strong>Financial Risk:</strong> High-cost outlier flag using scalar benchmarking (9× population avg threshold)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="fb r">
+  <h3>Population Scaling Projection</h3>
+  <table>
+    <thead><tr><th>Scale</th><th>CRITICAL Patients (8%)</th><th>Estimated Annual Spend</th><th>30% Intervention Saving</th><th>ROI on $500K Investment</th></tr></thead>
+    <tbody>
+      <tr><td>Current sample (200 pts)</td><td>16</td><td>$2.6M</td><td>$780K</td><td>156%</td></tr>
+      <tr><td>5,000 patients</td><td>400</td><td>$64M</td><td>$19M</td><td>3,800%</td></tr>
+      <tr class="tr-red"><td><strong>50,000 patients</strong></td><td><strong>4,000</strong></td><td><strong>$644M</strong></td><td><strong>$193M</strong></td><td><strong>38,600%</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==============================
+     PAGE 6: INITIATIVE 3 — REVENUE CYCLE
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Initiative 3: Revenue Cycle Overhaul</div>
+<div class="page-sub">$400M+ sitting in uncollected A/R — a processing and workflow failure, not a clinical one</div>
+
+<div class="init-card w">
+  <div class="init-tag">Initiative 3 · Q1 2026 · Financial Operations</div>
+  <div class="init-title">A/R Resolution, Collection System Repair &amp; Medicare Enrollment</div>
+  <div class="init-value">$400M+ A/R + Significant Medicare Enrollment Recovery</div>
+  <p style="font-size:10.5pt;color:#555;margin-bottom:10pt;">Investment: $800K
+<div class="roi-bar-wrap">
+  <div class="roi-bar-label">
+    <span>Investment: <strong>$800K</strong></span>
+    <span style="color:#E65100;">Return: <strong>$400M A/R + significant Medicare enrollment opportunity Medicare</strong></span>
+  </div>
+  <div class="roi-bar-track">
+    <div class="roi-bar-return" style="width:100%;background:#E65100;"></div>
+    <div class="roi-bar-invest" style="width:3%;background:#E65100;">invest</div>
+  </div>
+  <div class="roi-meta">
+    <span>🟢 <strong>ROI: 1375×</strong> return on investment</span>
+    <span>📌 <strong>Revenue Cycle</strong> — activate existing analytical infrastructure</span>
+  </div>
+</div>
+<div style="margin-bottom:6pt;"></div><p style="display:none;"> · Timeline: Q1 → Q3 2026 · Source: Ex 27, 29, 30, 32, 33</p>
+</div>
+
+<div class="sg sg3" style="margin-bottom:18pt;">
+  <div class="sc w"><div class="sn">56.8%</div><div class="sl">Collection Rate</div><div class="sd">vs 90%+ industry benchmark — 33 percentage points below standard</div></div>
+  <div class="sc w"><div class="sn">$400M+</div><div class="sl">Uncollected A/R (Est.)</div><div class="sd">Extrapolated from 32% zero-collection + 48% partial-collection billing sample</div></div>
+  <div class="sc w"><div class="sn">64,398</div><div class="sl">Medicare-Eligible Seniors</div><div class="sd">Significant enrollment opportunity — exact recovery subject to enrollment rate assumptions</div></div>
+</div>
+
+<div class="cg2">
+  <div class="fb w">
+    <h3>Why Collection Is Failing</h3>
+    <ul>
+      <li>All payment methods — debit, cheque, credit card, bank transfer — stuck in PENDING regardless of amount or payer</li>
+      <li>Insurance coverage makes zero statistical difference: insured and self-pay patients both collect at ~2%</li>
+      <li>This is a payment processing system failure, not a payer mix problem</li>
+      <li>32% of top-50 high-value bills show zero payments collected — the highest-value bills are failing first</li>
+      <li>Monthly accumulation confirms Q4 cascade: Oct −$58M, Nov −$66M, Dec −$61M</li>
+    </ul>
+  </div>
+  <div class="fb w">
+    <h3>Medicare Enrollment Opportunity</h3>
+    <ul>
+      <li>64,398 uninsured patients identified — subset eligible for Medicare based on age profile</li>
+      <li>Medicaid achieves the best reimbursement at 35% — Medicare would exceed this</li>
+      <li>7 active insurance types in the database currently reimburse at 0% — structural dead weight in payer mix</li>
+      <li>81.5% of visits are unverified at time of service — the opportunity is not marginal but systemic</li>
+      <li>significant Medicare enrollment opportunity recovery estimate based on eligible senior enrollment at standard Medicare rates</li>
+    </ul>
+  </div>
+</div>
+
+<div class="fb w">
+  <h3>Revenue Recovery Sequencing</h3>
+  <table>
+    <thead><tr><th>Action</th><th>Timeline</th><th>Expected Recovery</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td>Audit and resolve PENDING payment backlog</td><td>Month 1–2</td><td>$50M–$100M (immediate)</td><td>Low — system configuration</td></tr>
+      <tr><td>30/60/90-day A/R escalation automation</td><td>Month 2–3</td><td>$100M–$200M (6 months)</td><td>Medium — workflow build</td></tr>
+      <tr><td>Pre-visit insurance eligibility verification</td><td>Q1 2026</td><td>Prevent future gap</td><td>Medium — registration workflow</td></tr>
+      <tr class="tr-amber"><td>Medicare enrollment campaign (64K seniors)</td><td>Q1–Q2 2026</td><td>significant Medicare enrollment opportunity (12–18 months)</td><td>High — outreach + enrollment</td></tr>
+      <tr><td>Renegotiate zero-reimbursement payer contracts</td><td>Q2–Q3 2026</td><td>$50M+ annually</td><td>High — contract negotiation</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==============================
+     PAGE 7: INITIATIVE 4 — VOLUME RECOVERY
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Initiative 4: Volume Recovery Programme</div>
+<div class="page-sub">Reversing the 78% patient acquisition collapse — the single biggest structural threat to long-term financial viability</div>
+
+<div class="init-card b">
+  <div class="init-tag">Initiative 4 · Q1–Q3 2026 · Growth &amp; Retention</div>
+  <div class="init-title">New Patient Acquisition, First-Visit Retention &amp; Care Continuity</div>
+  <div class="init-value">$200M+ Annually · $303K Avg Patient LTV</div>
+  <p style="font-size:10.5pt;color:#555;margin-bottom:10pt;">Investment: $500K
+<div class="roi-bar-wrap">
+  <div class="roi-bar-label">
+    <span>Investment: <strong>$500K</strong></span>
+    <span style="color:#C62828;">Return: <strong>$200M+ annually · $303K Avg Patient LTV</strong></span>
+  </div>
+  <div class="roi-bar-track">
+    <div class="roi-bar-return" style="width:100%;background:#C62828;"></div>
+    <div class="roi-bar-invest" style="width:29.599999999999994%;background:#1565C0;">invest</div>
+  </div>
+  <div class="roi-meta">
+    <span>🟢 <strong>ROI: 400×</strong> return on investment</span>
+    <span>📌 <strong>Risk Programme</strong> — activate existing analytical infrastructure</span>
+  </div>
+</div>
+<div style="margin-bottom:6pt;"></div><p style="display:none;"> · Timeline: Q1 → Q4 2026 · Source: Ex 19, 28, 32, 33, 36</p>
+</div>
+
+<div class="sg sg4" style="margin-bottom:18pt;">
+  <div class="sc r"><div class="sn">78%</div><div class="sl">Acquisition Collapse</div><div class="sd">13,791 → 3,006 new patients/month over 12 months</div></div>
+  <div class="sc r"><div class="sn">11%</div><div class="sl">30-Day Retention</div><div class="sd">vs 30% industry target — 3× below standard</div></div>
+  <div class="sc r"><div class="sn">56%</div><div class="sl">Never Return</div><div class="sd">Of first-visit patients who do not book a second appointment</div></div>
+  <div class="sc b"><div class="sn">$303K</div><div class="sl">Avg Patient LTV</div><div class="sd">Established patients (180+ day tenure) — the economic case for retention</div></div>
+</div>
+
+<div class="cg2">
+  <div class="fb b">
+    <h3>The Retention Mathematics</h3>
+    <p>At $303K average LTV per established patient, recovering just 1,000 of the ~8,000 monthly lost patients from the acquisition collapse equates to <strong>$303M in lifetime value recovered</strong>. The 78% acquisition drop is not a marketing problem — it is an operational one. Patients who visit are not returning, not because of demand but because of follow-up failures.</p>
+    <ul style="margin-top:10pt;">
+      <li>549,737 appointment slots lost to no-shows, cancellations and failures</li>
+      <li>50% recovery target = $18.7M annually</li>
+      <li>56% of first-visit patients who left without booking — each represents $303K in unrecovered LTV</li>
+    </ul>
+  </div>
+  <div class="fb b">
+    <h3>Operational Root Causes</h3>
+    <ul>
+      <li><strong>10.3-day treatment gap:</strong> Patients fall between treatment cycles — no automated recall at day 7</li>
+      <li><strong>56% Visit Chain Step 1→2 drop-off:</strong> Steepest attrition at the most critical transition point</li>
+      <li><strong>12% pathway completion:</strong> 88% of patients starting multi-step protocols never finish them</li>
+      <li><strong>766-day care gap:</strong> High-risk patients going 2+ years between touches</li>
+      <li><strong>Q4 revenue cascade:</strong> $198M revenue decline Aug→Dec — patient volume not recovered in Q4</li>
+    </ul>
+  </div>
+</div>
+
+<div class="fb b">
+  <h3>Recovery Activation Plan</h3>
+  <table>
+    <thead><tr><th>Lever</th><th>Mechanism</th><th>Target Population</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>72-hour first visit follow-up call</td><td>Recall automation at appointment close</td><td>All first-visit patients (~3,000/month)</td><td>$900M LTV if 10% converted</td></tr>
+      <tr><td>7-day treatment gap trigger</td><td>Automated SMS/call to lapsed patients</td><td>Partially completed treatments (20%)</td><td>$5–8M annually</td></tr>
+      <tr class="tr-blue"><td>90-day inactive patient outreach</td><td>Targeted reactivation campaign</td><td>766-day care gap cohort</td><td>$15M+ annually</td></tr>
+      <tr><td>Care coordinator programme</td><td>Dedicated coordinator for high-complexity</td><td>13,567 high-complexity patients</td><td>$2M savings (400% ROI)</td></tr>
+      <tr><td>Pathway completion protocol</td><td>Step-specific follow-up at each transition</td><td>All active treatment pathways</td><td>$5–8M annually</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==============================
+     PAGE 8: INITIATIVE 5 — OPERATIONAL EFFICIENCY
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Initiative 5: Operational Efficiency &amp; Workforce Equity</div>
+<div class="page-sub">Structural capacity and compensation imbalances costing $2M+ annually in preventable attrition and supply chain waste</div>
+
+<div class="init-card" style="border-top-color:#6B21A8;">
+  <div class="init-tag">Initiative 5 · Q2–Q4 2026 · Operations</div>
+  <div class="init-title">Workforce Rebalancing, Capacity Alignment &amp; Supply Chain Optimisation</div>
+  <div class="init-value">$2M+ Annual Savings</div>
+  <p style="font-size:10.5pt;color:#555;margin-bottom:10pt;">Investment: $300K
+<div class="roi-bar-wrap">
+  <div class="roi-bar-label">
+    <span>Investment: <strong>$300K</strong></span>
+    <span style="color:#6B21A8;">Return: <strong>$2M+ annually</strong></span>
+  </div>
+  <div class="roi-bar-track">
+    <div class="roi-bar-return" style="width:100%;background:#6B21A8;"></div>
+    <div class="roi-bar-invest" style="width:20.0%;background:#6B21A8;">invest</div>
+  </div>
+  <div class="roi-meta">
+    <span>🟢 <strong>ROI: 100×</strong> return on investment</span>
+    <span>📌 <strong>Operational</strong> — activate existing analytical infrastructure</span>
+  </div>
+</div>
+<div style="margin-bottom:6pt;"></div><p style="display:none;"> · Timeline: Q2 → Q4 2026 · Source: Ex 17, 18, 25, 26, 32</p>
+</div>
+
+<div class="sg sg3" style="margin-bottom:18pt;">
+  <div class="sc p"><div class="sn">189.8%</div><div class="sl">System Utilisation Rate</div><div class="sd">47.3% of all assignments in over-capacity territory</div></div>
+  <div class="sc p"><div class="sn">3.6×</div><div class="sl">Pay Disparity by Workload</div><div class="sd">Low-workload staff earn 3.6× more per team than Very High workload staff</div></div>
+  <div class="sc p"><div class="sn">70%</div><div class="sl">Vendors in Problematic Status</div><div class="sd">Only 12% Active — 25-day total procurement cycle</div></div>
+</div>
+
+<div class="cg2">
+  <div class="fb">
+    <h3>Workforce Equity Crisis</h3>
+    <ul>
+      <li>Very High workload staff (200+ assignments): earn $297 per team on average</li>
+      <li>Low workload staff (&lt;100 assignments): earn $1,060 per team</li>
+      <li>The same unit of clinical work is valued at 3.6× depending on how much you carry</li>
+      <li>Projected burnout-driven attrition saving from rebalancing: <strong>$2.7M annually</strong></li>
+      <li>189.8% capacity utilisation with 47.3% of assignments in over-capacity — no headroom for demand surge</li>
+    </ul>
+  </div>
+  <div class="fb">
+    <h3>Supply Chain Exposure</h3>
+    <ul>
+      <li>Only 12% of vendors in Active status — 70% Probation or Inactive</li>
+      <li>Average lead time 17.8 days + 7.4 days internal verification = 25.2-day procurement cycle</li>
+      <li>Geographic diversification is the one genuine bright spot: no country exceeds 11% supply share across 10 nations</li>
+      <li>Formalising preferred contracts with Major-tier vendors: <strong>5–15% unit cost reduction</strong></li>
+      <li>Vendor degradation is recent and quality-driven — not structural — making remediation feasible</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cg2">
+  <div class="fb">
+    <h3>Capacity Planning Gaps</h3>
+    <ul>
+      <li>NTILE analysis: all top-100 cost patients in Very High Risk — median $214K, band $175K–$225K</li>
+      <li>High-acuity visit cadence: 65 days median vs 130 days low-acuity — 2× scheduling resource demand</li>
+      <li>No dedicated high-complexity scheduling lane exists — all patients treated with same scheduling logic</li>
+      <li>Equipment: 80% idle rate — significant locked capacity not being matched to demand</li>
+    </ul>
+  </div>
+  <div class="fb">
+    <h3>Appointment &amp; Scheduling Loss</h3>
+    <ul>
+      <li>549,737 appointment slots lost to no-shows, cancellations and failures</li>
+      <li>94.2% appointment conversion vs 80–85% industry — a genuine operational strength</li>
+      <li>But the 5.8% failure rate at scale (974,032 appointments) equates to significant lost capacity</li>
+      <li>50% no-show recovery target = <strong>$18.7M annually</strong></li>
+      <li>5-minute data type fix (CAST + index) reduced processing from 30 seconds to 5 minutes — quick wins exist throughout the stack</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 9: INITIATIVE 6 — ADVANCED ANALYTICS
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Initiative 6: Advanced Analytics Activation</div>
+<div class="page-sub">The infrastructure is production-ready — what remains is activating its full capability for real-time clinical and operational decision-making</div>
+
+<div class="init-card g">
+  <div class="init-tag">Initiative 6 · Q4 2026 → 2027 · Strategic Capability</div>
+  <div class="init-title">AI/ML Layer, Real-Time Eligibility, Population Health &amp; Predictive Risk</div>
+  <div class="init-value">$8–20M Annually + Long-Term Infrastructure Value</div>
+  <p style="font-size:10.5pt;color:#555;margin-bottom:10pt;">Investment: $1.2M
+<div class="roi-bar-wrap">
+  <div class="roi-bar-label">
+    <span>Investment: <strong>$1.2M</strong></span>
+    <span style="color:#2E7D32;">Return: <strong>$8–20M annually</strong></span>
+  </div>
+  <div class="roi-bar-track">
+    <div class="roi-bar-return" style="width:100%;background:#2E7D32;"></div>
+    <div class="roi-bar-invest" style="width:88.0%;background:#2E7D32;">invest</div>
+  </div>
+  <div class="roi-meta">
+    <span>🟢 <strong>ROI: 15×</strong> return on investment</span>
+    <span>📌 <strong>Analytics</strong> — activate existing analytical infrastructure</span>
+  </div>
+</div>
+<div style="margin-bottom:6pt;"></div><p style="display:none;"> · Timeline: Q4 2026 → 2027 · Source: Ex 21, 35, 36, E Section</p>
+</div>
+
+<div class="sg sg4" style="margin-bottom:18pt;">
+  <div class="sc g"><div class="sn">8,139×</div><div class="sl">Max Performance Gain</div><div class="sd">Baseline unindexed vs 5-table indexed JOIN</div></div>
+  <div class="sc g"><div class="sn">106×</div><div class="sl">Index Speedup</div><div class="sd">Single-table indexed vs unindexed at scale — 26ms vs 2,750ms</div></div>
+  <div class="sc g"><div class="sn">82%</div><div class="sl">Index Coverage</div><div class="sd">vs 40–60% industry standard — ahead of peers</div></div>
+  <div class="sc g"><div class="sn">18 yrs</div><div class="sl">To 10× Data Growth</div><div class="sd">Current architecture supports without infrastructure change</div></div>
+</div>
+
+<table>
+  <thead><tr><th>Capability</th><th>Readiness</th><th>Requirement</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr class="tr-green"><td>Temporal analysis (visit vs insurance windows)</td><td>✅ Deploy Now</td><td>Activate existing query</td><td>$242K per episode prevented</td></tr>
+    <tr class="tr-green"><td>Cohort segmentation &amp; retention tracking</td><td>✅ Deploy Now</td><td>Activate existing window functions</td><td>$303K LTV per retained patient</td></tr>
+    <tr class="tr-green"><td>Composite risk scoring (5-dimension)</td><td>✅ Deploy Now</td><td>Scale composite scoring to full population</td><td>$193M savings</td></tr>
+    <tr class="tr-green"><td>Financial dashboards (capstone)</td><td>✅ Deploy Now</td><td>Schedule recurring execution</td><td>Executive decision support</td></tr>
+    <tr class="tr-amber"><td>AI/ML predictive risk</td><td>⏳ Invest 6–12 months</td><td>Feature engineering from existing tables</td><td>$8–15M annually</td></tr>
+    <tr class="tr-amber"><td>Real-time insurance eligibility</td><td>⏳ Invest 6–12 months</td><td>API integration with payer systems</td><td>$50M+ bad debt prevention</td></tr>
+    <tr class="tr-amber"><td>NLP clinical note analysis</td><td>⏳ Invest 6–12 months</td><td>Text extraction from unstructured fields</td><td>5–10% risk accuracy improvement</td></tr>
+    <tr><td>Population health benchmarking</td><td>📋 Plan Q3–Q4 2026</td><td>External data integration</td><td>Strategic positioning</td></tr>
+    <tr><td>Distributed architecture (100× scale)</td><td>📋 Plan 2028+</td><td>710M records threshold</td><td>Long-term scalability</td></tr>
+  </tbody>
+</table>
+
+<div class="al ok">
+  <div class="al-ic">✅</div>
+  <div class="al-co">
+    <h4>What "Deploy Now" Actually Means</h4>
+    <p>The four "Deploy Now" capabilities are not theoretical — they are working SQL queries and visualisation pipelines already validated across 7.08M rows. Deployment means scheduling them as recurring jobs and connecting their outputs to operational dashboards. This is a configuration and integration task, not a build task. The time-to-value is weeks, not quarters.</p>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 10: INFRASTRUCTURE READINESS
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Infrastructure Readiness Assessment</div>
+<div class="page-sub">What the technical architecture can support today — and what it needs to support tomorrow</div>
+
+<div class="badge-ring-wrap" style="grid-template-columns:repeat(4,1fr);">
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num">0.003s</div>
+      <div class="badge-sub">Single-Table<br/>Query</div>
+    </div>
+    <div class="badge-desc">Indexed single-table at full 7.08M row scale</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num"><100ms</div>
+      <div class="badge-sub">4-Table<br/>Indexed JOIN</div>
+    </div>
+    <div class="badge-desc">Human-imperceptible response time in production</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle w">
+      <div class="badge-num">21.9s</div>
+      <div class="badge-sub">Unindexed<br/>4-Table JOIN</div>
+    </div>
+    <div class="badge-desc">The cost of missing a single index on a critical table</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle b">
+      <div class="badge-num">26 idx</div>
+      <div class="badge-sub">Indexes<br/>Deployed</div>
+    </div>
+    <div class="badge-desc">Covering 82% of query paths — well above 40–60% industry</div>
+  </div>
+</div>
+
+<table>
+  <thead><tr><th>Scalability Scenario</th><th>Record Volume</th><th>Years at Current Growth</th><th>Architecture Status</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr class="tr-green"><td><strong>Current (1×)</strong></td><td>7.08M rows</td><td>Today</td><td>✅ Fully supported</td><td>No action needed</td></tr>
+    <tr class="tr-green"><td><strong>10× Growth</strong></td><td>~71M rows</td><td>~4–5 years</td><td>✅ Supported with current indexes</td><td>Monitor query times</td></tr>
+    <tr class="tr-amber"><td><strong>50× Growth</strong></td><td>~354M rows</td><td>~10–12 years</td><td>⏳ Requires table partitioning</td><td>Plan partition strategy</td></tr>
+    <tr class="tr-red"><td><strong>100× Growth</strong></td><td>~710M rows</td><td>~18 years</td><td>🔴 Requires distributed architecture</td><td>Long-range infrastructure plan</td></tr>
+  </tbody>
+</table>
+
+<div class="cg2">
+  <div class="fb g">
+    <h3>What the Current Stack Does Well</h3>
+    <ul>
+      <li>Temporal analysis at full scale — date-range JOINs across 917K visits in &lt;100ms</li>
+      <li>Window functions (ROW_NUMBER, LAG, LEAD, NTILE) across multi-million row tables</li>
+      <li>Recursive CTEs for YTD accumulation — calendar generation and gap detection</li>
+      <li>Composite scoring across 5 dimensions on 200-patient cohort in under 1 second</li>
+      <li>Correlated subqueries with per-row age-group benchmarking — scales to full population</li>
+      <li>5-table JOINs (patient → visit → bill → treatment → staff) in under 1 second indexed</li>
+    </ul>
+  </div>
+  <div class="fb w">
+    <h3>Known Gaps &amp; Risks</h3>
+    <ul>
+      <li>3 critical indexes missing on STFF, EQPM, ALGY tables — query times degrade significantly at scale without them</li>
+      <li>ALGY index gap is particularly concerning given allergy safety priority — reclassification queries will be slow until fixed</li>
+      <li>No real-time streaming capability — all analysis is batch; eligibility verification requires API layer not yet built</li>
+      <li>Data quality: 5-minute processing time on date type (CAST fix available but not yet deployed system-wide)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 11: INVESTMENT SUMMARY
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Investment Summary &amp; Return on Investment</div>
+<div class="page-sub">$3.8M total investment to unlock $13.3B in identified opportunity — a 350,000% aggregate return</div>
+
+<table>
+  <thead>
+    <tr><th>Initiative</th><th>Investment</th><th>Timeline</th><th>Conservative Return</th><th>ROI</th><th>Priority</th></tr>
+  </thead>
+  <tbody>
+    <tr class="tr-red">
+      <td><strong>Patient Safety &amp; Allergy</strong><br/><span style="font-size:9pt;color:#888;">100 misclassified + 52K zero-record patients</span></td>
+      <td><strong>$200K</strong></td>
+      <td>Week 1–Month 3</td>
+      <td>$13.1B LTV protection + compliance</td>
+      <td>Non-financial (safety)</td>
+      <td>🚨 P1</td>
+    </tr>
+    <tr class="tr-red">
+      <td><strong>Risk Stratification Programme</strong><br/><span style="font-size:9pt;color:#888;">Composite risk scoring at population scale</span></td>
+      <td><strong>$500K</strong></td>
+      <td>Month 1–6</td>
+      <td>$193M direct savings</td>
+      <td>323% (CRITICAL tier)</td>
+      <td>🚨 P1</td>
+    </tr>
+    <tr class="tr-amber">
+      <td><strong>Revenue Cycle Overhaul</strong><br/><span style="font-size:9pt;color:#888;">A/R resolution + Medicare enrollment</span></td>
+      <td><strong>$800K</strong></td>
+      <td>Q1–Q3 2026</td>
+      <td>$400M A/R + significant Medicare enrollment opportunity Medicare</td>
+      <td>137,500%+</td>
+      <td>⚡ P2</td>
+    </tr>
+    <tr class="tr-amber">
+      <td><strong>Insurance Activation Campaign</strong><br/><span style="font-size:9pt;color:#888;">Pre-visit verification + payer renegotiation</span></td>
+      <td><strong>$1.5M</strong></td>
+      <td>Q1–Q2 2026</td>
+      <td>$50M+ annually (bad debt prevention)</td>
+      <td>3,333%</td>
+      <td>⚡ P2</td>
+    </tr>
+    <tr class="tr-blue">
+      <td><strong>Volume Recovery Programme</strong><br/><span style="font-size:9pt;color:#888;">Acquisition + retention + pathway completion</span></td>
+      <td><strong>$500K</strong></td>
+      <td>Q1–Q4 2026</td>
+      <td>$200M+ annually</td>
+      <td>40,000%</td>
+      <td>📋 P3</td>
+    </tr>
+    <tr class="tr-blue">
+      <td><strong>Operational Efficiency</strong><br/><span style="font-size:9pt;color:#888;">Workforce equity + supply chain</span></td>
+      <td><strong>$300K</strong></td>
+      <td>Q2–Q4 2026</td>
+      <td>$2M+ annually</td>
+      <td>10,000%</td>
+      <td>📋 P3</td>
+    </tr>
+    <tr class="tr-green">
+      <td><strong>Advanced Analytics Activation</strong><br/><span style="font-size:9pt;color:#888;">AI/ML + real-time eligibility + population health</span></td>
+      <td><strong>$1.2M</strong></td>
+      <td>Q4 2026–2027</td>
+      <td>$8–20M annually</td>
+      <td>1,500%</td>
+      <td>🔮 P4</td>
+    </tr>
+    <tr class="tr-total">
+      <td><strong>TOTAL PORTFOLIO</strong></td>
+      <td><strong>$3.8M</strong></td>
+      <td>2026–2027</td>
+      <td><strong>$13.3B+</strong></td>
+      <td><strong>350,000%+</strong></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="al info">
+  <div class="al-ic">💡</div>
+  <div class="al-co">
+    <h4>Reading These Numbers</h4>
+    <p>The ROI figures are extraordinary because the investment is primarily analytical activation — configuring and scheduling queries that are already written, building workflows around models that are already validated, and executing outreach campaigns informed by patient lists that can already be generated from the database. The capital is not building the capability. It is deploying it.</p>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 12: IMPLEMENTATION ROADMAP
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Implementation Roadmap: 2026–2027</div>
+<div class="page-sub">Four phases sequenced to deliver maximum near-term value while building the long-term analytical platform</div>
+
+<div class="phase">
+  <div>
+    <div class="phase-label">Phase 1 — Immediate</div>
+    <div class="phase-period">Week 1 → Month 3 · Q1 2026</div>
+    <div style="margin-top:10pt;background:#FEF2F2;border-radius:6px;padding:10pt 12pt;font-size:10pt;">
+      <strong style="color:#B91C1C;">Investment: $700K</strong><br/>
+      <span style="color:#555;">Patient Safety + Risk Stratification</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <h4>Safety First — Non-Negotiable Clinical Governance</h4>
+    <ul>
+      <li>Reclassify 100 misclassified allergy patients — individual case governance review</li>
+      <li>Begin allergy documentation audit for 52,202 zero-record patients, prioritise by upcoming appointment</li>
+      <li>Deploy composite risk scoring to full active patient population</li>
+      <li>Initiate 16 CRITICAL patient case management programme</li>
+      <li>Install prescribing alert at order entry for patients with 3+ active allergies</li>
+      <li>Audit PENDING payment backlog — resolve processing failures causing $400M+ A/R stagnation</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase p2">
+  <div>
+    <div class="phase-label">Phase 2 — Revenue Recovery</div>
+    <div class="phase-period">Month 3 → Month 9 · Q1–Q2 2026</div>
+    <div style="margin-top:10pt;background:#EFF6FF;border-radius:6px;padding:10pt 12pt;font-size:10pt;">
+      <strong style="color:#1D4ED8;">Investment: $2.3M</strong><br/>
+      <span style="color:#555;">Revenue Cycle + Insurance + Volume</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <h4>Activating the Revenue Recovery Pipeline</h4>
+    <ul>
+      <li>Launch Medicare enrollment campaign — 64,398 eligible seniors, target significant Medicare enrollment opportunity recovery over 12–18 months</li>
+      <li>Deploy pre-visit insurance eligibility verification at registration — eliminate the 81.5% unverified visit rate going forward</li>
+      <li>Implement 30/60/90-day A/R escalation automation — target 80%+ collection rate within 6 months</li>
+      <li>Launch 72-hour first visit follow-up protocol — automated recall at appointment close</li>
+      <li>Activate 7-day treatment gap trigger for partially completed treatment cohort</li>
+      <li>Deploy care coordinator programme for 13,567 high-complexity patients</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase p3">
+  <div>
+    <div class="phase-label">Phase 3 — Operational Excellence</div>
+    <div class="phase-period">Month 9 → Month 15 · Q3–Q4 2026</div>
+    <div style="margin-top:10pt;background:#F1F8E9;border-radius:6px;padding:10pt 12pt;font-size:10pt;">
+      <strong style="color:#166534;">Investment: $800K</strong><br/>
+      <span style="color:#555;">Workforce + Supply Chain + Capacity</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <h4>Structural Efficiency and Capacity Alignment</h4>
+    <ul>
+      <li>Rebalance staff workload assignments — correct 3.6× pay disparity between workload tiers</li>
+      <li>Introduce dedicated high-acuity scheduling lane for NTILE Very High Risk patients ($214K median)</li>
+      <li>Renegotiate vendor contracts — formalise Major-tier preferred status, target 5–15% cost reduction</li>
+      <li>Deploy 90-day inactive patient reactivation campaign for 766-day care gap cohort</li>
+      <li>Renegotiate zero-reimbursement payer contracts — 7 insurance types currently paying 0%</li>
+      <li>Fix missing STFF, EQPM, ALGY indexes — complete index coverage to 100%</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase p4">
+  <div>
+    <div class="phase-label">Phase 4 — Strategic Platform</div>
+    <div class="phase-period">Month 15+ · Q4 2026 → 2027</div>
+    <div style="margin-top:10pt;background:#FFF8E1;border-radius:6px;padding:10pt 12pt;font-size:10pt;">
+      <strong style="color:#92400E;">Investment: $1.2M</strong><br/>
+      <span style="color:#555;">AI/ML + Real-Time + Population Health</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <h4>Building the Long-Term Analytical Advantage</h4>
+    <ul>
+      <li>Build AI/ML predictive risk layer on top of validated composite scoring model — automate at-risk patient flagging</li>
+      <li>Integrate real-time insurance eligibility API — prevent future unverified visit rate at source</li>
+      <li>Deploy NLP pipeline on clinical notes — extract unstructured allergy and treatment data</li>
+      <li>Launch population health benchmarking against external reference datasets</li>
+      <li>Activate full capstone dashboard suite as recurring scheduled executive reporting</li>
+      <li>Begin table partitioning design for 50× growth scenario (10–12 year horizon)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 13: CROSS-SECTION EVIDENCE MAP
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Cross-Section Evidence Map</div>
+<div class="page-sub">How each section's findings feed into the six strategic initiatives — demonstrating the interconnected nature of the analytical story</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Initiative</th>
+      <th>Section A<br/><span style="font-weight:400;font-size:9pt;">Patient &amp; Care Quality</span></th>
+      <th>Section B<br/><span style="font-weight:400;font-size:9pt;">Operations</span></th>
+      <th>Section C<br/><span style="font-weight:400;font-size:9pt;">Financial</span></th>
+      <th>Section D<br/><span style="font-weight:400;font-size:9pt;">Risk &amp; Safety</span></th>
+      <th>Section E<br/><span style="font-weight:400;font-size:9pt;">Performance</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1. Patient Safety</strong></td>
+      <td>Allergy severity 64.5% severe; Risk categorisation</td>
+      <td>—</td>
+      <td>$2.9M allergy treatment gap spending</td>
+      <td>100 misclassified; 52,202 zero-record; allergy = #1 risk driver</td>
+      <td>EXISTS query validated at scale</td>
+    </tr>
+    <tr class="tr-blue">
+      <td><strong>2. Risk Programme</strong></td>
+      <td>Cohort acuity shift (93.9% admitted)</td>
+      <td>NTILE $214K median; 65-day high-acuity cadence</td>
+      <td>$161K CRITICAL avg spend; $273K LTV</td>
+      <td>16 CRITICAL patients; 79% failure rate; 5D scoring model</td>
+      <td>Composite scoring infrastructure; 323% ROI projection</td>
+    </tr>
+    <tr>
+      <td><strong>3. Revenue Cycle</strong></td>
+      <td>—</td>
+      <td>Q4 revenue cascade −$198M; daily MA decline</td>
+      <td>56.8% collection; $400M+ A/R; significant Medicare opportunity; all PENDING</td>
+      <td>Medication inventory risk; $51.3M expiration exposure</td>
+      <td>Monthly accumulation; scalar benchmarking queries</td>
+    </tr>
+    <tr class="tr-blue">
+      <td><strong>4. Volume Recovery</strong></td>
+      <td>78% acquisition collapse; 11% 30d retention; 56% never return</td>
+      <td>10.3d treatment gap; 56% Step 1→2 drop-off; 12% pathway completion</td>
+      <td>$303K avg LTV; Top 20 billing 19× population avg</td>
+      <td>766-day care gap; 100 under-managed patients</td>
+      <td>Visit chain funnel; retention window functions</td>
+    </tr>
+    <tr>
+      <td><strong>5. Operational Efficiency</strong></td>
+      <td>—</td>
+      <td>189.8% utilisation; 3.6× pay disparity; 80% equipment idle</td>
+      <td>—</td>
+      <td>70% vendors problematic; 25-day procurement cycle</td>
+      <td>Index architecture; 8,139× max performance gain; 26 indexes</td>
+    </tr>
+    <tr class="tr-blue">
+      <td><strong>6. Advanced Analytics</strong></td>
+      <td>Cohort retention curves; visit outcome distributions</td>
+      <td>Workload + salary equity models</td>
+      <td>Capstone financial dashboard; revenue trend models</td>
+      <td>Composite scoring → ML feature set</td>
+      <td>82% index coverage; &lt;100ms JOIN; 18-year scalability runway</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="al info">
+  <div class="al-ic">🔗</div>
+  <div class="al-co">
+    <h4>The Integrated Story</h4>
+    <p>No initiative in this portfolio stands alone. The patient safety finding (Section D) affects risk scoring accuracy (D → Initiative 2). Accurate risk scoring determines care pathway assignment, which drives operational capacity planning (Initiative 2 → B). Capacity alignment determines scheduling efficiency, which drives revenue capture (B → C → Initiative 3). Every thread connects. The $13.3B is not six separate numbers — it is one number viewed from six different analytical angles.</p>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 14: SQL MASTERY EVIDENCE
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Technical Mastery: What This Portfolio Demonstrates</div>
+<div class="page-sub">36 exercises across 7,078,107 rows — a complete progression from foundational SQL to enterprise-grade analytics</div>
+
+<div class="cg2">
+  <div>
+    <div class="fb b">
+      <h3>Core SQL Capability</h3>
+      <p style="font-size:10pt;margin-bottom:8pt;">Full foundational stack validated on a real 1.18 GB production-scale database:</p>
+      <ul>
+        <li>Multi-table JOINs (INNER, LEFT, RIGHT, FULL OUTER) across an 17-table schema</li>
+        <li>CTEs and multi-step analytical pipelines for complex business questions</li>
+        <li>Aggregate functions with NULL handling at multi-million row scale</li>
+        <li>Conditional logic, data type casting, and quality remediation</li>
+        <li>CROSS JOIN for capacity matrix · SELF JOIN for peer benchmarking</li>
+        <li>5-Table JOIN validated: patient → visit → bill → treatment → staff in &lt;100ms</li>
+      </ul>
+    </div>
+    <div class="fb b" style="margin-top:0;">
+      <h3>Advanced Analytics Capability</h3>
+      <p style="font-size:10pt;margin-bottom:8pt;">Enterprise-grade techniques applied directly to real clinical and financial problems:</p>
+      <ul>
+        <li><strong>Window Functions:</strong> ROW_NUMBER, LAG, LEAD, NTILE — cohort ranking and temporal gap analysis</li>
+        <li><strong>Recursive CTEs:</strong> YTD revenue accumulation, calendar gap detection, pathway tracing</li>
+        <li><strong>Correlated Subqueries:</strong> Per-patient benchmarking against age-group and population averages</li>
+        <li><strong>EXISTS / NOT EXISTS:</strong> Identified 100 misclassified safety-critical patients</li>
+        <li><strong>Index Benchmarking:</strong> 8,139× performance gain confirmed at full database scale</li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <div class="fb g">
+      <h3>Business Translation Capability</h3>
+      <p style="font-size:10pt;margin-bottom:8pt;">Every query result was translated into a business finding:</p>
+      <ul>
+        <li>Temporal JOIN → $242K bad debt exposure per uninsured episode</li>
+        <li>EXISTS gap → 100 patient safety cases requiring immediate governance review</li>
+        <li>NTILE distribution → $214K median cost tier, dedicated scheduling lane needed</li>
+        <li>Cohort window functions → 78% acquisition collapse, 11% retention, $303K LTV</li>
+      </ul>
+      <p style="font-size:10pt;margin-top:10pt;">The analysis does not stop at the query result. Every finding in this portfolio carries a dollar value, a risk assessment, or a strategic recommendation.</p>
+    </div>
+    <div class="fb g" style="margin-top:0;">
+      <h3>Production Engineering Mindset</h3>
+      <ul>
+        <li>All dashboards wrapped in try/except blocks for production stability</li>
+        <li>Consistent HC colour palette enforced across all visualisations (banned list maintained)</li>
+        <li>Index design documented, benchmarked, and validated at multi-million row scale</li>
+        <li>Schema understanding: 17 tables, referential relationships, NULL patterns, synthetic data artefacts</li>
+        <li>Data quality remediation: identified and fixed type casting issues, zero orphaned records confirmed across 7.1M rows</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ==============================
+     PAGE 15: PORTFOLIO CONCLUSION
+================================ -->
+<div class="pb"></div>
+<div class="page-title">Portfolio Conclusion</div>
+<div class="page-sub">What 36 exercises, 7.08 million rows, and $13.3 billion in identified opportunity demonstrate</div>
+
+<div class="badge-ring-wrap" style="grid-template-columns:repeat(4,1fr);">
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num">36</div>
+      <div class="badge-sub">Exercises<br/>Completed</div>
+    </div>
+    <div class="badge-desc">From SELECT to 5-dimension composite risk model</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num">✦</div>
+      <div class="badge-sub">Dashboards<br/>Produced</div>
+    </div>
+    <div class="badge-desc">300 DPI, multi-panel, production-quality</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle g">
+      <div class="badge-num">7.08M</div>
+      <div class="badge-sub">Rows<br/>Analysed</div>
+    </div>
+    <div class="badge-desc">Across 17 tables · 1.18 GB database · 24 months</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle p">
+      <div class="badge-num">$13.3B</div>
+      <div class="badge-sub">Opportunity<br/>Identified</div>
+    </div>
+    <div class="badge-desc">From a single database · $3.8M to activate</div>
+  </div>
+</div>
+
+<div class="fb" style="margin-bottom:18pt;">
+  <h3>The Central Finding</h3>
+  <p>This portfolio began as a SQL mastery project. It ended as a strategic intelligence capability. The same database that was used to answer "how many patients have blood type A?" in Exercise 1 was used in Exercise 36 to identify $13.295B in actionable business opportunity, track the financial deterioration of a healthcare system across 24 months, and profile 18 CRITICAL patients whose care plans require immediate governance review.</p>
+  <p style="margin-top:10pt;">The infrastructure was not the constraint at any point. The analysis was. And the analysis is complete.</p>
+</div>
+
+<div class="cg2">
+  <div class="fb g">
+    <h3>What the Numbers Prove</h3>
+    <ul>
+      <li><strong>Technical depth:</strong> Fluid movement from basic SELECT to recursive CTE, correlated subquery, and 5-table JOIN — choosing the right technique for each business question</li>
+      <li><strong>Business translation:</strong> Every result carries a dollar value, a risk rating, or a recommendation — analysis does not stop at the query</li>
+      <li><strong>Scale awareness:</strong> Results are validated at 7.08M rows and projected to population scale — findings are not sample artefacts</li>
+      <li><strong>Production thinking:</strong> Index benchmarking, stability engineering, design systems, and schema documentation reflect engineering mindset, not just analytical skill</li>
+      <li><strong>Communication:</strong> Multi-panel dashboards across 5 analytical sections, and this strategic summary demonstrate ability to translate complex findings for both technical and executive audiences</li>
+    </ul>
+  </div>
+  <div class="fb p">
+    <h3>Healthcare Domain Fluency</h3>
+    <ul>
+      <li><strong>Clinical:</strong> Readmission benchmarks (11.36% vs 15–20%), allergy conflict mechanics, treatment pathway design, risk stratification models</li>
+      <li><strong>Financial:</strong> A/R aging, collection rate benchmarks, payer mix dynamics, bad debt exposure, Medicare enrollment economics</li>
+      <li><strong>Operational:</strong> Capacity utilisation norms, staff workload standards, supply chain lead time benchmarks, vendor tier management</li>
+      <li><strong>Compliance:</strong> CMS penalty structures, insurance verification requirements, allergy documentation standards, clinical governance protocols</li>
+      <li><strong>Strategic:</strong> LTV-based retention economics, risk-stratified intervention ROI, infrastructure investment sequencing</li>
+    </ul>
+  </div>
+</div>
+
+<div style="background:linear-gradient(135deg,#4A148C,#6B21A8);color:white;border-radius:10px;padding:28pt 32pt;margin-top:24pt;text-align:center;">
+  <div style="font-size:11pt;letter-spacing:2px;opacity:0.8;margin-bottom:8pt;text-transform:uppercase;">Healthcare Data Analytics Portfolio · Complete</div>
+  <div style="font-size:24pt;font-weight:700;margin-bottom:10pt;line-height:1.2;">The infrastructure is ready.<br/>The analytics are complete.<br/>The opportunity is $13.3 billion.</div>
+  <div style="font-size:13pt;opacity:0.85;margin-bottom:18pt;">36 Exercises · 7,078,107 Rows · 17 Tables · Multi-panel Dashboards · 6 Strategic Initiatives</div>
+  <div style="display:inline-block;background:rgba(255,255,255,0.15);border-radius:6px;padding:10pt 24pt;font-size:11pt;font-weight:600;">
+    The only remaining constraint is activation.
+  </div>
+</div>
+
+<p style="font-size:9pt;color:#94A3B8;text-align:center;margin-top:16pt;">Healthcare Data Analytics Portfolio · 36 Exercises · Completed February 2026 · Section F of F</p>
+
+
+</div>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Healthcare Analytics Portfolio — Complete Report (Sections A–F)</title>
+<style>
+/* ═══════════════════════════════════════════
+   SHARED BASE CSS — from Section E (master)
+═══════════════════════════════════════════ */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Calibri,'Segoe UI',Arial,sans-serif;font-size:11pt;line-height:1.5;background:#F8FAFC;color:#1E293B;max-width:8.5in;margin:0 auto;padding:.5in .75in}
+.section-header{background:#0D47A1;color:white;padding:28pt 32pt;margin-bottom:32pt;border-radius:4px}
+.section-header .label{font-size:10pt;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:6pt}
+.section-header h1{font-size:26pt;font-weight:700;line-height:1.15;margin-bottom:8pt}
+.section-header .sub{font-size:13pt;opacity:.85}
+.page-title{font-size:20pt;font-weight:700;color:#1565C0;margin:32pt 0 6pt;padding-bottom:8pt;border-bottom:3px solid #1565C0}
+.page-sub{font-size:12pt;color:#64748B;margin-bottom:18pt}
+.lead{font-size:10.5pt;color:#334155;margin-bottom:16pt;line-height:1.6}
+.sg{display:grid;gap:14pt;margin:18pt 0}
+.sg2{grid-template-columns:repeat(2,1fr)}.sg3{grid-template-columns:repeat(3,1fr)}.sg4{grid-template-columns:repeat(4,1fr)}
+.sc{background:white;border-radius:6px;padding:16pt 14pt;box-shadow:0 1px 4px rgba(0,0,0,.08);border-top:4px solid #1565C0}
+.sc.r{border-top-color:#C62828}.sc.g{border-top-color:#2E7D32}.sc.w{border-top-color:#F9A825}.sc.b{border-top-color:#1565C0}
+.sn{font-size:28pt;font-weight:700;line-height:1.1;margin-bottom:4pt;color:#1565C0}
+.sc.r .sn{color:#C62828}.sc.g .sn{color:#2E7D32}.sc.w .sn{color:#E65100}
+.sl{font-size:10pt;font-weight:600;color:#1E293B;margin-bottom:3pt}.sd{font-size:9pt;color:#64748B}
+.fb{background:white;border-radius:6px;padding:16pt 18pt;margin:14pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #1565C0}
+.fb h3{font-size:12pt;font-weight:700;margin-bottom:6pt}
+.fb p,.fb li{font-size:10.5pt;color:#334155;margin-bottom:4pt;line-height:1.5}
+.fb ul,.fb ol{padding-left:16pt;margin-top:6pt}
+.al{border-radius:6px;padding:14pt 16pt;margin:14pt 0;display:flex;gap:12pt;align-items:flex-start}
+.al-ic{font-size:18pt;flex-shrink:0;margin-top:-2pt}
+.al-co h4{font-size:11pt;font-weight:700;margin-bottom:4pt}
+.al-co p,.al-co li{font-size:10pt;margin-bottom:3pt;line-height:1.4}
+.al-co ul{padding-left:14pt}
+.al.ok{background:#F1F8E9;border:1px solid #C5E1A5}.al.ok .al-co h4{color:#2E7D32}
+.al.info{background:#EFF6FF;border:1px solid #BFDBFE}.al.info .al-co h4{color:#1D4ED8}
+.al.warn{background:#FFF8E1;border:1px solid #FFE082}.al.warn .al-co h4{color:#E65100}
+.al.crisis{background:#FEF2F2;border:1px solid #FECACA}.al.crisis .al-co h4{color:#B91C1C}
+.cs{background:white;border-radius:6px;padding:14pt 20pt 14pt;margin:14pt 0;box-shadow:0 1px 6px rgba(0,0,0,.09);border-top:3px solid #1565C0}
+.cs img{width:100%;height:auto;display:block;border-radius:4px}
+.ch{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:12pt;padding-bottom:10pt;border-bottom:1px solid #E2E8F0}
+.cc{margin-top:14pt;padding-top:12pt;border-top:1px solid #F1F5F9}
+.cc p{font-size:9.5pt;color:#475569;line-height:1.5;margin-bottom:3pt}
+.cc .src{font-size:9pt;color:#94A3B8;font-style:italic}
+.cg2{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:22pt 0}
+.cg2 .cs{margin:0}
+.xref{background:#EFF6FF;border:2px solid #1565C0;border-radius:6px;padding:18pt 20pt;margin:22pt 0}
+.xref .tag{display:inline-block;background:#1565C0;color:white;font-size:8pt;font-weight:700;padding:2pt 8pt;border-radius:10px;margin-bottom:8pt;letter-spacing:.5px;text-transform:uppercase}
+.xref h4{font-size:12pt;font-weight:700;color:#1565C0;margin-bottom:8pt}
+.xref p{font-size:10.5pt;color:#1E293B;line-height:1.5;margin-bottom:6pt}
+.xref ul{padding-left:16pt;margin-top:6pt}
+.xref li{font-size:10.5pt;color:#334155;margin-bottom:4pt}
+table{width:100%;border-collapse:collapse;margin:16pt 0;font-size:10pt;background:white;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+th{background:#1565C0;color:white;font-weight:700;padding:9pt 10pt;text-align:left}
+td{padding:7pt 10pt;border-bottom:1px solid #F1F5F9}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#F8FAFC}
+.tr-green td{background:#F1F8E9!important}.tr-amber td{background:#FFF8E1!important}
+.tr-red td{background:#FEF2F2!important}.tr-total td{background:#0D47A1!important;color:white!important;font-weight:700}
+.code{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:4px;padding:12pt 14pt;font-family:'Courier New',monospace;font-size:9pt;margin:14pt 0;white-space:pre;line-height:1.6}
+.badge{display:inline-block;background:#0D47A1;color:white;font-size:9pt;font-weight:700;padding:3pt 10pt;border-radius:12px;margin-bottom:10pt;letter-spacing:.5px}
+.pb{page-break-before:always;margin-top:32pt}
+
+/* ── BADGE RINGS (Section F style) ── */
+.badge-ring-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:12pt;margin:20pt 0}
+.badge-ring-wrap.cols3{grid-template-columns:repeat(3,1fr)}
+.badge-ring{display:flex;flex-direction:column;align-items:center;text-align:center}
+.badge-circle{width:96pt;height:96pt;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.13);position:relative;margin-bottom:10pt}
+.badge-circle.b{background:linear-gradient(135deg,#1565C0,#1E88E5)}
+.badge-circle.b .badge-num{color:white}
+.badge-circle.lb{background:linear-gradient(135deg,#1976D2,#42A5F5)}
+.badge-circle.lb .badge-num{color:white}
+.badge-circle.r{background:linear-gradient(135deg,#B71C1C,#E53935)}
+.badge-circle.r .badge-num{color:white}
+.badge-circle.g{background:linear-gradient(135deg,#1B5E20,#43A047)}
+.badge-circle.g .badge-num{color:white}
+.badge-circle.o{background:linear-gradient(135deg,#E65100,#FB8C00)}
+.badge-circle.o .badge-num{color:white}
+.badge-circle.w{background:linear-gradient(135deg,#37474F,#607D8B)}
+.badge-circle.w .badge-num{color:white}
+.badge-num{font-size:15pt;font-weight:800;line-height:1;margin-bottom:3pt}
+.badge-sub{font-size:7pt;color:rgba(255,255,255,.9);font-weight:700;text-transform:uppercase;letter-spacing:.5px;max-width:72pt;line-height:1.3}
+.badge-desc{font-size:8.5pt;color:#64748B;max-width:96pt;line-height:1.4;text-align:center}
+
+
+/* ── ROI BARS (Section F style) ── */
+.roi-bar-wrap{margin-top:16pt;padding-top:14pt;border-top:1px solid #F1F5F9}
+.roi-bar-label{display:flex;justify-content:space-between;font-size:9pt;font-weight:700;margin-bottom:6pt}
+.roi-bar-track{background:#F1F5F9;border-radius:20px;height:14pt;overflow:hidden;position:relative}
+.roi-bar-invest{height:100%;border-radius:20px;display:flex;align-items:center;padding-left:8pt;font-size:8pt;font-weight:700;color:white;white-space:nowrap;min-width:40pt}
+.roi-bar-return{position:absolute;top:0;left:0;height:100%;border-radius:20px;opacity:.22}
+.roi-meta{display:flex;gap:16pt;margin-top:8pt;font-size:9pt;color:#64748B}
+.roi-meta span strong{color:#1E293B}
+/* ── SEVERITY BARS ── */
+.sev-wrap{margin:16pt 0}
+.sev-row{margin-bottom:10pt}
+.sev-label-row{display:flex;justify-content:space-between;font-size:9pt;font-weight:700;margin-bottom:4pt;color:#1E293B}
+.sev-track{background:#F1F5F9;border-radius:20px;height:11pt;overflow:hidden}
+.sev-fill{height:100%;border-radius:20px}
+.sev-fill.r{background:linear-gradient(90deg,#F87171,#C62828)}
+.sev-fill.o{background:linear-gradient(90deg,#FB8C00,#E65100)}
+.sev-fill.b{background:linear-gradient(90deg,#42A5F5,#1565C0)}
+.sev-fill.g{background:linear-gradient(90deg,#66BB6A,#2E7D32)}
+/* ── MINI DONUT (CSS only) ── */
+.mini-donut-wrap{display:flex;gap:20pt;align-items:center;margin:16pt 0;flex-wrap:wrap}
+.mini-donut{position:relative;width:80pt;height:80pt;flex-shrink:0}
+.mini-donut svg{width:80pt;height:80pt}
+.mini-donut-label{text-align:center;margin-top:6pt;font-size:8pt;font-weight:700;color:#1E293B}
+.mini-donut-info{flex:1;min-width:160pt}
+.mini-donut-info h4{font-size:11pt;font-weight:700;color:#1E293B;margin:0 0 6pt}
+.mini-donut-info p{font-size:9pt;color:#64748B;margin:3pt 0;line-height:1.4}
+
+
+.page-title .pt-line1{display:block;line-height:1.2;font-size:28pt;font-weight:800;color:#1565C0}
+.page-title .pt-line2{display:block;line-height:1.3;font-size:20pt;font-weight:700;color:#1565C0;margin-top:2pt}
+
+
+
+/* ═══════════════════════════════════════════
+   SECTION A — BLUE THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-a .section-header{background:#1565C0}
+.sec-a .page-title{color:#1565C0;border-bottom-color:#1565C0}
+.sec-a .sc{border-top-color:#1565C0}
+.sec-a .sn{color:#1565C0}
+.sec-a .sc.r .sn{color:#C62828}.sec-a .sc.r{border-top-color:#C62828}
+.sec-a .sc.g .sn{color:#2E7D32}.sec-a .sc.g{border-top-color:#2E7D32}
+.sec-a .sc.w .sn{color:#E65100}.sec-a .sc.w{border-top-color:#F9A825}
+.sec-a .sc.t{border-top-color:#33a7c8}.sec-a .sc.t .sn{color:#33a7c8}
+.sec-a .sc.p{border-top-color:#a538c6}.sec-a .sc.p .sn{color:#a538c6}
+.sec-a .fb{border-left-color:#1565C0}
+.sec-a .cs{border-top-color:#1565C0}
+.sec-a table th{background:#1565C0}
+.sec-a .conn-c{border-top-color:#1565C0}
+.sec-a .conn-c h4{color:#1565C0}
+.sec-a .chart-side .cs-txt h3{color:#1565C0}
+.sec-a .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #a538c6;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-a .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-a .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-a .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-a .rt{display:inline-block;background:#a538c6;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-a .rt.u{background:#D32F2F}.sec-a .rt.h{background:#1565C0}
+.sec-a .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-a .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-a .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #1565C0}
+.sec-a .cb{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1px solid #F59E0B;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-a .cb .ic{font-size:20pt}
+.sec-a .cb p{font-size:10pt;color:#78350F;line-height:1.5}
+.sec-a .sn-box{background:#FFFBEB;border-left:4px solid #F59E0B;border-radius:0 6px 6px 0;padding:12pt 14pt;margin:14pt 0;font-size:9.5pt;color:#78350F}
+.sec-a .sn-box strong{display:block;margin-bottom:6pt;font-size:10pt}
+.sec-a .chart-side{background:white;border-radius:6px;margin:16pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.sec-a .chart-side .cs-img{padding:16pt;border-right:1px solid #F1F5F9}
+.sec-a .chart-side .cs-img img{width:100%;height:auto;display:block;border-radius:4px}
+.sec-a .chart-side .cs-txt{padding:20pt 22pt}
+.sec-a .chart-side .cs-txt p{font-size:10pt;color:#475569;line-height:1.6;margin-bottom:8pt}
+.sec-a .chart-side .cs-txt ul{padding-left:14pt;margin-bottom:8pt}
+.sec-a .chart-side .cs-txt li{font-size:10pt;color:#475569;margin-bottom:5pt;line-height:1.5}
+.sec-a .chart-side .cs-txt .src{font-size:9pt;color:#94A3B8;font-style:italic;margin-top:12pt;padding-top:8pt;border-top:1px solid #F1F5F9}
+.sec-a .xref{background:#EFF6FF;border:2px solid #1565C0}
+.sec-a .xref .tag{background:#1565C0}
+.sec-a .xref h4{color:#1565C0}
+.sec-a .tr-total td{background:#0D47A1!important;color:white!important;font-weight:700}
+
+
+/* ═══════════════════════════════════════════
+   SECTION B — ORANGE THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-b .section-header{background:#E65100}
+.sec-b .page-title{color:#E65100;border-bottom-color:#E65100}
+.sec-b .sc{border-top-color:#E65100}
+.sec-b .sn{color:#E65100}
+.sec-b .sc.t{border-top-color:#0277BD}.sec-b .sc.t .sn{color:#0277BD}
+.sec-b .fb{border-left-color:#E65100}
+.sec-b .cs{border-top-color:#E65100}
+.sec-b table th{background:#E65100}
+.sec-b .conn-c{border-top-color:#E65100}
+.sec-b .conn-c h4{color:#E65100}
+.sec-b .chart-side .cs-txt h3{color:#E65100}
+.sec-b .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #E65100;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-b .rc.urgent{border-left-color:#D32F2F}
+.sec-b .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-b .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-b .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-b .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-b .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-b .rt{display:inline-block;background:#E65100;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-b .rt.u{background:#D32F2F}.sec-b .rt.h{background:#0277BD}
+.sec-b .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-b .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-b .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #E65100}
+.sec-b .cb{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:1px solid #FB8C00;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-b .cb .ic{font-size:20pt}
+.sec-b .cb p{font-size:10pt;color:#4E342E;line-height:1.5}
+.sec-b .cph{background:#FFF3E0;border:2px dashed #E65100;border-radius:4px;min-height:220px;display:flex;align-items:center;justify-content:center;color:#E65100;font-size:11pt;font-weight:600;text-align:center;padding:20pt}
+.sec-b .chart-side{background:white;border-radius:6px;margin:16pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.sec-b .chart-side .cs-img{padding:16pt;border-right:1px solid #F1F5F9}
+.sec-b .chart-side .cs-img img{width:100%;height:auto;display:block;border-radius:4px}
+.sec-b .chart-side .cs-txt{padding:20pt 22pt}
+.sec-b .chart-side .cs-txt p{font-size:10pt;color:#475569;line-height:1.6;margin-bottom:8pt}
+.sec-b .chart-side .cs-txt ul{padding-left:14pt;margin-bottom:8pt}
+.sec-b .chart-side .cs-txt li{font-size:10pt;color:#475569;margin-bottom:5pt;line-height:1.5}
+.sec-b .chart-side .cs-txt .src{font-size:9pt;color:#94A3B8;font-style:italic;margin-top:12pt;padding-top:8pt;border-top:1px solid #F1F5F9}
+.sec-b .tr-total td{background:#E65100!important;color:white!important;font-weight:700}
+.sec-b .xref{background:#FFF3E0;border:2px solid #E65100}
+.sec-b .xref .tag{background:#E65100}
+.sec-b .xref h4{color:#E65100}
+
+
+/* ═══════════════════════════════════════════
+   SECTION C — GREEN THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-c .section-header{background:#1B5E20}
+.sec-c .page-title{color:#2E7D32;border-bottom-color:#2E7D32}
+.sec-c .sc{border-top-color:#2E7D32}
+.sec-c .sn{color:#2E7D32}
+.sec-c .sc.t{border-top-color:#0277BD}.sec-c .sc.t .sn{color:#0277BD}
+.sec-c .fb{border-left-color:#2E7D32}
+.sec-c .cs{border-top-color:#2E7D32}
+.sec-c table th{background:#2E7D32}
+.sec-c .conn-c{border-top-color:#2E7D32}
+.sec-c .conn-c h4{color:#2E7D32}
+.sec-c .chart-side .cs-txt h3{color:#2E7D32}
+.sec-c .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #2E7D32;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-c .rc.urgent{border-left-color:#D32F2F}
+.sec-c .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-c .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-c .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-c .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-c .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-c .rt{display:inline-block;background:#2E7D32;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-c .rt.u{background:#D32F2F}.sec-c .rt.h{background:#0277BD}
+.sec-c .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-c .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-c .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #2E7D32}
+.sec-c .cb{background:linear-gradient(135deg,#F1F8E9,#DCEDC8);border:1px solid #66BB6A;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-c .cb .ic{font-size:20pt}
+.sec-c .cb p{font-size:10pt;color:#1B5E20;line-height:1.5}
+.sec-c .cph{background:#F1F8E9;border:2px dashed #2E7D32;border-radius:4px;min-height:220px;display:flex;align-items:center;justify-content:center;color:#2E7D32;font-size:11pt;font-weight:600;text-align:center;padding:20pt}
+.sec-c .chart-side{background:white;border-radius:6px;margin:16pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.sec-c .chart-side .cs-img{padding:16pt;border-right:1px solid #F1F5F9}
+.sec-c .chart-side .cs-img img{width:100%;height:auto;display:block;border-radius:4px}
+.sec-c .chart-side .cs-txt{padding:20pt 22pt}
+.sec-c .chart-side .cs-txt p{font-size:10pt;color:#475569;line-height:1.6;margin-bottom:8pt}
+.sec-c .chart-side .cs-txt ul{padding-left:14pt;margin-bottom:8pt}
+.sec-c .chart-side .cs-txt li{font-size:10pt;color:#475569;margin-bottom:5pt;line-height:1.5}
+.sec-c .chart-side .cs-txt .src{font-size:9pt;color:#94A3B8;font-style:italic;margin-top:12pt;padding-top:8pt;border-top:1px solid #F1F5F9}
+.sec-c .tr-total td{background:#1B5E20!important;color:white!important;font-weight:700}
+.sec-c .xref{background:#F1F8E9;border:2px solid #2E7D32}
+.sec-c .xref .tag{background:#2E7D32}
+.sec-c .xref h4{color:#2E7D32}
+.sec-c .badge-desc{font-size:9.5pt;color:#334155;max-width:100pt;line-height:1.5;text-align:center;font-weight:500}
+
+
+/* ═══════════════════════════════════════════
+   SECTION D — RED THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-d .section-header{background:#B71C1C}
+.sec-d .page-title{color:#C62828;border-bottom-color:#C62828}
+.sec-d .sc{border-top-color:#C62828}
+.sec-d .sn{color:#C62828}
+.sec-d .sc.r .sn{color:#C62828}.sec-d .sc.r{border-top-color:#C62828}
+.sec-d .sc.g{border-top-color:#2E7D32}.sec-d .sc.g .sn{color:#2E7D32}
+.sec-d .sc.t{border-top-color:#0277BD}.sec-d .sc.t .sn{color:#0277BD}
+.sec-d .sc.w{border-top-color:#F9A825}.sec-d .sc.w .sn{color:#F9A825}
+.sec-d .fb{border-left-color:#C62828}
+.sec-d .cs{border-top-color:#C62828}
+.sec-d table th{background:#C62828}
+.sec-d .conn-c{border-top-color:#C62828}
+.sec-d .conn-c h4{color:#C62828}
+.sec-d .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #C62828;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-d .rc.ok{border-left-color:#2E7D32}
+.sec-d .rc.warn{border-left-color:#F9A825}
+.sec-d .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-d .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-d .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-d .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-d .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-d .rt{display:inline-block;background:#C62828;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-d .rt.ok{background:#2E7D32}.sec-d .rt.w{background:#F9A825;color:#1E293B}.sec-d .rt.h{background:#0277BD}
+.sec-d .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-d .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-d .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #C62828}
+.sec-d .cb{background:linear-gradient(135deg,#FFF5F5,#FFCDD2);border:1px solid #EF9A9A;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-d .cb .ic{font-size:20pt}
+.sec-d .cb p{font-size:10pt;color:#B71C1C;line-height:1.5}
+.sec-d .cph{background:#FFF5F5;border:2px dashed #C62828;border-radius:4px;min-height:220px;display:flex;align-items:center;justify-content:center;color:#C62828;font-size:11pt;font-weight:600;text-align:center;padding:20pt}
+.sec-d .tr-total td{background:#B71C1C!important;color:white!important;font-weight:700}
+.sec-d .xref{background:#FFF5F5;border:2px solid #C62828}
+.sec-d .xref .tag{background:#C62828}
+.sec-d .xref h4{color:#C62828}
+
+
+/* ═══════════════════════════════════════════
+   SECTION E — PURPLE THEME OVERRIDES
+═══════════════════════════════════════════ */
+
+.sec-e .section-header{background:#0D47A1}
+.sec-e .page-title{color:#1565C0;border-bottom-color:#1565C0}
+.sec-e .rc{background:white;border-radius:6px;padding:16pt 18pt;margin:12pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #1565C0;display:grid;grid-template-columns:1fr auto;gap:12pt}
+.sec-e .rc.w{border-left-color:#F9A825}
+.sec-e .rc.g{border-left-color:#2E7D32}
+.sec-e .rc h3{font-size:12pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-e .rc p{font-size:10pt;color:#475569;line-height:1.5}
+.sec-e .rc ul{padding-left:16pt;margin-top:6pt}
+.sec-e .rc li{font-size:10pt;color:#475569;margin-bottom:4pt}
+.sec-e .rm{text-align:right;min-width:120pt;padding-left:12pt;border-left:1px solid #F1F5F9}
+.sec-e .rt{display:inline-block;background:#1565C0;color:white;font-size:8pt;font-weight:700;padding:2pt 7pt;border-radius:10px;margin-bottom:6pt;text-transform:uppercase;letter-spacing:.5px}
+.sec-e .rt.u{background:#D32F2F}.sec-e .rt.h{background:#0277BD}
+.sec-e .rm p{font-size:9pt;color:#64748B;margin-bottom:2pt}
+.sec-e .conn{display:grid;grid-template-columns:repeat(2,1fr);gap:12pt;margin:14pt 0}
+.sec-e .conn-c{background:white;border-radius:6px;padding:12pt 14pt;box-shadow:0 1px 3px rgba(0,0,0,.07);border-top:3px solid #1565C0}
+.sec-e .conn-c h4{color:#1565C0}
+.sec-e .cb{background:linear-gradient(135deg,#EDE7F6,#D1C4E9);border:1px solid #9575CD;border-radius:6px;padding:12pt 16pt;margin:14pt 0;display:flex;gap:10pt;align-items:center}
+.sec-e .cb .ic{font-size:20pt}
+.sec-e .cb p{font-size:10pt;color:#311B92;line-height:1.5}
+.sec-e .rc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14pt;margin:14pt 0}
+.sec-e .tag{display:inline-block;background:#1565C0;color:white;font-size:8pt;font-weight:700;padding:2pt 8pt;border-radius:10px;margin-bottom:8pt;letter-spacing:.5px;text-transform:uppercase}
+
+
+/* ═══════════════════════════════════════════
+   PRINT / PAGE BREAK RULES
+═══════════════════════════════════════════ */
+@page {
+  size: letter;
+  margin: 0.75in 0.75in 0.75in 0.75in;
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+    font-size: 9pt;
+    color: #94A3B8;
+    padding-top: 6pt;
+    border-top: 1px solid #E2E8F0;
+  }
+}
+@media print {
+  .pb { page-break-before: always !important; }
+  .sec-a, .sec-b, .sec-c, .sec-d, .sec-e, .sec-f { page-break-before: always !important; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; margin: 0; padding: 0; }
+  .section-divider { display: none !important; }
+}
+
+/* ── SECTION DIVIDERS (screen only) ── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 16pt;
+  margin: 40pt 0 0 0;
+  padding: 20pt 0 0 0;
+  position: relative;
+}
+.section-divider::before {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, currentColor);
+  opacity: 0.25;
+}
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to left, transparent, currentColor);
+  opacity: 0.25;
+}
+.section-divider .div-label {
+  display: flex;
+  align-items: center;
+  gap: 10pt;
+  background: white;
+  border: 2px solid currentColor;
+  border-radius: 30px;
+  padding: 6pt 18pt;
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.section-divider .div-label .div-icon { font-size: 13pt; }
+.section-divider .div-label .div-count {
+  margin-left: 10pt;
+  padding: 2pt 9pt;
+  border-radius: 12px;
+  font-size: 8pt;
+  font-weight: 800;
+  background: currentColor;
+  color: white;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+.section-divider.intro  { color: #6B21A8; }
+.section-divider.sec-a  { color: #1565C0; }
+.section-divider.sec-b  { color: #E65100; }
+.section-divider.sec-c  { color: #1B5E20; }
+.section-divider.sec-d  { color: #B71C1C; }
+.section-divider.sec-e  { color: #0D47A1; }
+.section-divider.sec-f  { color: #6B21A8; }
+
+/* ═══ INTRO — PURPLE THEME ═══ */
+.sec-intro{background:#F5F0FF}
+.sec-intro .section-header{background:linear-gradient(135deg,#4A148C,#6B21A8);color:white;padding:32pt 48pt;margin-bottom:32pt;border-radius:4px}
+.sec-intro .section-header .label{font-size:10pt;letter-spacing:3px;text-transform:uppercase;opacity:.75;margin-bottom:8pt}
+.sec-intro .section-header h1{font-size:28pt;font-weight:800;line-height:1.1;margin-bottom:6pt}
+.sec-intro .section-header h1 span{opacity:.65;font-weight:400}
+.sec-intro .section-header .sub{font-size:12pt;opacity:.82;max-width:560pt}
+.sec-intro .page-title{font-size:20pt;font-weight:700;color:#6B21A8;margin:32pt 0 6pt;padding-bottom:8pt;border-bottom:3px solid #6B21A8}
+.sec-intro .page-sub{font-size:12pt;color:#64748B;margin-bottom:18pt}
+.sec-intro .badge-ring-wrap{display:grid;gap:12pt;margin:24pt 0}
+.sec-intro .badge-ring{display:flex;flex-direction:column;align-items:center;text-align:center}
+.sec-intro .badge-circle{width:100pt;height:100pt;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.13);margin-bottom:10pt}
+.sec-intro .badge-circle.p{background:white;border:5pt solid #6B21A8}
+.sec-intro .badge-circle.g{background:white;border:5pt solid #2E7D32}
+.sec-intro .badge-circle.r{background:white;border:5pt solid #C62828}
+.sec-intro .badge-circle.w{background:white;border:5pt solid #E65100}
+.sec-intro .badge-circle.b{background:white;border:5pt solid #1565C0}
+.sec-intro .badge-num{font-size:17pt;font-weight:800;line-height:1;margin-bottom:3pt}
+.sec-intro .badge-circle.p .badge-num{color:#6B21A8}
+.sec-intro .badge-circle.g .badge-num{color:#2E7D32}
+.sec-intro .badge-circle.r .badge-num{color:#C62828}
+.sec-intro .badge-circle.w .badge-num{color:#E65100}
+.sec-intro .badge-circle.b .badge-num{color:#1565C0}
+.sec-intro .badge-sub{font-size:7pt;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;max-width:72pt;line-height:1.3}
+.sec-intro .badge-desc{font-size:9pt;color:#64748B;max-width:100pt;line-height:1.4;text-align:center}
+.sec-intro .fb{background:white;border-radius:6px;padding:16pt 18pt;margin:14pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #6B21A8}
+.sec-intro .fb.r{border-left-color:#C62828}.sec-intro .fb.g{border-left-color:#2E7D32}.sec-intro .fb.b{border-left-color:#1565C0}.sec-intro .fb.w{border-left-color:#E65100}
+.sec-intro .fb h3{font-size:12pt;font-weight:700;margin-bottom:8pt;color:#6B21A8}
+.sec-intro .fb.r h3{color:#C62828}.sec-intro .fb.g h3{color:#2E7D32}.sec-intro .fb.b h3{color:#1565C0}.sec-intro .fb.w h3{color:#E65100}
+.sec-intro .fb p,.sec-intro .fb li{font-size:10.5pt;color:#334155;margin-bottom:4pt;line-height:1.5}
+.sec-intro .fb ul{padding-left:16pt;margin-top:6pt}
+.sec-intro .al{border-radius:6px;padding:14pt 16pt;margin:14pt 0;display:flex;gap:12pt;align-items:flex-start}
+.sec-intro .al-ic{font-size:18pt;flex-shrink:0;margin-top:-2pt}
+.sec-intro .al-co h4{font-size:11pt;font-weight:700;margin-bottom:4pt}
+.sec-intro .al-co p{font-size:10pt;color:#334155;line-height:1.4}
+.sec-intro .al.info{background:#F3E8FF;border:1px solid #D8B4FE}.sec-intro .al.info .al-co h4{color:#6B21A8}
+.sec-intro .al.crisis{background:#FEF2F2;border:1px solid #FECACA}.sec-intro .al.crisis .al-co h4{color:#B91C1C}
+.sec-intro .al.ok{background:#F1F8E9;border:1px solid #C5E1A5}.sec-intro .al.ok .al-co h4{color:#2E7D32}
+.sec-intro table{width:100%;border-collapse:collapse;margin:16pt 0;font-size:10pt;background:white;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-intro th{background:#4A148C;color:white;font-weight:700;padding:9pt 10pt;text-align:left}
+.sec-intro td{padding:7pt 10pt;border-bottom:1px solid #F1F5F9}
+.sec-intro tr:last-child td{border-bottom:none}
+.sec-intro tr:nth-child(even) td{background:#F5F0FF}
+.sec-intro .tr-total td{background:#4A148C!important;color:white!important;font-weight:700}
+.sec-intro .cg2{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:16pt 0}
+.sec-intro .hero-visual{background:white;border-radius:10px;padding:20pt;box-shadow:0 3px 16px rgba(0,0,0,.10);margin:24pt 0}
+.sec-intro .hero-title{font-size:13pt;font-weight:700;color:#1E293B;margin-bottom:4pt}
+.sec-intro .hero-sub{font-size:10pt;color:#64748B;margin-bottom:16pt}
+.sec-intro .smap{display:grid;grid-template-columns:repeat(6,1fr);gap:8pt;margin:20pt 0}
+.sec-intro .smap-item{background:white;border-radius:6px;padding:10pt 8pt;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-intro .smap-letter{font-size:20pt;font-weight:700;margin-bottom:2pt}
+.sec-intro .smap-name{font-size:7.5pt;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.3px;line-height:1.3}
+.sec-intro .smap-pages{font-size:8.5pt;color:#888;margin-top:3pt}
+
+
+/* ═══ SECTION F — PURPLE THEME ═══ */
+.sec-f{background:#F5F0FF}
+.sec-f .section-header{background:linear-gradient(135deg,#4A148C,#6B21A8);color:white;padding:32pt 48pt;margin-bottom:32pt;border-radius:4px}
+.sec-f .section-header .label{font-size:10pt;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:6pt}
+.sec-f .section-header h1{font-size:26pt;font-weight:700;line-height:1.15;margin-bottom:8pt}
+.sec-f .section-header .sub{font-size:13pt;opacity:.85}
+.sec-f .page-title{font-size:20pt;font-weight:700;color:#6B21A8;margin:32pt 0 6pt;padding-bottom:8pt;border-bottom:3px solid #6B21A8}
+.sec-f .page-sub{font-size:12pt;color:#64748B;margin-bottom:18pt}
+.sec-f .lead{font-size:10.5pt;color:#334155;margin-bottom:16pt;line-height:1.6}
+.sec-f .sg{display:grid;gap:14pt;margin:18pt 0}
+.sec-f .sg2{grid-template-columns:repeat(2,1fr)}.sec-f .sg3{grid-template-columns:repeat(3,1fr)}.sec-f .sg4{grid-template-columns:repeat(4,1fr)}
+.sec-f .sc{background:white;border-radius:6px;padding:16pt 14pt;box-shadow:0 1px 4px rgba(0,0,0,.08);border-top:4px solid #6B21A8}
+.sec-f .sc.r{border-top-color:#C62828}.sec-f .sc.g{border-top-color:#2E7D32}.sec-f .sc.w{border-top-color:#F9A825}.sec-f .sc.b{border-top-color:#1565C0}
+.sec-f .sn{font-size:26pt;font-weight:700;line-height:1.1;margin-bottom:4pt;color:#6B21A8}
+.sec-f .sc.r .sn{color:#C62828}.sec-f .sc.g .sn{color:#2E7D32}.sec-f .sc.w .sn{color:#E65100}.sec-f .sc.b .sn{color:#1565C0}
+.sec-f .sl{font-size:10pt;font-weight:600;color:#1E293B;margin-bottom:3pt}.sec-f .sd{font-size:9pt;color:#64748B}
+.sec-f .fb{background:white;border-radius:6px;padding:16pt 18pt;margin:14pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:5px solid #6B21A8}
+.sec-f .fb.r{border-left-color:#C62828}.sec-f .fb.g{border-left-color:#2E7D32}.sec-f .fb.w{border-left-color:#E65100}.sec-f .fb.b{border-left-color:#1565C0}
+.sec-f .fb h3{font-size:12pt;font-weight:700;margin-bottom:8pt;color:#6B21A8}
+.sec-f .fb.r h3{color:#C62828}.sec-f .fb.g h3{color:#2E7D32}.sec-f .fb.w h3{color:#E65100}.sec-f .fb.b h3{color:#1565C0}
+.sec-f .fb p,.sec-f .fb li{font-size:10.5pt;color:#334155;margin-bottom:4pt;line-height:1.5}
+.sec-f .fb ul,.sec-f .fb ol{padding-left:16pt;margin-top:6pt}
+.sec-f .al{border-radius:6px;padding:14pt 16pt;margin:14pt 0;display:flex;gap:12pt;align-items:flex-start}
+.sec-f .al-ic{font-size:18pt;flex-shrink:0;margin-top:-2pt}
+.sec-f .al-co h4{font-size:11pt;font-weight:700;margin-bottom:4pt}
+.sec-f .al-co p,.sec-f .al-co li{font-size:10pt;margin-bottom:3pt;line-height:1.4}
+.sec-f .al-co ul{padding-left:14pt}
+.sec-f .al.ok{background:#F1F8E9;border:1px solid #C5E1A5}.sec-f .al.ok .al-co h4{color:#2E7D32}
+.sec-f .al.info{background:#F3E8FF;border:1px solid #D8B4FE}.sec-f .al.info .al-co h4{color:#6B21A8}
+.sec-f .al.warn{background:#FFF8E1;border:1px solid #FFE082}.sec-f .al.warn .al-co h4{color:#E65100}
+.sec-f .al.crisis{background:#FEF2F2;border:1px solid #FECACA}.sec-f .al.crisis .al-co h4{color:#B91C1C}
+.sec-f table{width:100%;border-collapse:collapse;margin:16pt 0;font-size:10pt;background:white;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-f th{background:#4A148C;color:white;font-weight:700;padding:9pt 10pt;text-align:left}
+.sec-f td{padding:7pt 10pt;border-bottom:1px solid #F1F5F9}
+.sec-f tr:last-child td{border-bottom:none}
+.sec-f tr:nth-child(even) td{background:#F5F0FF}
+.sec-f .tr-green td{background:#F1F8E9!important}.sec-f .tr-amber td{background:#FFF8E1!important}
+.sec-f .tr-red td{background:#FEF2F2!important}.sec-f .tr-total td{background:#4A148C!important;color:white!important;font-weight:700}
+.sec-f .tr-blue td{background:#EFF6FF!important}
+.sec-f .code{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:4px;padding:12pt 14pt;font-family:'Courier New',monospace;font-size:9pt;margin:14pt 0;white-space:pre;line-height:1.6}
+.sec-f .badge{display:inline-block;background:#4A148C;color:white;font-size:9pt;font-weight:700;padding:3pt 10pt;border-radius:12px;margin-bottom:10pt;letter-spacing:.5px}
+.sec-f .badge.r{background:#B91C1C}.sec-f .badge.g{background:#166534}.sec-f .badge.w{background:#92400E}.sec-f .badge.b{background:#1e40af}
+.sec-f .cg2{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:16pt 0}
+.sec-f .init-card{background:white;border-radius:8px;padding:20pt;box-shadow:0 2px 8px rgba(0,0,0,.09);margin:14pt 0;border-top:5px solid #6B21A8}
+.sec-f .init-card.r{border-top-color:#C62828}.sec-f .init-card.g{border-top-color:#2E7D32}.sec-f .init-card.b{border-top-color:#1565C0}.sec-f .init-card.w{border-top-color:#E65100}
+.sec-f .init-tag{font-size:8pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6B21A8;margin-bottom:6pt}
+.sec-f .init-card.r .init-tag{color:#C62828}.sec-f .init-card.g .init-tag{color:#2E7D32}.sec-f .init-card.b .init-tag{color:#1565C0}.sec-f .init-card.w .init-tag{color:#E65100}
+.sec-f .init-title{font-size:16pt;font-weight:700;color:#1E293B;margin-bottom:10pt}
+.sec-f .init-value{font-size:22pt;font-weight:700;color:#6B21A8;margin-bottom:8pt}
+.sec-f .init-card.r .init-value{color:#C62828}.sec-f .init-card.g .init-value{color:#2E7D32}.sec-f .init-card.b .init-value{color:#1565C0}.sec-f .init-card.w .init-value{color:#E65100}
+.sec-f .phase{background:white;border-radius:6px;padding:16pt 18pt;margin:10pt 0;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:6px solid #6B21A8;display:grid;grid-template-columns:140pt 1fr;gap:16pt;align-items:start}
+.sec-f .phase.p2{border-left-color:#1565C0}.sec-f .phase.p3{border-left-color:#2E7D32}.sec-f .phase.p4{border-left-color:#E65100}
+.sec-f .phase-label{font-size:11pt;font-weight:700;color:#6B21A8}
+.sec-f .phase.p2 .phase-label{color:#1565C0}.sec-f .phase.p3 .phase-label{color:#2E7D32}.sec-f .phase.p4 .phase-label{color:#E65100}
+.sec-f .phase-period{font-size:9pt;color:#64748B;margin-top:3pt}
+.sec-f .phase-body h4{font-size:11pt;font-weight:700;color:#1E293B;margin-bottom:6pt}
+.sec-f .phase-body p,.sec-f .phase-body li{font-size:10pt;color:#334155;line-height:1.5;margin-bottom:3pt}
+.sec-f .phase-body ul{padding-left:14pt}
+.sec-f .crisis-card{background:white;border-radius:8px;padding:18pt;box-shadow:0 2px 6px rgba(0,0,0,.09);border-top:4px solid #C62828}
+.sec-f .crisis-tag{font-size:8pt;font-weight:700;letter-spacing:1.5px;color:#C62828;text-transform:uppercase;margin-bottom:6pt}
+.sec-f .crisis-metric{font-size:24pt;font-weight:700;color:#C62828;margin-bottom:4pt}
+.sec-f .crisis-label{font-size:10pt;color:#555;margin-bottom:10pt}
+.sec-f .crisis-body{font-size:10pt;color:#334155;line-height:1.6}
+.sec-f .smap{display:grid;grid-template-columns:repeat(5,1fr);gap:10pt;margin:20pt 0}
+.sec-f .smap-item{background:white;border-radius:6px;padding:12pt 10pt;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.sec-f .smap-letter{font-size:22pt;font-weight:700;margin-bottom:4pt}
+.sec-f .smap-name{font-size:8pt;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.5px;line-height:1.3}
+.sec-f .smap-pages{font-size:9pt;color:#888;margin-top:4pt}
+.sec-f .quad{display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin:16pt 0}
+.sec-f .quad-item{border-radius:8px;padding:18pt;min-height:160pt}
+.sec-f .quad-item h4{font-size:12pt;font-weight:700;margin-bottom:10pt}
+.sec-f .quad-item ul{padding-left:14pt}
+.sec-f .quad-item li{font-size:10pt;line-height:1.6;margin-bottom:4pt}
+.sec-f .badge-ring-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:12pt;margin:24pt 0}
+.sec-f .badge-ring{display:flex;flex-direction:column;align-items:center;text-align:center}
+.sec-f .badge-circle{width:100pt;height:100pt;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.13);margin-bottom:10pt}
+.sec-f .badge-circle.p{background:white;border:5pt solid #6B21A8}
+.sec-f .badge-circle.g{background:white;border:5pt solid #2E7D32}
+.sec-f .badge-circle.r{background:white;border:5pt solid #C62828}
+.sec-f .badge-circle.w{background:white;border:5pt solid #E65100}
+.sec-f .badge-circle.b{background:white;border:5pt solid #1565C0}
+.sec-f .badge-num{font-size:17pt;font-weight:800;line-height:1;margin-bottom:3pt}
+.sec-f .badge-circle.p .badge-num{color:#6B21A8}
+.sec-f .badge-circle.g .badge-num{color:#2E7D32}
+.sec-f .badge-circle.r .badge-num{color:#C62828}
+.sec-f .badge-circle.w .badge-num{color:#E65100}
+.sec-f .badge-circle.b .badge-num{color:#1565C0}
+.sec-f .badge-sub{font-size:7pt;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;max-width:72pt;line-height:1.3}
+.sec-f .badge-desc{font-size:9pt;color:#64748B;max-width:100pt;line-height:1.4;text-align:center}
+.sec-f .roi-bar-wrap{margin-top:16pt;padding-top:14pt;border-top:1px solid #F1F5F9}
+.sec-f .roi-bar-label{display:flex;justify-content:space-between;font-size:9pt;font-weight:700;margin-bottom:6pt}
+.sec-f .roi-bar-track{background:#F1F5F9;border-radius:20px;height:14pt;overflow:hidden;position:relative}
+.sec-f .roi-bar-invest{height:100%;border-radius:20px;display:flex;align-items:center;padding-left:8pt;font-size:8pt;font-weight:700;color:white;white-space:nowrap;min-width:40pt}
+.sec-f .roi-bar-return{position:absolute;top:0;left:0;height:100%;border-radius:20px;opacity:.22}
+.sec-f .roi-meta{display:flex;gap:16pt;margin-top:8pt;font-size:9pt;color:#64748B}
+.sec-f .roi-meta span strong{color:#1E293B}
+.sec-f .crisis-card2{background:white;border-radius:10px;padding:0;box-shadow:0 3px 12px rgba(0,0,0,.10);overflow:hidden;margin-bottom:4pt}
+.sec-f .crisis-top{background:#C62828;color:white;padding:14pt 18pt;display:flex;align-items:center;gap:14pt;min-height:72pt}
+.sec-f .crisis-icon{font-size:28pt;flex-shrink:0}
+.sec-f .crisis-top-text h4{font-size:13pt;font-weight:700;margin-bottom:2pt}
+.sec-f .crisis-top-text .csub{font-size:8.5pt;opacity:.85;letter-spacing:.2px}
+.sec-f .crisis-body2{padding:16pt 18pt}
+.sec-f .crisis-metric2{font-size:30pt;font-weight:800;color:#C62828;line-height:1;margin-bottom:4pt}
+.sec-f .crisis-label2{font-size:10pt;color:#555;margin-bottom:12pt;font-weight:600}
+.sec-f .crisis-sev{margin-bottom:12pt}
+.sec-f .crisis-sev-label{font-size:8pt;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:4pt;letter-spacing:.5px}
+.sec-f .crisis-sev-track{background:#FEE2E2;border-radius:20px;height:10pt;overflow:hidden}
+.sec-f .crisis-sev-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#F87171,#C62828)}
+.sec-f .crisis-detail{font-size:10pt;color:#334155;line-height:1.6}
+.sec-f .crisis-action{background:#FEF2F2;border-radius:6px;padding:10pt 12pt;margin-top:10pt;font-size:10pt;color:#7F1D1D;border-left:3px solid #C62828}
+
+
+
+/* ════════════════════════════════════════════════════
+   LAYOUT FIXES — DEFINITIVE CLEAN VERSION
+   !important on layout only, never on font-size
+════════════════════════════════════════════════════ */
+
+/* Intro: badge circles sized correctly */
+.sec-intro .badge-circle{width:74pt;height:74pt}
+.sec-intro .badge-num{font-size:12.5pt}
+.sec-intro .badge-sub{font-size:6pt}
+.sec-intro .badge-desc{font-size:8pt;max-width:88pt}
+.sec-intro .badge-ring-wrap{gap:8pt}
+
+/* Sec-C: 4-col badge grid contained */
+.sec-c .badge-ring-wrap{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8pt}
+.sec-c .badge-circle{width:88pt;height:88pt}
+.sec-c .badge-num{font-size:13pt}
+.sec-c .badge-sub{font-size:6.5pt;max-width:68pt}
+
+/* Sec-E: grids contained — layout !important, font-size never */
+.sec-e .sg2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.sec-e .sg3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.sec-e .sg4{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.sec-e .sc{min-width:0!important;overflow:hidden!important}
+.sec-e .sn{font-size:20pt;word-break:break-word;white-space:normal}
+.sec-e .sl{font-size:9pt;word-break:break-word}
+.sec-e .sd{font-size:8pt;word-break:break-word;line-height:1.3}
+
+/* Sec-E: code blocks wrap, never expand page */
+.sec-e .code{white-space:pre-wrap!important;overflow-wrap:break-word!important;word-break:break-all!important;overflow-x:hidden!important;font-size:8pt}
+
+/* Sec-E: rc-grid contained */
+.sec-e .rc-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;overflow:hidden!important}
+.sec-e .rc-grid .rc{min-width:0!important;overflow:hidden!important;word-break:break-word}
+.sec-e .rc-grid .xref{overflow:hidden!important;word-break:break-word;font-size:9pt}
+.sec-e .rc-grid .xref-grid{grid-template-columns:1fr 1fr!important;font-size:9pt}
+.sec-e h3{word-break:break-word}
+
+/* All crisis banners same height */
+.crisis-top{min-height:72pt!important}
+.sec-f .crisis-top{min-height:72pt!important}
+
+/* Print */
+@media print{
+  .pb{page-break-before:always!important}
+  .sec-intro,.sec-a,.sec-b,.sec-c,.sec-d,.sec-e,.sec-f{page-break-before:always!important}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER PAGE ═══ -->
+<div style="page-break-after:always;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#0D47A1 0%,#1565C0 40%,#1976D2 70%,#283593 100%);color:white;padding:60pt 80pt;text-align:center;border-radius:8px;margin-bottom:0;">
+  <div style="font-size:11pt;letter-spacing:4px;text-transform:uppercase;opacity:.7;margin-bottom:20pt;">Healthcare Analytics Portfolio — Comprehensive Report</div>
+  <div style="font-size:42pt;font-weight:800;line-height:1.1;margin-bottom:16pt;letter-spacing:-1px;">Healthcare Analytics<br/>Portfolio</div>
+  <div style="font-size:18pt;opacity:.85;margin-bottom:32pt;font-weight:300;">A Complete Data-Driven Analysis Across Five Dimensions</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16pt;margin:28pt 0;width:100%;max-width:600pt;">
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:16pt 12pt;">
+      <div style="font-size:24pt;font-weight:800;">351,765</div>
+      <div style="font-size:9pt;opacity:.8;text-transform:uppercase;letter-spacing:1px;">Total Patients</div>
+    </div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:16pt 12pt;">
+      <div style="font-size:24pt;font-weight:800;">$15B+</div>
+      <div style="font-size:9pt;opacity:.8;text-transform:uppercase;letter-spacing:1px;">Revenue Opportunity</div>
+    </div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:16pt 12pt;">
+      <div style="font-size:24pt;font-weight:800;">36</div>
+      <div style="font-size:9pt;opacity:.8;text-transform:uppercase;letter-spacing:1px;">SQL Exercises</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12pt;flex-wrap:wrap;justify-content:center;margin:20pt 0;">
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section A — Patient &amp; Care Quality</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section B — Operations &amp; Capacity</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section C — Financial &amp; Revenue Cycle</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section D — Risk, Safety &amp; Compliance</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:6pt 16pt;font-size:9pt;letter-spacing:1px;">Section E — System Performance &amp; Scalability</div>
+  </div>
+  <div style="margin-top:40pt;font-size:10pt;opacity:.65;">Prepared for Executive Leadership · Q1 2026 · Confidential</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     INTRODUCTION
+═══════════════════════════════════════ -->
+<body>
+
+<!-- ═══════════════════════════════════════
+     EDITABLE SECTION: Introduction — Executive Overview
+     Edit ONLY between the section div tags below.
+     The head/CSS above is a copy for preview only.
+═══════════════════════════════════════ -->
+
+<div class="sec-intro pb" id="introduction">
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION HEADER
+══════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="label">Healthcare Analytics Portfolio — Introduction</div>
+  <h1 style="text-align:center;font-weight:800;line-height:1.6;"><span style="font-size:30pt;display:block;">Healthcare Analytics:</span><span style="font-size:22pt;font-weight:600;display:block;opacity:.9;">Strategic Assessment &amp; Transformation Roadmap</span></h1>
+  <div class="sub">Comprehensive analysis of 7,078,107 healthcare records across 17 database tables — 36 analytical investigations identifying $13.3B in recoverable value</div>
+</div>
+
+<!-- Cover badges -->
+<div class="badge-ring-wrap" style="grid-template-columns:repeat(5,1fr);">
+  <div class="badge-ring">
+    <div class="badge-circle p"><div class="badge-num">7.08M</div><div class="badge-sub">Records<br/>Analysed</div></div>
+    <div class="badge-desc">Across 17 tables · 1.18 GB database</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle b"><div class="badge-num">36</div><div class="badge-sub">Analytical<br/>Investigations</div></div>
+    <div class="badge-desc">Foundational to enterprise-grade SQL</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle g"><div class="badge-num">✦</div><div class="badge-sub">Professional<br/>Dashboards</div></div>
+    <div class="badge-desc">300 DPI · multi-panel · production-quality</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle r"><div class="badge-num">4</div><div class="badge-sub">Active Crisis<br/>Signals</div></div>
+    <div class="badge-desc">Each requiring immediate executive action</div>
+  </div>
+  <div class="badge-ring">
+    <div class="badge-circle w"><div class="badge-num">$13.3B</div><div class="badge-sub">Opportunity<br/>Identified</div></div>
+    <div class="badge-desc">Across 5 analytical domains</div>
+  </div>
+</div>
+
+<!-- Portfolio section map -->
+<div class="smap">
+  <div class="smap-item"><div class="smap-letter" style="color:#388E3C;">A</div><div class="smap-name">Patient &amp; Care Quality</div><div class="smap-pages">11 pages</div></div>
+  <div class="smap-item"><div class="smap-letter" style="color:#1565C0;">B</div><div class="smap-name">Operations &amp; Capacity</div><div class="smap-pages">14 pages</div></div>
+  <div class="smap-item"><div class="smap-letter" style="color:#2E7D32;">C</div><div class="smap-name">Financial &amp; Revenue Cycle</div><div class="smap-pages">13 pages</div></div>
+  <div class="smap-item"><div class="smap-letter" style="color:#C62828;">D</div><div class="smap-name">Risk, Safety &amp; Compliance</div><div class="smap-pages">13 pages</div></div>
+  <div class="smap-item"><div class="smap-letter" style="color:#1565C0;">E</div><div class="smap-name">System Performance &amp; Scalability</div><div class="smap-pages">20 pages</div></div>
+  <div class="smap-item"><div class="smap-letter" style="color:#6B21A8;">F</div><div class="smap-name">Strategic Recommendations</div><div class="smap-pages">15 pages</div></div>
+</div>
+
+<div class="al info">
+  <div class="al-ic">⚡</div>
+  <div class="al-co">
+    <h4>The Core Paradox</h4>
+    <p>This organisation demonstrates exceptional clinical operations — 11.36% readmission rate (top 10% nationally), robust data infrastructure, and a patient lifetime value of $303K — yet faces four cascading operational crises that threaten to undermine every clinical strength. The $13.3B opportunity does not require new technology. It requires activating analytical capabilities that are already built and translating findings into operational decisions.</p>
+  </div>
+</div>
+
+<!-- Database scope table -->
+<div class="pb"></div>
+<div class="page-title">Database Architecture &amp; Analytical Scope</div>
+<div class="page-sub">17 tables · 7,078,107 rows · 24 months of operational data · 1.18 GB</div>
+
+<table>
+  <thead><tr><th>Table</th><th>Records</th><th>Domain</th><th>HL7 Standard</th><th>Role in Analysis</th></tr></thead>
+  <tbody>
+    <tr><td><strong>STG_EHP__PATN</strong></td><td>351,765</td><td>Patient Demographics</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">ADT-A28 / PID</td><td>Population profiling, risk segmentation, LTV calculation</td></tr>
+    <tr><td><strong>STG_EHP__APPT</strong></td><td>974,032</td><td>Appointment Scheduling</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">SIU / SCH</td><td>No-show analysis, acquisition collapse tracking, capacity</td></tr>
+    <tr><td><strong>STG_EHP__VIST</strong></td><td>917,331</td><td>Clinical Visits</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">ADT-A01 / PV1</td><td>Care pathway, readmission, temporal insurance matching</td></tr>
+    <tr><td><strong>STG_EHP__BILL</strong></td><td>917,331</td><td>Billing Transactions</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">DFT-P03 / FT1</td><td>Revenue cycle, collection rate, A/R aging analysis</td></tr>
+    <tr><td><strong>STG_EHP__MDBL</strong></td><td>465,152</td><td>Medical Bills (Detail)</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">DFT-P03 / PR1</td><td>Top-patient billing, outlier identification</td></tr>
+    <tr><td><strong>STG_EHP__TRTM</strong></td><td>917,191</td><td>Treatments</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">ORM / OBR</td><td>Pathway completion, failure rate, risk scoring</td></tr>
+    <tr><td><strong>STG_EHP__MEDT</strong></td><td>312,870</td><td>Medical Teams</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">REF / PRD</td><td>Workload analysis, compensation equity</td></tr>
+    <tr><td><strong>STG_EHP__STFF</strong></td><td>5,496</td><td>Workforce / Staff</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">MFN-M02 / STF</td><td>Salary equity, capacity utilisation, burnout risk</td></tr>
+    <tr><td><strong>STG_EHP__DPMT</strong></td><td>30</td><td>Departments</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">MFN / OM1</td><td>Spatial capacity, team assignment analysis</td></tr>
+    <tr><td><strong>STG_EHP__MDCN</strong></td><td>346,302</td><td>Medicines</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">RDE / RXE</td><td>Medication inventory, allergy conflict detection</td></tr>
+    <tr><td><strong>STG_EHP__SPLY</strong></td><td>721,134</td><td>Supply Chain</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">INV / IIM</td><td>Vendor analysis, procurement cycle, lead time</td></tr>
+    <tr><td><strong>STG_EHP__EQPM</strong></td><td>10,190</td><td>Equipment</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">MFN / EQU</td><td>Utilisation rate, idle capacity mapping</td></tr>
+    <tr><td><strong>STG_EHP__ROMS</strong></td><td>24,302</td><td>Rooms</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">MFN / LOC</td><td>Facility capacity planning</td></tr>
+    <tr><td><strong>STG_EHP__PTAL</strong></td><td>644,303</td><td>Patient Allergies</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">ADT / AL1</td><td>Safety gap detection, misclassification analysis</td></tr>
+    <tr><td><strong>STG_EHP__INSR</strong></td><td>457,072</td><td>Insurance Records</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">ADT / IN1</td><td>Coverage gap analysis, Medicare enrollment opportunity</td></tr>
+    <tr><td><strong>STG_EHP__VNDR</strong></td><td>13,562</td><td>Vendors</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">MFN / OM1</td><td>Vendor reliability scoring, supply chain risk</td></tr>
+    <tr><td><strong>STG_EHP__ALGY</strong></td><td>44</td><td>Allergy Type Reference</td><td style="font-size:8.5pt;color:#1565C0;font-family:monospace;">MFN / AL1</td><td>Severity classification, conflict cross-check</td></tr>
+    <tr class="tr-total"><td><strong>TOTAL</strong></td><td><strong>7,078,107</strong></td><td colspan="3"><strong>17 tables · Full operational coverage · 24-month span</strong></td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt;color:#64748B;margin-top:8pt;font-style:italic;">&#9432; HL7 v2.x segment codes shown for international reference. This project uses a synthetic SQLite implementation; naming conventions follow HL7 healthcare data standards.</p>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2: CRISIS → OPPORTUNITY → INITIATIVE FLOW
+══════════════════════════════════════════════ -->
+<div class="pb"></div>
+<div class="page-title">The Strategic Situation</div>
+<div class="page-sub">Four crises converge on a single $13.3B opportunity — six initiatives unlock it</div>
+
+<!-- HERO VISUAL 1: Crisis → Opportunity → Initiative flow diagram -->
+<div class="hero-visual">
+  <div class="hero-title">Crisis → Opportunity → Initiative: The Portfolio Story in One View</div>
+  <div class="hero-sub">How four active crises create the $13.3B opportunity and map to six strategic initiatives</div>
+
+  <svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+    <defs>
+      <marker id="arr-r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#C62828"/>
+      </marker>
+      <marker id="arr-g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#2E7D32"/>
+      </marker>
+      <marker id="arr-p" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#6B21A8"/>
+      </marker>
+      <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000022"/>
+      </filter>
+      <!-- Radial glow for centre -->
+      <radialGradient id="centreGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Background zones -->
+    <rect x="0" y="0" width="780" height="420" fill="#FAFAFA" rx="8"/>
+    <!-- Left zone label -->
+    <rect x="8" y="8" width="210" height="18" fill="#FEF2F2" rx="4"/>
+    <text x="113" y="21" text-anchor="middle" font-family="Calibri,Arial" font-size="9" font-weight="700" fill="#C62828" letter-spacing="1">ACTIVE CRISES</text>
+    <!-- Centre zone label -->
+    <rect x="295" y="8" width="190" height="18" fill="#F3E8FF" rx="4"/>
+    <text x="390" y="21" text-anchor="middle" font-family="Calibri,Arial" font-size="9" font-weight="700" fill="#6B21A8" letter-spacing="1">OPPORTUNITY</text>
+    <!-- Right zone label -->
+    <rect x="562" y="8" width="210" height="18" fill="#F1F8E9" rx="4"/>
+    <text x="667" y="21" text-anchor="middle" font-family="Calibri,Arial" font-size="9" font-weight="700" fill="#2E7D32" letter-spacing="1">STRATEGIC INITIATIVES</text>
+
+    <!-- ── CENTRE CIRCLE ── -->
+    <circle cx="390" cy="215" r="72" fill="url(#centreGlow)" filter="url(#shadow)"/>
+    <circle cx="390" cy="215" r="66" fill="white" stroke="#6B21A8" stroke-width="3"/>
+    <text x="390" y="200" text-anchor="middle" font-family="Calibri,Arial" font-size="10" font-weight="700" fill="#64748B">TOTAL</text>
+    <text x="390" y="218" text-anchor="middle" font-family="Calibri,Arial" font-size="22" font-weight="800" fill="#6B21A8">$13.3B</text>
+    <text x="390" y="234" text-anchor="middle" font-family="Calibri,Arial" font-size="9" fill="#64748B">Identified</text>
+    <text x="390" y="247" text-anchor="middle" font-family="Calibri,Arial" font-size="9" fill="#64748B">Opportunity</text>
+    <text x="390" y="265" text-anchor="middle" font-family="Calibri,Arial" font-size="8" fill="#9CA3AF">$3.8M to activate</text>
+
+    <!-- ── CRISIS CARDS (left) ── -->
+    <!-- Crisis 1 -->
+    <rect x="14" y="38" width="200" height="68" rx="6" fill="white" stroke="#C62828" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="14" y="38" width="8" height="68" rx="3" fill="#C62828"/>
+    <text x="30" y="56" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#C62828">PATIENT ACQUISITION</text>
+    <text x="30" y="70" font-family="Calibri,Arial" font-size="18" font-weight="800" fill="#C62828">78%</text>
+    <text x="74" y="70" font-family="Calibri,Arial" font-size="8" fill="#64748B">collapse</text>
+    <text x="30" y="84" font-family="Calibri,Arial" font-size="8" fill="#475569">13,791 → 3,006 new patients/month</text>
+    <text x="30" y="97" font-family="Calibri,Arial" font-size="8" fill="#475569">11% 30-day retention vs 30% target</text>
+
+    <!-- Crisis 2 -->
+    <rect x="14" y="120" width="200" height="68" rx="6" fill="white" stroke="#C62828" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="14" y="120" width="8" height="68" rx="3" fill="#C62828"/>
+    <text x="30" y="138" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#C62828">REVENUE COLLECTION</text>
+    <text x="30" y="152" font-family="Calibri,Arial" font-size="18" font-weight="800" fill="#C62828">56.8%</text>
+    <text x="96" y="152" font-family="Calibri,Arial" font-size="8" fill="#64748B">rate</text>
+    <text x="30" y="166" font-family="Calibri,Arial" font-size="8" fill="#475569">vs 85–95% industry standard</text>
+    <text x="30" y="179" font-family="Calibri,Arial" font-size="8" fill="#475569">All methods stuck PENDING</text>
+
+    <!-- Crisis 3 -->
+    <rect x="14" y="202" width="200" height="68" rx="6" fill="white" stroke="#C62828" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="14" y="202" width="8" height="68" rx="3" fill="#C62828"/>
+    <text x="30" y="220" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#C62828">INSURANCE COVERAGE</text>
+    <text x="30" y="234" font-family="Calibri,Arial" font-size="18" font-weight="800" fill="#C62828">81.5%</text>
+    <text x="78" y="234" font-family="Calibri,Arial" font-size="8" fill="#64748B">unverified</text>
+    <text x="30" y="248" font-family="Calibri,Arial" font-size="8" fill="#475569">64,398 seniors eligible for Medicare</text>
+    <text x="30" y="261" font-family="Calibri,Arial" font-size="8" fill="#475569">$7.36B financial exposure</text>
+
+    <!-- Crisis 4 -->
+    <rect x="14" y="284" width="200" height="68" rx="6" fill="white" stroke="#C62828" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="14" y="284" width="8" height="68" rx="3" fill="#C62828"/>
+    <text x="30" y="302" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#C62828">PATIENT SAFETY</text>
+    <text x="30" y="316" font-family="Calibri,Arial" font-size="18" font-weight="800" fill="#C62828">100</text>
+    <text x="64" y="316" font-family="Calibri,Arial" font-size="8" fill="#64748B">misclassified</text>
+    <text x="30" y="330" font-family="Calibri,Arial" font-size="8" fill="#475569">8–11 allergies, labelled LOW RISK</text>
+    <text x="30" y="343" font-family="Calibri,Arial" font-size="8" fill="#475569">52,202 patients · zero allergy records</text>
+
+    <!-- ── ARROWS — crises → centre ── -->
+    <line x1="214" y1="72" x2="318" y2="175" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-r)"/>
+    <line x1="214" y1="154" x2="320" y2="200" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-r)"/>
+    <line x1="214" y1="236" x2="320" y2="230" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-r)"/>
+    <line x1="214" y1="318" x2="320" y2="262" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-r)"/>
+
+    <!-- ── INITIATIVE CARDS (right) ── -->
+    <!-- Initiative 1 -->
+    <rect x="566" y="38" width="204" height="55" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="758" y="38" width="8" height="55" rx="3" fill="#2E7D32"/>
+    <text x="578" y="56" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#2E7D32">PATIENT SAFETY</text>
+    <text x="578" y="70" font-family="Calibri,Arial" font-size="10" font-weight="700" fill="#1E293B">Allergy Reclassification</text>
+    <text x="578" y="84" font-family="Calibri,Arial" font-size="8" fill="#475569">$13.1B LTV protection · $200K invest</text>
+
+    <!-- Initiative 2 -->
+    <rect x="566" y="105" width="204" height="55" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="758" y="105" width="8" height="55" rx="3" fill="#2E7D32"/>
+    <text x="578" y="123" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#2E7D32">RISK PROGRAMME</text>
+    <text x="578" y="137" font-family="Calibri,Arial" font-size="10" font-weight="700" fill="#1E293B">Risk Stratification at Scale</text>
+    <text x="578" y="151" font-family="Calibri,Arial" font-size="8" fill="#475569">$193M savings · 323% ROI · $500K invest</text>
+
+    <!-- Initiative 3 -->
+    <rect x="566" y="172" width="204" height="55" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="758" y="172" width="8" height="55" rx="3" fill="#2E7D32"/>
+    <text x="578" y="190" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#2E7D32">REVENUE CYCLE</text>
+    <text x="578" y="204" font-family="Calibri,Arial" font-size="10" font-weight="700" fill="#1E293B">A/R Overhaul + Medicare</text>
+    <text x="578" y="218" font-family="Calibri,Arial" font-size="8" fill="#475569">$1.49B Pending Insurance Review recoverable · $800K</text>
+
+    <!-- Initiative 4 -->
+    <rect x="566" y="239" width="204" height="55" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="758" y="239" width="8" height="55" rx="3" fill="#2E7D32"/>
+    <text x="578" y="257" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#2E7D32">VOLUME RECOVERY</text>
+    <text x="578" y="271" font-family="Calibri,Arial" font-size="10" font-weight="700" fill="#1E293B">Acquisition &amp; Retention</text>
+    <text x="578" y="285" font-family="Calibri,Arial" font-size="8" fill="#475569">$200M+ annually · $303K LTV · $500K</text>
+
+    <!-- Initiative 5 -->
+    <rect x="566" y="306" width="204" height="55" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="758" y="306" width="8" height="55" rx="3" fill="#2E7D32"/>
+    <text x="578" y="324" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#2E7D32">OPERATIONS</text>
+    <text x="578" y="338" font-family="Calibri,Arial" font-size="10" font-weight="700" fill="#1E293B">Efficiency &amp; Workforce</text>
+    <text x="578" y="352" font-family="Calibri,Arial" font-size="8" fill="#475569">$2M+ annually · $1.2M invest</text>
+
+    <!-- Initiative 6 -->
+    <rect x="566" y="373" width="204" height="40" rx="6" fill="#F3E8FF" stroke="#6B21A8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="758" y="373" width="8" height="40" rx="3" fill="#6B21A8"/>
+    <text x="578" y="389" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="#6B21A8">ADVANCED ANALYTICS</text>
+    <text x="578" y="404" font-family="Calibri,Arial" font-size="8" fill="#475569">$8–20M annually · AI/ML + real-time · $1.2M</text>
+
+    <!-- ── ARROWS — centre → initiatives ── -->
+    <line x1="456" y1="175" x2="562" y2="65" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+    <line x1="458" y1="190" x2="562" y2="132" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+    <line x1="460" y1="210" x2="562" y2="199" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+    <line x1="458" y1="235" x2="562" y2="266" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+    <line x1="454" y1="252" x2="562" y2="333" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+    <line x1="446" y1="268" x2="562" y2="390" stroke="#6B21A8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-p)"/>
+
+    <!-- ── TOTAL INVESTMENT BAR (bottom) ── -->
+    <rect x="14" y="368" width="200" height="44" rx="6" fill="#F5F0FF" stroke="#6B21A8" stroke-width="1.5"/>
+    <text x="114" y="385" text-anchor="middle" font-family="Calibri,Arial" font-size="9" font-weight="700" fill="#6B21A8">TOTAL INVESTMENT</text>
+    <text x="114" y="402" text-anchor="middle" font-family="Calibri,Arial" font-size="14" font-weight="800" fill="#6B21A8">$3.8M → $13.3B</text>
+
+    <line x1="214" y1="390" x2="318" y2="255" stroke="#6B21A8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-p)"/>
+  </svg>
+</div>
+
+<div class="cg2">
+  <div class="fb r">
+    <h3>The Strategic Paradox</h3>
+    <p>This organisation simultaneously demonstrates <strong>exceptional clinical quality</strong> (11.36% readmission rate — top 10% nationally, $303K average patient LTV) and <strong>four structural crises</strong> that are compounding in real time. The crises are not clinical failures — they are operational and financial system failures sitting on top of clinical excellence.</p>
+  </div>
+  <div class="fb g">
+    <h3>Why the Opportunity Is $13.3B</h3>
+    <p>The $13.3B is not speculative. Every dollar is grounded in specific patient counts, billing records, and payment transactions already in the database. The investment to unlock it is $3.8M — primarily analytical activation of infrastructure that is already built, validated, and production-ready.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3: DATABASE SCHEMA MAP
+══════════════════════════════════════════════ -->
+<div class="pb"></div>
+<div class="page-title">Data Architecture: 17-Table Schema Map</div>
+<div class="page-sub">All 17 tables visualised by domain, record volume, and analytical relationship — the foundation every finding in this portfolio is built on</div>
+
+<!-- HERO VISUAL 2: Database schema map -->
+<div class="hero-visual">
+  <div class="hero-title">Healthcare Database — 17 Tables, 7.08M Rows, 6 Domains</div>
+  <div class="hero-sub">Node size proportional to record volume · colour by domain · lines show key JOIN relationships used in analysis</div>
+
+  <svg viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+    <defs>
+      <filter id="sh2" x="-15%" y="-15%" width="130%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000018"/>
+      </filter>
+      <marker id="jn" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+        <circle cx="3" cy="3" r="2" fill="#CBD5E1"/>
+      </marker>
+    </defs>
+
+    <rect x="0" y="0" width="780" height="500" fill="#F8FAFC" rx="8"/>
+
+    <!-- Domain legend -->
+    <rect x="10" y="8" width="760" height="26" fill="white" rx="4" stroke="#E2E8F0" stroke-width="1"/>
+    <circle cx="32" cy="21" r="6" fill="#1565C0"/><text x="42" y="25" font-family="Calibri,Arial" font-size="8.5" fill="#334155">Patient</text>
+    <circle cx="110" cy="21" r="6" fill="#388E3C"/><text x="120" y="25" font-family="Calibri,Arial" font-size="8.5" fill="#334155">Clinical</text>
+    <circle cx="185" cy="21" r="6" fill="#E65100"/><text x="195" y="25" font-family="Calibri,Arial" font-size="8.5" fill="#334155">Financial</text>
+    <circle cx="265" cy="21" r="6" fill="#6B21A8"/><text x="275" y="25" font-family="Calibri,Arial" font-size="8.5" fill="#334155">Workforce</text>
+    <circle cx="355" cy="21" r="6" fill="#C62828"/><text x="365" y="25" font-family="Calibri,Arial" font-size="8.5" fill="#334155">Safety</text>
+    <circle cx="415" cy="21" r="6" fill="#0891B2"/><text x="425" y="25" font-family="Calibri,Arial" font-size="8.5" fill="#334155">Operations</text>
+    <circle cx="505" cy="21" r="6" fill="#64748B"/><text x="515" y="25" font-family="Calibri,Arial" font-size="8.5" fill="#334155">Reference</text>
+    <text x="620" y="25" font-family="Calibri,Arial" font-size="8" fill="#94A3B8">Node size ∝ record volume</text>
+
+    <!-- ── JOIN LINES (drawn first, behind nodes) ── -->
+    <!-- PATN — VIST -->   <line x1="200" y1="120" x2="340" y2="175" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- PATN — APPT -->   <line x1="200" y1="110" x2="300" y2="95" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- PATN — PTAL -->   <line x1="185" y1="130" x2="155" y2="230" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- PATN — INSR -->   <line x1="195" y1="130" x2="220" y2="250" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- VIST — BILL -->   <line x1="370" y1="190" x2="430" y2="175" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- VIST — TRTM -->   <line x1="360" y1="195" x2="370" y2="290" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- VIST — MEDT -->   <line x1="355" y1="175" x2="270" y2="290" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- BILL join line -->
+    <!-- BILL — MDBL -->   <line x1="450" y1="190" x2="510" y2="255" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- STFF — MEDT -->   <line x1="200" y1="380" x2="255" y2="310" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- STFF — DPMT -->   <line x1="215" y1="375" x2="335" y2="390" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- PTAL — ALGY -->   <line x1="148" y1="248" x2="105" y2="330" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- SPLY — VNDR -->   <line x1="570" y1="340" x2="640" y2="280" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- EQPM — ROMS -->   <line x1="630" y1="385" x2="680" y2="320" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- INSR — VIST -->   <line x1="235" y1="255" x2="340" y2="190" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- MDCN — TRTM -->   <line x1="470" y1="330" x2="395" y2="305" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3,2"/>
+
+    <!-- ── NODES ── -->
+    <!-- Helper: circle + label pattern -->
+
+    <!-- PATN — 351K — Patient — LARGE -->
+    <circle cx="190" cy="115" r="32" fill="#1565C0" filter="url(#sh2)" opacity=".92"/>
+    <text x="190" y="110" text-anchor="middle" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="white">PATN</text>
+    <text x="190" y="122" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" fill="#BFDBFE">351K</text>
+    <text x="190" y="133" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BFDBFE">patients</text>
+
+    <!-- APPT — 974K — Clinical — LARGE -->
+    <circle cx="305" cy="80" r="34" fill="#388E3C" filter="url(#sh2)" opacity=".92"/>
+    <text x="305" y="74" text-anchor="middle" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="white">APPT</text>
+    <text x="305" y="86" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" fill="#BBF7D0">974K</text>
+    <text x="305" y="97" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BBF7D0">appts</text>
+
+    <!-- VIST — 917K — Clinical — LARGE -->
+    <circle cx="355" cy="178" r="33" fill="#388E3C" filter="url(#sh2)" opacity=".92"/>
+    <text x="355" y="172" text-anchor="middle" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="white">VIST</text>
+    <text x="355" y="184" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" fill="#BBF7D0">917K</text>
+    <text x="355" y="195" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BBF7D0">visits</text>
+
+    <!-- BILL — 917K — Financial — LARGE -->
+    <circle cx="450" cy="170" r="30" fill="#E65100" filter="url(#sh2)" opacity=".92"/>
+    <text x="450" y="164" text-anchor="middle" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="white">BILL</text>
+    <text x="450" y="176" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" fill="#FED7AA">917K</text>
+    <text x="450" y="187" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#FED7AA">bills</text>
+
+    <!-- PMNT removed — table does not exist in database -->
+
+    <!-- MDBL — 465K — Financial — MED -->
+    <circle cx="520" cy="265" r="24" fill="#E65100" filter="url(#sh2)" opacity=".85"/>
+    <text x="520" y="260" text-anchor="middle" font-family="Calibri,Arial" font-size="8" font-weight="700" fill="white">MDBL</text>
+    <text x="520" y="272" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#FED7AA">465K</text>
+
+    <!-- TRTM — 917K — Clinical — LARGE -->
+    <circle cx="375" cy="305" r="30" fill="#388E3C" filter="url(#sh2)" opacity=".92"/>
+    <text x="375" y="299" text-anchor="middle" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="white">TRTM</text>
+    <text x="375" y="311" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" fill="#BBF7D0">917K</text>
+    <text x="375" y="322" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BBF7D0">treatments</text>
+
+    <!-- MEDT — 312K — Workforce — MED -->
+    <circle cx="265" cy="305" r="26" fill="#6B21A8" filter="url(#sh2)" opacity=".88"/>
+    <text x="265" y="299" text-anchor="middle" font-family="Calibri,Arial" font-size="8" font-weight="700" fill="white">MEDT</text>
+    <text x="265" y="311" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#E9D5FF">312K</text>
+    <text x="265" y="321" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#E9D5FF">teams</text>
+
+    <!-- PTAL — 644K — Safety — LARGE -->
+    <circle cx="148" cy="240" r="28" fill="#C62828" filter="url(#sh2)" opacity=".90"/>
+    <text x="148" y="234" text-anchor="middle" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="white">PTAL</text>
+    <text x="148" y="246" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" fill="#FECACA">644K</text>
+    <text x="148" y="257" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#FECACA">allergies</text>
+
+    <!-- INSR — 457K — Financial — MED -->
+    <circle cx="228" cy="262" r="25" fill="#E65100" filter="url(#sh2)" opacity=".85"/>
+    <text x="228" y="257" text-anchor="middle" font-family="Calibri,Arial" font-size="8" font-weight="700" fill="white">INSR</text>
+    <text x="228" y="269" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#FED7AA">457K</text>
+
+    <!-- SPLY — 721K — Operations — LARGE -->
+    <circle cx="565" cy="335" r="30" fill="#0891B2" filter="url(#sh2)" opacity=".90"/>
+    <text x="565" y="329" text-anchor="middle" font-family="Calibri,Arial" font-size="8.5" font-weight="700" fill="white">SPLY</text>
+    <text x="565" y="341" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" fill="#BAE6FD">721K</text>
+    <text x="565" y="352" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BAE6FD">supply</text>
+
+    <!-- VNDR — 13K — Operations — SMALL -->
+    <circle cx="648" cy="270" r="19" fill="#0891B2" filter="url(#sh2)" opacity=".85"/>
+    <text x="648" y="266" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" font-weight="700" fill="white">VNDR</text>
+    <text x="648" y="277" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BAE6FD">13K</text>
+
+    <!-- STFF — 5.5K — Workforce — SMALL -->
+    <circle cx="195" cy="385" r="21" fill="#6B21A8" filter="url(#sh2)" opacity=".88"/>
+    <text x="195" y="381" text-anchor="middle" font-family="Calibri,Arial" font-size="8" font-weight="700" fill="white">STFF</text>
+    <text x="195" y="392" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#E9D5FF">5.5K</text>
+
+    <!-- DPMT — 30 — Reference — TINY -->
+    <circle cx="355" cy="395" r="15" fill="#64748B" filter="url(#sh2)" opacity=".85"/>
+    <text x="355" y="391" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" font-weight="700" fill="white">DPMT</text>
+    <text x="355" y="401" text-anchor="middle" font-family="Calibri,Arial" font-size="6.5" fill="#E2E8F0">30</text>
+
+    <!-- MDCN — 346K — Safety — MED -->
+    <circle cx="470" cy="335" r="24" fill="#C62828" filter="url(#sh2)" opacity=".85"/>
+    <text x="470" y="330" text-anchor="middle" font-family="Calibri,Arial" font-size="8" font-weight="700" fill="white">MDCN</text>
+    <text x="470" y="342" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#FECACA">346K</text>
+
+    <!-- EQPM — 10K — Operations — SMALL -->
+    <circle cx="633" cy="390" r="18" fill="#0891B2" filter="url(#sh2)" opacity=".85"/>
+    <text x="633" y="386" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" font-weight="700" fill="white">EQPM</text>
+    <text x="633" y="397" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BAE6FD">10K</text>
+
+    <!-- ROMS — 24K — Operations — SMALL -->
+    <circle cx="695" cy="325" r="17" fill="#0891B2" filter="url(#sh2)" opacity=".85"/>
+    <text x="695" y="321" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" font-weight="700" fill="white">ROMS</text>
+    <text x="695" y="332" text-anchor="middle" font-family="Calibri,Arial" font-size="7" fill="#BAE6FD">24K</text>
+
+    <!-- ALGY — 44 — Reference — TINY -->
+    <circle cx="100" cy="340" r="14" fill="#64748B" filter="url(#sh2)" opacity=".85"/>
+    <text x="100" y="336" text-anchor="middle" font-family="Calibri,Arial" font-size="7.5" font-weight="700" fill="white">ALGY</text>
+    <text x="100" y="347" text-anchor="middle" font-family="Calibri,Arial" font-size="6.5" fill="#E2E8F0">44</text>
+
+    <!-- Key JOIN callouts -->
+    <rect x="380" y="448" width="140" height="16" rx="3" fill="#F3E8FF"/>
+    <text x="450" y="460" text-anchor="middle" font-family="Calibri,Arial" font-size="8" fill="#6B21A8">5-Table JOIN: PATN→APPT→VIST→BILL→TRTM</text>
+    <rect x="10" y="448" width="150" height="16" rx="3" fill="#FEF2F2"/>
+    <text x="85" y="460" text-anchor="middle" font-family="Calibri,Arial" font-size="8" fill="#C62828">Safety: PTAL→ALGY→MDCN cross-check</text>
+    <rect x="550" y="448" width="140" height="16" rx="3" fill="#EFF6FF"/>
+    <text x="620" y="460" text-anchor="middle" font-family="Calibri,Arial" font-size="8" fill="#1565C0">Temporal: VIST→INSR date-range JOIN</text>
+
+    <!-- Total records label -->
+    <rect x="295" y="448" width="80" height="16" rx="3" fill="#F1F5F9"/>
+    <text x="335" y="460" text-anchor="middle" font-family="Calibri,Arial" font-size="8" font-weight="700" fill="#334155">7,078,107 rows</text>
+  </svg>
+</div>
+
+<div class="cg2">
+  <div class="fb b">
+    <h3>Why This Schema Matters</h3>
+    <p>Every finding in this portfolio required navigating referential relationships across multiple tables simultaneously. A revenue cycle finding required joining VIST → BILL → INSR across 1.4M+ rows. A safety finding required PTAL → ALGY → MDCN cross-checks. The 5-table JOIN (PATN → APPT → VIST → BILL → TRTM) required index design to execute in under 1 second — without it, the same query runs in 21.9 seconds.</p>
+  </div>
+  <div class="fb g">
+    <h3>Technical Achievement at Scale</h3>
+    <p>Working across 17 tables, 7.08M rows, and 24 months of data required managing data quality issues, NULL handling, synthetic data artefacts, and performance constraints at every stage. 26 strategic indexes covering 82% of query paths — well above the 40–60% industry standard — ensure every analytical question in this portfolio can be answered in production time.</p>
+  </div>
+</div>
+
+
+
+
+</div>
+
+<!-- ═══ TABLE OF CONTENTS ═══ -->
+<div class="pb"></div>
+<div style="padding:32pt 0;">
+  <div style="font-size:28pt;font-weight:800;color:#1565C0;margin-bottom:4pt;">Table of Contents</div>
+  <div style="font-size:12pt;color:#64748B;margin-bottom:28pt;padding-bottom:16pt;border-bottom:3px solid #1565C0;">Healthcare Analytics Portfolio — Introduction · Sections A–F · Complete Document</div>
+  <div style="display:grid;gap:12pt;">
+
+    <div style="background:linear-gradient(135deg,#F5F0FF,#EDE7F6);border-radius:8px;padding:14pt 20pt;border-left:5px solid #6B21A8;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9pt;font-weight:700;color:#6B21A8;letter-spacing:2px;text-transform:uppercase;margin-bottom:4pt;">Introduction</div>
+        <div style="font-size:15pt;font-weight:700;color:#1E293B;">Strategic Assessment &amp; Database Architecture</div>
+        <div style="font-size:10pt;color:#64748B;margin-top:4pt;">7.08M Records · 17-Table Schema · Crisis Overview · Opportunity Map</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:20pt;font-weight:800;color:#6B21A8;">3 Pages</div>
+        <div style="font-size:9pt;color:#64748B;">Portfolio framing</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:8px;padding:14pt 20pt;border-left:5px solid #1565C0;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9pt;font-weight:700;color:#1565C0;letter-spacing:2px;text-transform:uppercase;margin-bottom:4pt;">Section A</div>
+        <div style="font-size:15pt;font-weight:700;color:#1E293B;">Patient &amp; Care Quality</div>
+        <div style="font-size:10pt;color:#64748B;margin-top:4pt;">Demographics · Allergy Risk · Retention · Treatment Journey · Risk Stratification</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:20pt;font-weight:800;color:#1565C0;">7 Pages</div>
+        <div style="font-size:9pt;color:#64748B;">Exercises 1–15 · 8 Findings</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:8px;padding:14pt 20pt;border-left:5px solid #E65100;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9pt;font-weight:700;color:#E65100;letter-spacing:2px;text-transform:uppercase;margin-bottom:4pt;">Section B</div>
+        <div style="font-size:15pt;font-weight:700;color:#1E293B;">Operations &amp; Capacity</div>
+        <div style="font-size:10pt;color:#64748B;margin-top:4pt;">Workload Distribution · Supply Chain · Equipment · Vendor Performance</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:20pt;font-weight:800;color:#E65100;">9 Pages</div>
+        <div style="font-size:9pt;color:#64748B;">Exercises 16–24 · $2M+ Savings</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#F1F8E9,#DCEDC8);border-radius:8px;padding:14pt 20pt;border-left:5px solid #2E7D32;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9pt;font-weight:700;color:#2E7D32;letter-spacing:2px;text-transform:uppercase;margin-bottom:4pt;">Section C</div>
+        <div style="font-size:15pt;font-weight:700;color:#1E293B;">Financial &amp; Revenue Cycle</div>
+        <div style="font-size:10pt;color:#64748B;margin-top:4pt;">Insurance Verification · Revenue Recovery · Payer Performance · Q4 Decline</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:20pt;font-weight:800;color:#2E7D32;">11 Pages</div>
+        <div style="font-size:9pt;color:#64748B;">Exercises 25–30 · $13–15B Recovery</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#FFF5F5,#FFCDD2);border-radius:8px;padding:14pt 20pt;border-left:5px solid #C62828;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9pt;font-weight:700;color:#C62828;letter-spacing:2px;text-transform:uppercase;margin-bottom:4pt;">Section D</div>
+        <div style="font-size:15pt;font-weight:700;color:#1E293B;">Risk, Safety &amp; Compliance</div>
+        <div style="font-size:10pt;color:#64748B;margin-top:4pt;">Patient Safety Gaps · Vendor Compliance · Readmission · Pharmaceutical Risks</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:20pt;font-weight:800;color:#C62828;">10 Pages</div>
+        <div style="font-size:9pt;color:#64748B;">Exercises 31–34 · $520M Exposure</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#EDE7F6,#D1C4E9);border-radius:8px;padding:14pt 20pt;border-left:5px solid #4527A0;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9pt;font-weight:700;color:#4527A0;letter-spacing:2px;text-transform:uppercase;margin-bottom:4pt;">Section E</div>
+        <div style="font-size:15pt;font-weight:700;color:#1E293B;">System Performance &amp; Scalability</div>
+        <div style="font-size:10pt;color:#64748B;margin-top:4pt;">Query Optimisation · EHR Infrastructure · Analytics Architecture · Scalability</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:20pt;font-weight:800;color:#4527A0;">20 Pages</div>
+        <div style="font-size:9pt;color:#64748B;">Exercises 35–36 · $8.4M Investment</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#F5F0FF,#EDE7F6);border-radius:8px;padding:14pt 20pt;border-left:5px solid #6B21A8;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9pt;font-weight:700;color:#6B21A8;letter-spacing:2px;text-transform:uppercase;margin-bottom:4pt;">Section F</div>
+        <div style="font-size:15pt;font-weight:700;color:#1E293B;">Strategic Recommendations &amp; Activation Roadmap</div>
+        <div style="font-size:10pt;color:#64748B;margin-top:4pt;">6 Initiatives · 90-Day Plan · Full ROI Map · Portfolio Conclusion</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:20pt;font-weight:800;color:#6B21A8;">15 Pages</div>
+        <div style="font-size:9pt;color:#64748B;">$3.8M → $13.3B · Final</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:28pt;background:linear-gradient(135deg,#1E293B,#334155);border-radius:8px;padding:20pt 24pt;color:white;display:grid;grid-template-columns:repeat(4,1fr);gap:16pt;text-align:center;">
+    <div><div style="font-size:22pt;font-weight:800;">$3.8M</div><div style="font-size:9pt;opacity:.75;margin-top:4pt;">Total Investment</div></div>
+    <div><div style="font-size:22pt;font-weight:800;">$13.3B</div><div style="font-size:9pt;opacity:.75;margin-top:4pt;">Opportunity Identified</div></div>
+    <div><div style="font-size:22pt;font-weight:800;">7.08M</div><div style="font-size:9pt;opacity:.75;margin-top:4pt;">Rows Analysed</div></div>
+    <div><div style="font-size:22pt;font-weight:800;">36</div><div style="font-size:9pt;opacity:.75;margin-top:4pt;">Exercises Completed</div></div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════
+     SECTION A — PATIENT & CARE QUALITY
+═══════════════════════════════════════ -->
+<div class="section-divider sec-a">
+  <div class="div-label"><span class="div-icon">🏥</span> Section A — Patient &amp; Care Quality<span class="div-count">2 of 7</span></div>
+</div>
+
+</body>
+</html>
