@@ -8,16 +8,15 @@ A comprehensive **SQL + Python** analytics project built on a synthetic healthca
 
 All analytical reports are published as standalone HTML pages with all charts embedded. View directly in any browser — no dependencies required.
 
-| Report Section | Live URL |
-|----------------|----------|
-| Introduction | [Introduction.html](https://mehmood-khans.github.io/healthcare-analytics/Introduction.html) |
-| Section A — Patient & Care Quality | [Section_A.html](https://mehmood-khans.github.io/healthcare-analytics/Section_A.html) |
-| Section B — Operations & Capacity | [Section_B.html](https://mehmood-khans.github.io/healthcare-analytics/Section_B.html) |
-| Section C — Financial & Revenue Cycle | [Section_C.html](https://mehmood-khans.github.io/healthcare-analytics/Section_C.html) |
-| Section D — Risk, Safety & Compliance | [Section_D.html](https://mehmood-khans.github.io/healthcare-analytics/Section_D.html) |
-| Section E — System Performance & Scalability | [Section_E.html](https://mehmood-khans.github.io/healthcare-analytics/Section_E.html) |
-| Section F — Strategic Recommendations | [Section_F.html](https://mehmood-khans.github.io/healthcare-analytics/Section_F.html) |
-
+| Report Section                               | Live URL                                                                                    |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Introduction                                 | [Introduction.html](https://mehmoodkhans.github.io/healthcare-analytics/Introduction.html) |
+| Section A — Patient & Care Quality           | [Section_A.html](https://mehmoodkhans.github.io/healthcare-analytics/Section_A.html)       |
+| Section B — Operations & Capacity            | [Section_B.html](https://mehmoodkhans.github.io/healthcare-analytics/Section_B.html)       |
+| Section C — Financial & Revenue Cycle        | [Section_C.html](https://mehmoodkhans.github.io/healthcare-analytics/Section_C.html)       |
+| Section D — Risk, Safety & Compliance        | [Section_D.html](https://mehmoodkhans.github.io/healthcare-analytics/Section_D.html)       |
+| Section E — System Performance & Scalability | [Section_E.html](https://mehmoodkhans.github.io/healthcare-analytics/Section_E.html)       |
+| Section F — Strategic Recommendations        | [Section_F.html](https://mehmoodkhans.github.io/healthcare-analytics/Section_F.html)       |
 **104 charts embedded across 6 analytical sections · $13.3B total opportunity identified**
 
 ---
