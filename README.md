@@ -1,3 +1,44 @@
+# 🏥 Healthcare Data Analysis Project
+
+A comprehensive **SQL + Python** analytics project built on a synthetic healthcare dataset of **17 tables and 7,078,107 rows**. The project progresses from foundational SQL through advanced techniques including window functions, recursive CTEs, and multi-dimensional risk scoring — all applied to realistic healthcare scenarios.
+
+---
+
+## 📊 Portfolio Reports — Live on GitHub Pages
+
+All analytical reports are published as standalone HTML pages with all charts embedded. View directly in any browser — no dependencies required.
+
+| Report Section | Live URL |
+|----------------|----------|
+| Introduction | [Introduction.html](https://mehmood-khans.github.io/healthcare-analytics/Introduction.html) |
+| Section A — Patient & Care Quality | [Section_A.html](https://mehmood-khans.github.io/healthcare-analytics/Section_A.html) |
+| Section B — Operations & Capacity | [Section_B.html](https://mehmood-khans.github.io/healthcare-analytics/Section_B.html) |
+| Section C — Financial & Revenue Cycle | [Section_C.html](https://mehmood-khans.github.io/healthcare-analytics/Section_C.html) |
+| Section D — Risk, Safety & Compliance | [Section_D.html](https://mehmood-khans.github.io/healthcare-analytics/Section_D.html) |
+| Section E — System Performance & Scalability | [Section_E.html](https://mehmood-khans.github.io/healthcare-analytics/Section_E.html) |
+| Section F — Strategic Recommendations | [Section_F.html](https://mehmood-khans.github.io/healthcare-analytics/Section_F.html) |
+
+**104 charts embedded across 6 analytical sections · $13.3B total opportunity identified**
+
+---
+
+## 📁 Project Structure
+
+```
+healthcare-analytics/
+│
+├── README.md                        # This file
+├── Healthcare_Data_Analysis.ipynb   # Main notebook (36 exercises + capstone)
+├── Introduction.html                # Portfolio intro & database architecture
+├── Section_A.html                   # Patient & Care Quality (17 charts)
+├── Section_B.html                   # Operations & Capacity (19 charts)
+├── Section_C.html                   # Financial & Revenue Cycle (15 charts)
+├── Section_D.html                   # Risk, Safety & Compliance (18 charts)
+├── Section_E.html                   # System Performance & Scalability (35 charts)
+├── Section_F.html                   # Strategic Recommendations
+└── .gitignore                       # Excludes database and raw data files
+```
+
 ---
 
 ## 📊 Dataset
