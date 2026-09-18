@@ -1,0 +1,15 @@
+visit_sequence,visit_status,visit_count
+1,Discharged,101
+1,Need Follow-Up,99
+2,Admitted,6
+2,Discharged,80
+2,Need Follow-Up,97
+3,Admitted,24
+3,Discharged,61
+3,Need Follow-Up,75
+4,Admitted,30
+4,Discharged,36
+4,Need Follow-Up,40
+5,Admitted,22
+5,Discharged,24
+5,Need Follow-Up,12

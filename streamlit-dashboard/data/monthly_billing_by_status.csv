@@ -1,0 +1,114 @@
+year_month,bill_status,total_billed
+2024-01,Insurance Covered 100%,6523000
+2024-01,Insurance Covered 50%,7300000
+2024-01,Insurance Covered 80%,6493000
+2024-01,Insurance Denied,6616000
+2024-01,Write-Off,6621000
+2024-02,Insurance Covered 100%,18375000
+2024-02,Insurance Covered 50%,18490000
+2024-02,Insurance Covered 80%,18424000
+2024-02,Insurance Denied,18531000
+2024-02,Write-Off,19293000
+2024-03,Insurance Covered 100%,32687000
+2024-03,Insurance Covered 50%,32219000
+2024-03,Insurance Covered 80%,33264000
+2024-03,Insurance Denied,31636000
+2024-03,Write-Off,33611000
+2024-04,Insurance Covered 100%,44222000
+2024-04,Insurance Covered 50%,44547000
+2024-04,Insurance Covered 80%,46146000
+2024-04,Insurance Denied,45802000
+2024-04,Write-Off,45032000
+2024-05,Insurance Covered 100%,58361000
+2024-05,Insurance Covered 50%,57968000
+2024-05,Insurance Covered 80%,61314000
+2024-05,Insurance Denied,59058000
+2024-05,Write-Off,59541000
+2024-06,Insurance Covered 100%,71855000
+2024-06,Insurance Covered 50%,70149000
+2024-06,Insurance Covered 80%,69048000
+2024-06,Insurance Denied,71218000
+2024-06,Write-Off,70656000
+2024-07,Insurance Covered 100%,84638000
+2024-07,Insurance Covered 50%,82546000
+2024-07,Insurance Covered 80%,85826000
+2024-07,Insurance Denied,83968000
+2024-07,Write-Off,86431000
+2024-08,Insurance Covered 100%,88701000
+2024-08,Insurance Covered 50%,86589000
+2024-08,Insurance Covered 80%,86566000
+2024-08,Insurance Denied,87899000
+2024-08,Write-Off,87135000
+2024-09,Insurance Covered 100%,85937000
+2024-09,Insurance Covered 50%,85740000
+2024-09,Insurance Covered 80%,84849000
+2024-09,Insurance Denied,84929000
+2024-09,Write-Off,83612000
+2024-10,Insurance Covered 100%,88488000
+2024-10,Insurance Covered 50%,88320000
+2024-10,Insurance Covered 80%,89134000
+2024-10,Insurance Denied,88014000
+2024-10,Write-Off,89300000
+2024-11,Insurance Covered 100%,85243000
+2024-11,Insurance Covered 50%,86865000
+2024-11,Insurance Covered 80%,86037000
+2024-11,Insurance Denied,84851000
+2024-11,Write-Off,84536000
+2024-12,Insurance Covered 100%,86297000
+2024-12,Insurance Covered 50%,87042000
+2024-12,Insurance Covered 80%,88051000
+2024-12,Insurance Denied,88260000
+2024-12,Write-Off,89383000
+2025-01,Insurance Covered 100%,86138000
+2025-01,Insurance Covered 50%,88022000
+2025-01,Insurance Covered 80%,84238000
+2025-01,Insurance Denied,87310000
+2025-01,Write-Off,88549000
+2025-02,Insurance Covered 100%,78545000
+2025-02,Insurance Covered 50%,80365000
+2025-02,Insurance Covered 80%,81246000
+2025-02,Insurance Denied,78901000
+2025-02,Write-Off,79206000
+2025-03,Insurance Covered 100%,88389000
+2025-03,Insurance Covered 50%,88298000
+2025-03,Insurance Covered 80%,89350000
+2025-03,Insurance Denied,88233000
+2025-03,Write-Off,89379000
+2025-04,Insurance Covered 100%,85011000
+2025-04,Insurance Covered 50%,86839000
+2025-04,Insurance Covered 80%,84329000
+2025-04,Insurance Denied,85858000
+2025-04,Write-Off,84753000
+2025-05,Insurance Covered 100%,88363000
+2025-05,Insurance Covered 50%,88084000
+2025-05,Insurance Covered 80%,88060000
+2025-05,Insurance Denied,88959000
+2025-05,Write-Off,87606000
+2025-06,Insurance Covered 100%,87901000
+2025-06,Insurance Covered 50%,85284000
+2025-06,Insurance Covered 80%,84354000
+2025-06,Insurance Denied,85035000
+2025-06,Write-Off,86737000
+2025-07,Insurance Covered 100%,88288000
+2025-07,Insurance Covered 50%,88897000
+2025-07,Insurance Covered 80%,87444000
+2025-07,Insurance Denied,88276000
+2025-07,Write-Off,89113000
+2025-08,Insurance Covered 100%,88598000
+2025-08,Insurance Covered 50%,89994000
+2025-08,Insurance Covered 80%,88882000
+2025-08,Insurance Denied,87987000
+2025-08,Write-Off,88608000
+2025-09,Insurance Covered 100%,64811000
+2025-09,Insurance Covered 50%,66086000
+2025-09,Insurance Covered 80%,65293000
+2025-09,Insurance Denied,64565000
+2025-09,Pending Insurance Review,101242000
+2025-09,Write-Off,66093000
+2025-10,Pending Insurance Review,395615000
+2025-11,Pending Insurance Review,320150000
+2025-12,Pending Insurance Review,265958000
+2026-01,Pending Insurance Review,200015000
+2026-02,Pending Insurance Review,124294000
+2026-03,Pending Insurance Review,70395000
+2026-04,Pending Insurance Review,10004000

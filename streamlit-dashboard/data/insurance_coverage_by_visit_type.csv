@@ -1,0 +1,5 @@
+visit_type,coverage_status,visit_count
+Diagnosis,Covered,84678
+Diagnosis,Uninsured,373668
+Treatment,Covered,85122
+Treatment,Uninsured,373863
