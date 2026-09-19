@@ -3,6 +3,10 @@
 A comprehensive **SQL + Python** analytics project built on a synthetic healthcare dataset of **17 tables and 7,078,107 rows**. The project progresses from foundational SQL through advanced techniques including window functions, recursive CTEs, and multi-dimensional risk scoring — all applied to realistic healthcare scenarios.
 
 ---
+## 📊 Interactive Dashboard
+
+Prefer to explore the data yourself instead of reading static charts? The same findings, live and interactive:
+
 
 ## 📊 Portfolio Reports — Live on GitHub Pages
 
@@ -19,10 +23,6 @@ All analytical reports are published as standalone HTML pages with all charts em
 | Section F — Strategic Recommendations | [Section_F.html](https://mehmoodkhans.github.io/healthcare-analytics/html/Section_F.html) |
 
 **104 charts embedded across 6 analytical sections · $13.3B total opportunity identified**
-
-## 📊 Interactive Dashboard
-
-Prefer to explore the data yourself instead of reading static charts? The same findings, live and interactive:
 
 **🔗 [mehmoodkhans-healthcare.streamlit.app](https://mehmoodkhans-healthcare.streamlit.app)**
 
